@@ -13,14 +13,14 @@
   camel-api
   camel-base
   camel-base-engine
-  camel-bean
+  camel-bean  
   camel-cloud
-  camel-cluster
+  camel-cluster  
   camel-core-engine
   camel-core-language
   camel-core-model
   camel-core-processor
-  camel-core-reifier
+  camel-core-reifier  
   camel-direct
   camel-dsl-support
   camel-health
@@ -35,7 +35,7 @@
   camel-util-json
   camel-validator
   camel-xml-io-util
-  camel-xml-jaxp
+  camel-xml-jaxp  
   camel-xml-jaxp-util
   camel-yaml-dsl
   camel-yaml-dsl-common
