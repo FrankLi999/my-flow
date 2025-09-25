@@ -40,8 +40,8 @@
             <version>${spring-boot-version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel.springboot</groupId>
-            <artifactId>camel-spring-boot</artifactId>
+            <groupId>com.bpwizard</groupId>
+            <artifactId>my-flow-spring-boot</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
