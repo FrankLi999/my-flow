@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.apache.camel</groupId>
+        <groupId>com.bpwizard.myflow</groupId>
         <artifactId>core</artifactId>
         <version>4.15.0-SNAPSHOT</version>
     </parent>
@@ -49,31 +49,31 @@
 
         <!-- lets keep mandatory dependencies on top level so dependency tree is nicer -->
         <dependency>
-            <groupId>org.apache.camel</groupId>
+            <groupId>com.bpwizard.myflow</groupId>
             <artifactId>camel-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
+            <groupId>com.bpwizard.myflow</groupId>
             <artifactId>camel-base</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
+            <groupId>com.bpwizard.myflow</groupId>
             <artifactId>camel-core-engine</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
+            <groupId>com.bpwizard.myflow</groupId>
             <artifactId>camel-management-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
+            <groupId>com.bpwizard.myflow</groupId>
             <artifactId>camel-support</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
+            <groupId>com.bpwizard.myflow</groupId>
             <artifactId>camel-util</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
+            <groupId>com.bpwizard.myflow</groupId>
             <artifactId>camel-core-languages</artifactId>
         </dependency>
 
@@ -90,17 +90,17 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
+            <groupId>com.bpwizard.myflow</groupId>
             <artifactId>camel-bean</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
+            <groupId>com.bpwizard.myflow</groupId>
             <artifactId>camel-direct</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
+            <groupId>com.bpwizard.myflow</groupId>
             <artifactId>camel-health</artifactId>
             <scope>test</scope>
         </dependency>

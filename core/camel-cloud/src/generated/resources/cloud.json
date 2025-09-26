@@ -8,7 +8,7 @@
     "firstVersion": "3.0",
     "label": "core,cloud",
     "supportLevel": "Stable",
-    "groupId": "org.apache.camel",
+    "groupId": "com.bpwizard.myflow",
     "artifactId": "camel-cloud",
     "version": "4.15.0-SNAPSHOT"
   }

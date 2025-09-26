@@ -14,6 +14,7 @@
 	<description>My Flow tooling</description>
 	<packaging>pom</packaging>
     <modules>
-		<module>camel-util-json</module>		
+		<module>camel-util-json</module>
+		<module>spi-annotations</module>		
 	</modules>
 </project>

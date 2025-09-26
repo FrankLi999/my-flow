@@ -7,7 +7,7 @@
     "description": "Display Camel startup configuration",
     "deprecated": false,
     "javaType": "org.apache.camel.main.MainConfigurationDevConsole",
-    "groupId": "org.apache.camel",
+    "groupId": "com.bpwizard.myflow",
     "artifactId": "camel-main",
     "version": "4.15.0-SNAPSHOT"
   }

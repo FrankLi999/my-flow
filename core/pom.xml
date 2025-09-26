@@ -24,8 +24,15 @@
         <module>camel-xml-jaxp</module>
         <module>camel-base</module>
         <module>camel-base-engine</module>
-         <module>camel-core-model</module>
+        <module>camel-core-model</module>
         <module>camel-core-processor</module>
+        <module>camel-cluster</module>
+        <module>camel-cloud</module>
+        <module>camel-health</module>
+        <module>camel-core-reifier</module>
+        <module>camel-core-engine</module>
+        <module>camel-core-languages</module>
+        <module>camel-main</module>
 	</modules>
 	<properties>
         <camel.surefire.parallel>true</camel.surefire.parallel>

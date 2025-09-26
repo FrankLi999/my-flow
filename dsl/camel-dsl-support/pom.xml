@@ -20,13 +20,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-
-    <parent>
-        <groupId>org.apache.camel</groupId>
+        <parent>
+        <groupId>com.bpwizard.myflow</groupId>
         <artifactId>dsl</artifactId>
         <version>4.15.0-SNAPSHOT</version>
     </parent>
-
     <artifactId>camel-dsl-support</artifactId>
     <packaging>jar</packaging>
     <name>Camel :: DSL :: Support</name>
@@ -40,11 +38,11 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.camel</groupId>
+            <groupId>com.bpwizard.myflow</groupId>
             <artifactId>camel-support</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
+            <groupId>com.bpwizard.myflow</groupId>
             <artifactId>camel-core-model</artifactId>
         </dependency>
     </dependencies>

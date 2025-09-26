@@ -13,7 +13,7 @@
   camel-api
   camel-base
   camel-base-engine
-  camel-bean  
+
   camel-cloud
   camel-cluster  
   camel-core-engine
@@ -21,26 +21,35 @@
   camel-core-model
   camel-core-processor
   camel-core-reifier  
-  camel-direct
-  camel-dsl-support
+
   camel-health
   camel-main
+  
   camel-management-api
+
+  camel-support
+  camel-util
+ 
+
+  camel-xml-io-util
+  camel-xml-jaxp  
+  camel-xml-jaxp-util
+
+  camel-util-json
+
+  camel-bean  
+  camel-direct
+  camel-validator
   camel-spring
   camel-spring-boot
   camel-spring-boot-engine-starter
   camel-spring-main
-  camel-support
-  camel-util
-  camel-util-json
-  camel-validator
-  camel-xml-io-util
-  camel-xml-jaxp  
-  camel-xml-jaxp-util
+  
+  
+  camel-dsl-support
   camel-yaml-dsl
   camel-yaml-dsl-common
   camel-yaml-dsl-deserializers
-
 ## atlasmap
   atlas-api
   atlas-core

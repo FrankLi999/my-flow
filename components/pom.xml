@@ -13,7 +13,11 @@
 	<name>components</name>
 	<description>My Flow components</description>
 	<packaging>pom</packaging>
-    <!-- <modules>
-		<module>my-flow-spring-boot</module>		
-	</modules> -->
-</project>
+    <modules>
+		<module>camel-direct</module>
+		<module>camel-bean</module>
+		<module>camel-spring</module>
+		<module>camel-spring-main</module>
+		<module>camel-validator</module>
+	</modules>
+	</project>

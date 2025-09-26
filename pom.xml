@@ -36,9 +36,13 @@
 		<maven-compiler-plugin-version>3.14.1</maven-compiler-plugin-version>
 		<maven-surefire-plugin-version>3.5.4</maven-surefire-plugin-version>
 		<jakarta-xml-bind-api-version>4.0.4</jakarta-xml-bind-api-version>
+		<lifecycle-mapping-version>1.0.0</lifecycle-mapping-version>
+		<mockito-version>5.20.0</mockito-version>
+		<spring-version>6.2.11</spring-version>
 	    <woodstox-version>4.4.1</woodstox-version>
 		<xerces-version>2.12.2</xerces-version>
 		<camel.javadoc.offline>false</camel.javadoc.offline>
+		<hamcrest-version>3.0</hamcrest-version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -109,6 +113,87 @@
 				<artifactId>camel-core-processor</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-cluster</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-cloud</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+            <dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-core-reifier</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-core-engine</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-health</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-core-languages</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-bean</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-direct</artifactId>
+				<version>${project.version}</version>
+			</dependency>	
+			<dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-spring</artifactId>
+				<version>${project.version}</version>
+			</dependency>	
+			<dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-validator</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-main</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-spring-main</artifactId>
+				<version>${project.version}</version>
+			</dependency>	
+			<dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-dsl-support</artifactId>
+				<version>${project.version}</version>
+			</dependency>	
+            <dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-yaml-dsl-common</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-yaml-dsl-deserializers</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			            <dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-yaml-dsl</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+				
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
@@ -131,4 +216,47 @@
 		<module>spring</module>
 		<module>starter</module>
 	</modules>
+	<repositories>
+        <repository>
+            <id>apache.snapshots</id>
+            <url>https://repository.apache.org/snapshots/</url>
+            <name>Apache Snapshot Repo</name>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>apache.snapshots</id>
+            <url>https://repository.apache.org/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
+	<build>
+		<!-- <defaultGoal>install</defaultGoal> -->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.camel</groupId>
+                    <artifactId>camel-package-maven-plugin</artifactId>
+                    <version>${project.version}</version>
+                </plugin>
+				<plugin>
+                    <groupId>org.apache.camel</groupId>
+                    <artifactId>camel-yaml-dsl-maven-plugin</artifactId>
+                    <version>${project.version}</version>
+                </plugin>
+		    </plugins>
+		</pluginManagement>		
+	</build>
+
 </project>
