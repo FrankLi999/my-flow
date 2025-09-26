@@ -40,7 +40,7 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.apache.camel</groupId>
+            <groupId>com.bpwizard.myflow</groupId>
             <artifactId>camel-util</artifactId>
         </dependency>
 

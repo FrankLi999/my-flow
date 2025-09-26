@@ -13,7 +13,7 @@
 	<name>tooling</name>
 	<description>My Flow tooling</description>
 	<packaging>pom</packaging>
-    <!-- <modules>
-		<module>my-flow-spring-boot</module>		
-	</modules> -->
+    <modules>
+		<module>camel-util-json</module>		
+	</modules>
 </project>

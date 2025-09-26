@@ -36,6 +36,9 @@
 		<maven-compiler-plugin-version>3.14.1</maven-compiler-plugin-version>
 		<maven-surefire-plugin-version>3.5.4</maven-surefire-plugin-version>
 		<jakarta-xml-bind-api-version>4.0.4</jakarta-xml-bind-api-version>
+	    <woodstox-version>4.4.1</woodstox-version>
+		<xerces-version>2.12.2</xerces-version>
+		<camel.javadoc.offline>false</camel.javadoc.offline>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -45,6 +48,36 @@
 				<version>${camel-version}</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-util</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-management-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-util-json</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-xml-jaxp-util</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-support</artifactId>
+				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
