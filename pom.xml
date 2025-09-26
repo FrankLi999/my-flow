@@ -79,6 +79,36 @@
 				<artifactId>camel-support</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-base</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-xml-io-util</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-core-model</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-xml-jaxp</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-base-engine</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bpwizard.myflow</groupId>
+				<artifactId>camel-core-processor</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>

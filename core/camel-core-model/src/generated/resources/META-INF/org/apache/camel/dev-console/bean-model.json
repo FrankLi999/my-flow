@@ -7,7 +7,7 @@
     "description": "Displays beans from the DSL model",
     "deprecated": false,
     "javaType": "org.apache.camel.model.console.BeanModelDevConsole",
-    "groupId": "org.apache.camel",
+    "groupId": "com.bpwizard.myflow",
     "artifactId": "camel-core-model",
     "version": "4.15.0-SNAPSHOT"
   }

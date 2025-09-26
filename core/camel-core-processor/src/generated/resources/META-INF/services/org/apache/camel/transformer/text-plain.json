@@ -5,7 +5,7 @@
     "title": "Text Plain",
     "deprecated": false,
     "javaType": "org.apache.camel.processor.transformer.StringDataTypeTransformer",
-    "groupId": "org.apache.camel",
+    "groupId": "com.bpwizard.myflow",
     "artifactId": "camel-core-processor",
     "version": "4.15.0-SNAPSHOT"
   }

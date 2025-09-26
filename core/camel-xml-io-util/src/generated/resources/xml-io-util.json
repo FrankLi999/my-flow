@@ -8,7 +8,7 @@
     "firstVersion": "3.10.0",
     "label": "core,xml",
     "supportLevel": "Stable",
-    "groupId": "org.apache.camel",
+    "groupId": "com.bpwizard.myflow",
     "artifactId": "camel-xml-io-util",
     "version": "4.15.0-SNAPSHOT"
   }

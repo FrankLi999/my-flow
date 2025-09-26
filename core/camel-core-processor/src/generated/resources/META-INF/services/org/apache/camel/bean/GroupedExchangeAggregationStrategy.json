@@ -7,7 +7,7 @@
     "title": "Grouped Exchange Aggregation Strategy",
     "description": "Aggregate all Exchanges into a single combined Exchange holding all the aggregated exchanges in a List of Exchange as the message body. This aggregation strategy can be used in combination with Splitter to batch messages.",
     "deprecated": false,
-    "groupId": "org.apache.camel",
+    "groupId": "com.bpwizard.myflow",
     "artifactId": "camel-core-processor",
     "version": "4.15.0-SNAPSHOT"
   }
