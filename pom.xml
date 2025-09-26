@@ -35,6 +35,7 @@
 		<commons-io-version>2.20.0</commons-io-version>
 		<maven-compiler-plugin-version>3.14.1</maven-compiler-plugin-version>
 		<maven-surefire-plugin-version>3.5.4</maven-surefire-plugin-version>
+		<jakarta-xml-bind-api-version>4.0.4</jakarta-xml-bind-api-version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -64,6 +65,7 @@
 		<module>components</module>
 		<module>dsl</module>
 		<module>tooling</module>
+		<module>spring</module>
 		<module>starter</module>
 	</modules>
 </project>
