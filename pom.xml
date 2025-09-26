@@ -242,7 +242,7 @@
         </pluginRepository>
     </pluginRepositories>
 	<build>
-		<!-- <defaultGoal>install</defaultGoal> -->
+		<defaultGoal>install</defaultGoal>
         <pluginManagement>
             <plugins>
                 <plugin>
