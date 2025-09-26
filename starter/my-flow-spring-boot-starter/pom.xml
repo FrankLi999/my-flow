@@ -40,7 +40,7 @@
             <version>${spring-boot-version}</version>
         </dependency>
         <dependency>
-            <groupId>com.bpwizard</groupId>
+            <groupId>com.bpwizard.myflow</groupId>
             <artifactId>my-flow-spring-boot</artifactId>
             <version>${project.version}</version>
         </dependency>
