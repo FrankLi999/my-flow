@@ -6,8 +6,6 @@
 :since: 3.9
 :supportlevel: Stable
 :tabs-sync-option:
-//Manually maintained attributes
-:group: DSL
 
 *Since Camel {since}*
 

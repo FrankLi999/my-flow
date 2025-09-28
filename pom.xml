@@ -32,12 +32,21 @@
 		<spring-boot-version>3.5.6</spring-boot-version>
 		<camel-version>4.15.0-SNAPSHOT</camel-version>
 		<awaitility-version>4.3.0</awaitility-version>
+		<commons-dbcp2-version>2.13.0</commons-dbcp2-version>
 		<commons-io-version>2.20.0</commons-io-version>
+		<gmavenplus-plugin-version>4.2.1</gmavenplus-plugin-version>
+		<groovy-version>4.0.28</groovy-version>
 		<maven-compiler-plugin-version>3.14.1</maven-compiler-plugin-version>
 		<maven-surefire-plugin-version>3.5.4</maven-surefire-plugin-version>
 		<jakarta-xml-bind-api-version>4.0.4</jakarta-xml-bind-api-version>
 		<lifecycle-mapping-version>1.0.0</lifecycle-mapping-version>
 		<mockito-version>5.20.0</mockito-version>
+		<networknt-json-schema-validator-version>1.5.9</networknt-json-schema-validator-version>
+		<pgjdbc-driver-version>42.7.8</pgjdbc-driver-version>
+        <pgjdbc-ng-driver-version>0.8.9</pgjdbc-ng-driver-version>
+		<snakeyaml-version>2.5</snakeyaml-version>
+        <snakeyaml-engine-version>2.10</snakeyaml-engine-version>
+		<spock-version>2.3-groovy-4.0</spock-version>
 		<spring-version>6.2.11</spring-version>
 	    <woodstox-version>4.4.1</woodstox-version>
 		<xerces-version>2.12.2</xerces-version>
