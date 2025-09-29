@@ -28,13 +28,7 @@
 		<url/>
 	</scm>
 	<properties>
-        <jdk.version>25</jdk.version>
-        <!-- These two are here only to prevent the versions for the Apache parent pom from leaking-->
-        <maven.compiler.source>${jdk.version}</maven.compiler.source>
-        <maven.compiler.target>${jdk.version}</maven.compiler.target>
-        <maven.compiler.release>${jdk.version}</maven.compiler.release>
-        <minimalJavaBuildVersion>${jdk.version}</minimalJavaBuildVersion>
-		<java.version>${jdk.version}</java.version>
+		<java.version>25</java.version>
 		<spring-boot-version>3.5.6</spring-boot-version>
 		<camel-version>4.15.0-SNAPSHOT</camel-version>
 		<awaitility-version>4.3.0</awaitility-version>
