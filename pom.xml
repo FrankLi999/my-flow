@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -28,7 +46,7 @@
 		<url/>
 	</scm>
 	<properties>
-        <jdk.version>25</jdk.version>
+        <jdk.version>17</jdk.version>
         <!-- These two are here only to prevent the versions for the Apache parent pom from leaking-->
         <maven.compiler.source>${jdk.version}</maven.compiler.source>
         <maven.compiler.target>${jdk.version}</maven.compiler.target>
@@ -76,6 +94,8 @@
 		<build-helper-maven-plugin-version>3.6.1</build-helper-maven-plugin-version>
 		<maven-resources-plugin-version>3.3.1</maven-resources-plugin-version>
 		<maven-jar-plugin-version>3.4.2</maven-jar-plugin-version>
+        <formatter-maven-plugin-version>2.29.0</formatter-maven-plugin-version>
+        <impsort-maven-plugin-version>1.12.0</impsort-maven-plugin-version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -1140,4 +1160,545 @@
             </plugin>
         </plugins>
     </reporting>
+    <profiles>
+        <profile>
+            <id>deploy</id>
+            <build>
+                <defaultGoal>deploy</defaultGoal>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                                <configuration>
+                                    <source>11</source>
+                                    <doclint>none</doclint>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>source-jar</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>release</id>
+            <activation>
+                <property>
+                    <name>release</name>
+                </property>
+            </activation>
+            <properties>
+                <skipTests>true</skipTests>
+            </properties>
+            <build>
+                <plugins>
+                    <!-- We want to deploy the artifact to a staging location for perusal -->
+                    <plugin>
+                        <inherited>true</inherited>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-deploy-plugin</artifactId>
+                        <configuration>
+                            <updateReleaseInfo>true</updateReleaseInfo>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <source>8</source>
+                            <additionalOptions>${javadoc.opts}</additionalOptions>
+                            <!-- disable Javadoc linting for buildung the release with Java 11 -->
+                            <doclint>none</doclint>
+                        </configuration>
+                    </plugin>
+                    <!-- We want to sign the artifact, the POM, and all attached artifacts -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <configuration>
+                            <passphrase>${gpg.passphrase}</passphrase>
+                            <useAgent>${gpg.useagent}</useAgent>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <configuration>
+                            <failIfNoSpecifiedTests>false</failIfNoSpecifiedTests>
+                            <failIfNoTests>false</failIfNoTests>
+                            <skipITs>true</skipITs>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <failIfNoSpecifiedTests>false</failIfNoSpecifiedTests>
+                            <failIfNoTests>false</failIfNoTests>
+                            <skipTests>true</skipTests>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>default-test</id>
+                                <phase>none</phase><!-- No need to even load the plugin during releases -->
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.mycila</groupId>
+                        <artifactId>license-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>license-format</id>
+                                <goals>
+                                    <goal>format</goal>
+                                </goals>
+                                <phase>none</phase><!-- No need to even load the plugin during releases -->
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>net.revelc.code.formatter</groupId>
+                        <artifactId>formatter-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>code-format</id>
+                                <goals>
+                                    <goal>format</goal>
+                                </goals>
+                                <phase>none</phase><!-- No need to even load the plugin during releases -->
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.cyclonedx</groupId>
+                        <artifactId>cyclonedx-maven-plugin</artifactId>
+                        <version>${cyclonedx-maven-plugin-version}</version>
+                        <inherited>false</inherited>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>makeAggregateBom</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <outputName>${project.artifactId}-${project.version}-sbom</outputName>
+                        </configuration>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+        <!--
+        <profile>
+            <id>cleanrepo</id>
+            <build>
+                <defaultGoal>build-helper:remove-project-artifact</defaultGoal>
+            </build>
+        </profile>
+        -->
+        <profile>
+            <id>sbom</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.cyclonedx</groupId>
+                        <artifactId>cyclonedx-maven-plugin</artifactId>
+                        <version>${cyclonedx-maven-plugin-version}</version>
+                        <inherited>false</inherited>
+                        <configuration>
+                            <outputName>camel-sbom</outputName>
+                            <outputDirectory>${project.basedir}/camel-sbom/</outputDirectory>
+                            <excludeArtifactId>camel-allcomponents</excludeArtifactId>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>makeAggregateBom</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>apache-snapshots</id>
+            <repositories>
+                <repository>
+                    <id>apache.snapshots</id>
+                    <url>https://repository.apache.org/snapshots/</url>
+                    <name>Apache Snapshot Repo</name>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>apache.snapshots</id>
+                    <url>https://repository.apache.org/snapshots/</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+        <!-- The full profile contains mojos *not* essential for the quick build. -->
+        <!-- These are typically various source checks and code generations whose result is stored in git anyway. -->
+        <!-- Pass -Dquickly to skip these non-essential plugin executions. -->
+        <!-- -Dquickly suits primarily the situation when building from a state that passed all checks on the CI. -->
+        <!-- We do not enforce with -Dquickly, but we enforce otherwise -->
+        <!-- from parent pom -->
+        <!--
+        <profile>            
+            <id>full</id>
+            <activation>
+                <property>
+                    <name>!quickly</name>
+                </property>
+            </activation>
+            <properties>
+                <enforcer.phase>validate</enforcer.phase>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.mycila</groupId>
+                        <artifactId>license-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>license-format</id>
+                                <goals>
+                                    <goal>format</goal>
+                                </goals>
+                                <phase>process-sources</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>default-test</id>
+                                <phase>test</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        -->
+        <profile>
+            <id>nochecks</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>fastinstall</id>
+            <activation>
+                <property>
+                    <name>fastinstall</name>
+                </property>
+            </activation>
+            <properties>
+                <archetype.test.skip>true</archetype.test.skip>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>sourcecheck</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>net.revelc.code.formatter</groupId>
+                        <artifactId>formatter-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>format</id>
+                                <phase>none</phase>
+                            </execution>
+                            <execution>
+                                <id>validate</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>validate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>net.revelc.code</groupId>
+                        <artifactId>impsort-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>sort-imports</id>
+                                <phase>none</phase>
+                            </execution>
+                            <execution>
+                                <id>check</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>dependencycheck</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.owasp</groupId>
+                        <artifactId>dependency-check-maven</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>dependencyReview</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+
+        <profile>
+            <id>cleanrepo</id>
+            <build>
+                <defaultGoal>build-helper:remove-project-artifact</defaultGoal>
+            </build>
+        </profile>
+
+        <profile>
+            <activation>
+                <os>
+                    <family>Linux</family>
+                </os>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <!-- By default Java's secure RNG uses /dev/random to generate seeds. In
+                     certain environments (in particular cloud environments), some unit
+                     tests may exhaust the Linux entropy pool and start blocking on reads
+                     from /dev/random. To avoid this, force Java to always use /dev/urandom.
+                     Note that "file:/dev/urandom" doesn't work here because it is interpreted
+                     in a special way. Use either "file:///dev/urandom" or "file:/dev/./urandom". -->
+                                <java.security.egd>file:///dev/urandom</java.security.egd>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>tia</id>
+            <properties>
+                <mvntia.propertyName>camel.surefire.fork.vmargs</mvntia.propertyName>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jboss.fuse.mvntia</groupId>
+                        <artifactId>mvntia-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>prepare-agent</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <argLine>@{camel.surefire.fork.vmargs}</argLine>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <configuration>
+                            <argLine>@{camel.surefire.fork.vmargs}</argLine>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>full</id>
+            <activation>
+                <property>
+                    <name>!quickly</name>
+                </property>
+            </activation>
+            <properties>
+                <surefire.rerunFailingTestsCount>2</surefire.rerunFailingTestsCount>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>net.revelc.code.formatter</groupId>
+                        <artifactId>formatter-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>format</id>
+                                <goals>
+                                    <goal>format</goal>
+                                </goals>
+                                <phase>process-sources</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>net.revelc.code</groupId>
+                        <artifactId>impsort-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>sort-imports</id>
+                                <goals>
+                                    <goal>sort</goal>
+                                </goals>
+                                <phase>process-sources</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <argLine>${camel.surefire.fork.vmargs}</argLine>
+                            <childDelegation>false</childDelegation>
+                            <useFile>true</useFile>
+                            <failIfNoTests>false</failIfNoTests>
+                            <failIfNoSpecifiedTests>false</failIfNoSpecifiedTests>
+                            <runOrder>alphabetical</runOrder>
+                            <!-- lets re-run the failed test, just to be sure -->
+                            <rerunFailingTestsCount>${surefire.rerunFailingTestsCount}</rerunFailingTestsCount>
+                            <systemPropertyVariables>
+                                <javax.xml.accessExternalSchema>file,http,https</javax.xml.accessExternalSchema>
+                                <javax.xml.accessExternalDTD>file,http</javax.xml.accessExternalDTD>
+                                <derby.stream.error.file>target/derby.log</derby.stream.error.file>
+                                <java.awt.headless>${java.awt.headless}</java.awt.headless>
+                                <java.util.logging.config.file>${basedir}/target/test-classes/logging.properties
+                                </java.util.logging.config.file>
+                                <org.apache.activemq.default.directory.prefix>target/
+                                </org.apache.activemq.default.directory.prefix>
+                            </systemPropertyVariables>
+                            <includes>
+                                <include>**/*Test.java</include>
+                            </includes>
+                            <excludes>
+                                <exclude>**/*IT.java</exclude>
+                                <exclude>**/*XXXTest.*</exclude>
+                            </excludes>
+                            <forkCount>${camel.surefire.forkCount}</forkCount>
+                            <reuseForks>${camel.surefire.reuseForks}</reuseForks>
+                            <forkedProcessTimeoutInSeconds>${camel.surefire.forkTimeout}</forkedProcessTimeoutInSeconds>
+                            <properties>
+                                <configurationParameters>
+                                    junit.jupiter.execution.parallel.enabled = ${camel.surefire.parallel}
+                                    junit.jupiter.execution.parallel.mode.default = same_thread
+                                    junit.jupiter.execution.parallel.mode.classes.default = concurrent
+                                    junit.jupiter.execution.parallel.config.strategy = ${camel.surefire.parallel.strategy}
+                                    junit.jupiter.execution.parallel.config.dynamic.factor = ${camel.surefire.parallel.factor}
+                                </configurationParameters>
+                            </properties>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

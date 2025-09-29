@@ -50,7 +50,8 @@ public class CamelHealthCheckAutoConfiguration {
     protected class CamelHealthCheckIndicatorInitializer {
 
         @Bean(name = "camelHealth")
-        public HealthIndicator camelHealthCheckIndicator(ApplicationContext applicationContext,
+        public HealthIndicator camelHealthCheckIndicator(
+                ApplicationContext applicationContext,
                 CamelContext camelContext, CamelHealthCheckConfigurationProperties config) {
             if (config != null && config.getEnabled() != null && !config.getEnabled()) {
                 // health check is disabled

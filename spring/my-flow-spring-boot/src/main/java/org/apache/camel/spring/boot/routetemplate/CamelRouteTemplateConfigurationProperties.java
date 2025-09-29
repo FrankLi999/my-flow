@@ -18,6 +18,7 @@ package org.apache.camel.spring.boot.routetemplate;
 
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.routetemplate")

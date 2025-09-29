@@ -20,7 +20,6 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.FluentProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
-import org.apache.camel.spring.SpringRouteBuilder;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,7 @@ import org.springframework.context.annotation.Configuration;
 @CamelSpringBootTest
 @SpringBootApplication
 @SpringBootTest(classes = AutoStartupExcludePatternTest.class,
-        properties = "camel.main.autoStartupExcludePattern=myRoute,timer*")
+                properties = "camel.main.autoStartupExcludePattern=myRoute,timer*")
 public class AutoStartupExcludePatternTest {
 
     @Autowired

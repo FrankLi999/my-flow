@@ -18,6 +18,7 @@ package org.apache.camel.spring.boot;
 
 import java.io.Closeable;
 import java.io.InputStream;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.CamelExecutionException;
 import org.apache.camel.ProducerTemplate;

@@ -17,10 +17,8 @@
 package org.apache.camel.spring.boot.routecontroller;
 
 import org.apache.camel.impl.engine.DefaultSupervisingRouteController;
-import org.apache.camel.spi.RouteController;
 import org.apache.camel.spi.SupervisingRouteController;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

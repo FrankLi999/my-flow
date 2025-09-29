@@ -31,8 +31,6 @@ public class KubernetesVaultConfigurationProperties {
      */
     private String secrets;
 
-
-
     public boolean isRefreshEnabled() {
         return refreshEnabled;
     }

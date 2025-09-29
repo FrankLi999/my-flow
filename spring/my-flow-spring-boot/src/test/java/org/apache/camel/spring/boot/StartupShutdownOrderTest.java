@@ -16,11 +16,9 @@
  */
 package org.apache.camel.spring.boot;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.util.Map;
+
 import org.apache.camel.CamelContext;
-import org.apache.camel.support.service.ServiceSupport;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
@@ -31,6 +29,8 @@ import org.springframework.context.Lifecycle;
 import org.springframework.context.SmartLifecycle;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class StartupShutdownOrderTest {
 

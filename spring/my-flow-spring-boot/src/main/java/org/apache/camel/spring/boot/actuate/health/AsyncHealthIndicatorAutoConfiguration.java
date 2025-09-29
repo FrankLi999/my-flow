@@ -18,6 +18,7 @@ package org.apache.camel.spring.boot.actuate.health;
 
 import java.time.Duration;
 import java.time.ZonedDateTime;
+
 import org.apache.camel.spring.boot.actuate.health.liveness.CamelLivenessStateHealthIndicator;
 import org.apache.camel.spring.boot.actuate.health.readiness.CamelReadinessStateHealthIndicator;
 import org.slf4j.Logger;
@@ -50,7 +51,7 @@ public class AsyncHealthIndicatorAutoConfiguration implements InitializingBean {
     private CamelHealthCheckConfigurationProperties config;
 
     public AsyncHealthIndicatorAutoConfiguration(HealthContributorRegistry healthContributorRegistry,
-            CamelHealthCheckConfigurationProperties config) {
+                                                 CamelHealthCheckConfigurationProperties config) {
         this.healthContributorRegistry = healthContributorRegistry;
         this.config = config;
 

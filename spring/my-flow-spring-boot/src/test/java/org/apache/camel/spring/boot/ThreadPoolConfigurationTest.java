@@ -32,14 +32,17 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(classes = { CamelAutoConfiguration.class, CamelThreadPoolAutoConfiguration.class,
-        ThreadPoolConfigurationTest.TestConfiguration.class }, properties = { "camel.threadpool.pool-size = 5",
-                "camel.threadpool.max-pool-size = 10", "camel.threadpool.max-queue-size = 20",
-                "camel.threadpool.rejected-policy = CallerRuns", "camel.threadpool.config[smallPool].pool-size = 2",
-                "camel.threadpool.config[smallPool].rejected-policy = Abort",
-                "camel.threadpool.config[bigPool].pool-size = 20",
-                "camel.threadpool.config[bigPool].max-pool-size = 50",
-                "camel.threadpool.config[bigPool].max-queue-size = 500", })
+@SpringBootTest(classes = {
+        CamelAutoConfiguration.class, CamelThreadPoolAutoConfiguration.class,
+        ThreadPoolConfigurationTest.TestConfiguration.class },
+                properties = {
+                        "camel.threadpool.pool-size = 5",
+                        "camel.threadpool.max-pool-size = 10", "camel.threadpool.max-queue-size = 20",
+                        "camel.threadpool.rejected-policy = CallerRuns", "camel.threadpool.config[smallPool].pool-size = 2",
+                        "camel.threadpool.config[smallPool].rejected-policy = Abort",
+                        "camel.threadpool.config[bigPool].pool-size = 20",
+                        "camel.threadpool.config[bigPool].max-pool-size = 50",
+                        "camel.threadpool.config[bigPool].max-queue-size = 500", })
 public class ThreadPoolConfigurationTest {
     @Autowired
     private CamelContext context;

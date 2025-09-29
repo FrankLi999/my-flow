@@ -16,9 +16,8 @@
  */
 package org.apache.camel.spring.boot;
 
-import static org.awaitility.Awaitility.await;
-
 import java.util.concurrent.TimeUnit;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.ServiceStatus;
 import org.apache.camel.builder.RouteBuilder;
@@ -34,14 +33,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 
+import static org.awaitility.Awaitility.await;
+
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(classes = { CamelAutoConfiguration.class,
-        SupervisingRouteControllerRestartTest.TestConfiguration.class }, properties = {
-                "camel.main.run-controller = true", "camel.routecontroller.enabled = true",
-                "camel.routecontroller.initialDelay = 500", "camel.routecontroller.backoffDelay = 1000",
-                "camel.routecontroller.backoffMaxAttempts = 5", })
+@SpringBootTest(classes = {
+        CamelAutoConfiguration.class,
+        SupervisingRouteControllerRestartTest.TestConfiguration.class },
+                properties = {
+                        "camel.main.run-controller = true", "camel.routecontroller.enabled = true",
+                        "camel.routecontroller.initialDelay = 500", "camel.routecontroller.backoffDelay = 1000",
+                        "camel.routecontroller.backoffMaxAttempts = 5", })
 public class SupervisingRouteControllerRestartTest {
 
     @Autowired

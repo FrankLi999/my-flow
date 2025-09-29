@@ -19,6 +19,7 @@ package org.apache.camel.spring.boot.util;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.Component;
 import org.apache.camel.PropertyBindingException;
@@ -76,23 +77,19 @@ public final class CamelPropertiesHelper {
      * When an option has been set on the target bean, then its removed from the given properties map. If all the
      * options has been set, then the map will be empty. The implementation ignores case for the property keys.
      *
-     * @param context
-     *            the CamelContext
-     * @param target
-     *            the target bean
-     * @param properties
-     *            the properties
-     * @param failIfNotSet
-     *            whether to fail if an option either does not exists on the target bean or if the option cannot be due
-     *            no suitable setter methods with the given type
+     * @param  context                  the CamelContext
+     * @param  target                   the target bean
+     * @param  properties               the properties
+     * @param  failIfNotSet             whether to fail if an option either does not exists on the target bean or if the
+     *                                  option cannot be due no suitable setter methods with the given type
      *
-     * @return <tt>true</tt> if at least one option was configured
+     * @return                          <tt>true</tt> if at least one option was configured
      *
-     * @throws IllegalArgumentException
-     *             is thrown if an option cannot be configured on the bean because there is no suitable setter method
-     *             and failOnNoSet is true.
+     * @throws IllegalArgumentException is thrown if an option cannot be configured on the bean because there is no
+     *                                  suitable setter method and failOnNoSet is true.
      */
-    public static boolean setCamelProperties(CamelContext context, Object target, Map<String, Object> properties,
+    public static boolean setCamelProperties(
+            CamelContext context, Object target, Map<String, Object> properties,
             boolean failIfNotSet) {
         ObjectHelper.notNull(context, "context");
         ObjectHelper.notNull(target, "target");
@@ -135,10 +132,11 @@ public final class CamelPropertiesHelper {
                 it.remove();
                 rc = true;
             } else if (failIfNotSet) {
-                throw new IllegalArgumentException("Cannot configure option [" + name + "] with value [" + stringValue
-                        + "] as the bean class [" + ObjectHelper.classCanonicalName(target)
-                        + "] has no suitable setter method, or not possible to lookup a bean with the id ["
-                        + stringValue + "] in Spring Boot registry");
+                throw new IllegalArgumentException(
+                        "Cannot configure option [" + name + "] with value [" + stringValue
+                                                   + "] as the bean class [" + ObjectHelper.classCanonicalName(target)
+                                                   + "] has no suitable setter method, or not possible to lookup a bean with the id ["
+                                                   + stringValue + "] in Spring Boot registry");
             }
         }
 
@@ -148,12 +146,10 @@ public final class CamelPropertiesHelper {
     /**
      * Gets all the non-null properties from the given object,
      *
-     * @param camelContext
-     *            the camel context
-     * @param target
-     *            the object
+     * @param  camelContext the camel context
+     * @param  target       the object
      *
-     * @return the properties (non-null only)
+     * @return              the properties (non-null only)
      */
     public static Map<String, Object> getNonNullProperties(CamelContext camelContext, Object target) {
         Map<String, Object> properties = new HashMap<>();

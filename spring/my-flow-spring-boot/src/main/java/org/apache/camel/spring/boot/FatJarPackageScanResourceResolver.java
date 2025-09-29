@@ -49,11 +49,13 @@ public class FatJarPackageScanResourceResolver extends DefaultPackageScanResourc
     private static final String SPRING_BOOT_WEB_INF_CLASSES_ROOT = "WEB-INF/classes/";
 
     @Override
-    protected List<String> doLoadImplementationsInJar(String packageName, InputStream stream, String urlPath, Predicate<String> filter) {
+    protected List<String> doLoadImplementationsInJar(
+            String packageName, InputStream stream, String urlPath, Predicate<String> filter) {
         return doLoadImplementationsInJar(packageName, stream, urlPath, true, true, filter);
     }
 
-    protected List<String> doLoadImplementationsInJar(String packageName, InputStream stream, String urlPath,
+    protected List<String> doLoadImplementationsInJar(
+            String packageName, InputStream stream, String urlPath,
             boolean inspectNestedJars, boolean closeStream, Predicate<String> filter) {
         List<String> entries = new ArrayList<>();
 
@@ -90,7 +92,8 @@ public class FatJarPackageScanResourceResolver extends DefaultPackageScanResourc
             }
         } catch (IOException ioe) {
             LOG.warn("Cannot search jar file '" + urlPath + " due to an IOException: " + ioe.getMessage()
-                    + ". This exception is ignored.", ioe);
+                     + ". This exception is ignored.",
+                    ioe);
         } finally {
             if (closeStream) {
                 // stream is left open when scanning nested jars, otherwise the fat jar stream gets closed

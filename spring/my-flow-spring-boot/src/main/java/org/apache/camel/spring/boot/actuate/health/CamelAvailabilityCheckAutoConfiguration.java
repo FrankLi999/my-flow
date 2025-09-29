@@ -20,7 +20,6 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.actuate.health.liveness.CamelLivenessStateHealthIndicator;
 import org.apache.camel.spring.boot.actuate.health.readiness.CamelReadinessStateHealthIndicator;
-
 import org.springframework.boot.actuate.availability.LivenessStateHealthIndicator;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.availability.ApplicationAvailabilityAutoConfiguration;

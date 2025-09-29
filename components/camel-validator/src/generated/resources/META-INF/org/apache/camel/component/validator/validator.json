@@ -9,7 +9,7 @@
     "label": "core,validation",
     "javaType": "org.apache.camel.component.validator.ValidatorComponent",
     "supportLevel": "Stable",
-    "groupId": "org.apache.camel",
+    "groupId": "com.bpwizard.myflow",
     "artifactId": "camel-validator",
     "version": "4.15.0-SNAPSHOT",
     "scheme": "validator",

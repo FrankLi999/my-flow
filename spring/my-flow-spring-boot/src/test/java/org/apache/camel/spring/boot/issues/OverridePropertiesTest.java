@@ -17,6 +17,7 @@
 package org.apache.camel.spring.boot.issues;
 
 import java.util.Properties;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
@@ -36,8 +37,7 @@ public class OverridePropertiesTest extends CamelSpringTestSupport {
 
         Properties prop = new Properties();
         prop.put("name", "Donald Duck");
-        camelContextConfiguration.
-                withUseOverridePropertiesWithPropertiesComponent(prop);
+        camelContextConfiguration.withUseOverridePropertiesWithPropertiesComponent(prop);
 
         PropertiesComponent pc = (PropertiesComponent) context.getPropertiesComponent();
         pc.setPropertiesParser(new SpringPropertiesParser(applicationContext.getEnvironment()));

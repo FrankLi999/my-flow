@@ -16,14 +16,14 @@
  */
 package org.apache.camel.spring.boot;
 
+import java.util.concurrent.locks.ReentrantLock;
+
 import org.apache.camel.main.MainListener;
 import org.apache.camel.spring.SpringCamelContext;
 import org.apache.camel.util.StopWatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
-
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * The {@link org.apache.camel.CamelContext} created by Spring Boot.
@@ -84,8 +84,8 @@ public class SpringBootCamelContext extends SpringCamelContext {
                 if (!junit && !starterWeb) {
                     LOG.warn(
                             "CamelContext has only been running for less than a second. If you intend to run Camel for a longer time "
-                                    + "then you can set the property camel.main.run-controller=true in application.properties"
-                                    + " or add spring-boot-starter-web JAR to the classpath.");
+                             + "then you can set the property camel.main.run-controller=true in application.properties"
+                             + " or add spring-boot-starter-web JAR to the classpath.");
                 }
             }
             super.doStop();

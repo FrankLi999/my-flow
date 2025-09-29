@@ -17,6 +17,7 @@
 package org.apache.camel.spring.boot.actuate.health;
 
 import java.io.IOException;
+
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.assertj.core.api.Assertions;
@@ -37,12 +38,15 @@ import org.springframework.web.client.ResponseErrorHandler;
 @CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootApplication
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {
+        CamelAutoConfiguration.class,
         CamelHealthCheckAutoConfiguration.class, CamelAvailabilityCheckAutoConfiguration.class,
-        ProbesRoute.class }, properties = { "camel.main.java-routes-include-pattern=**/ProbesRoute*",
-                "management.endpoint.health.probes.enabled=true",
-                "management.endpoint.health.group.readiness.include=readinessState,camelReadinessState",
-                "management.endpoint.health.group.liveness.include=livenessState,camelLivenessState" })
+        ProbesRoute.class },
+                properties = {
+                        "camel.main.java-routes-include-pattern=**/ProbesRoute*",
+                        "management.endpoint.health.probes.enabled=true",
+                        "management.endpoint.health.group.readiness.include=readinessState,camelReadinessState",
+                        "management.endpoint.health.group.liveness.include=livenessState,camelLivenessState" })
 public class CamelProbesTest {
 
     @Autowired

@@ -16,12 +16,11 @@
  */
 package org.apache.camel.spring.boot.aot;
 
-import static org.apache.camel.spring.boot.aot.RuntimeHintsHelper.registerClassHierarchy;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aot.hint.MemberCategory;
@@ -29,6 +28,8 @@ import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.RuntimeHintsRegistrar;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+
+import static org.apache.camel.spring.boot.aot.RuntimeHintsHelper.registerClassHierarchy;
 
 /**
  * {@code CamelRuntimeHints} provide the basic hints for the native compilation of a Camel application.
@@ -56,11 +57,9 @@ public final class CamelRuntimeHints implements RuntimeHintsRegistrar {
     /**
      * Register all the Camel services that could be found in the given classloader.
      *
-     * @param hints
-     *            the hints contributed so far for the deployment unit
-     * @param classLoader
-     *            the ClassLoader to load classpath resources with, or {@code null} for using the thread context class
-     *            loader at the time of actual resource access
+     * @param hints       the hints contributed so far for the deployment unit
+     * @param classLoader the ClassLoader to load classpath resources with, or {@code null} for using the thread context
+     *                    class loader at the time of actual resource access
      */
     private static void registerCamelServices(RuntimeHints hints, ClassLoader classLoader) {
         hints.resources().registerPattern("META-INF/services/org/apache/camel/*");

@@ -17,6 +17,7 @@
 package org.apache.camel.spring.boot.cloud;
 
 import java.util.List;
+
 import org.apache.camel.Exchange;
 import org.apache.camel.cloud.ServiceDefinition;
 import org.apache.camel.cloud.ServiceFilter;

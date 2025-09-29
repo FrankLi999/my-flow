@@ -24,6 +24,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.StartupListener;
 import org.apache.camel.main.MainDurationEventNotifier;
@@ -69,8 +70,9 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
     // Constructors
 
     public CamelSpringBootApplicationListener(ApplicationContext applicationContext,
-            List<CamelContextConfiguration> camelContextConfigurations,
-            CamelConfigurationProperties configurationProperties, RoutesCollector springBootRoutesCollector) {
+                                              List<CamelContextConfiguration> camelContextConfigurations,
+                                              CamelConfigurationProperties configurationProperties,
+                                              RoutesCollector springBootRoutesCollector) {
         this.applicationContext = applicationContext;
         this.camelContextConfigurations = new ArrayList<>(camelContextConfigurations);
         this.configurationProperties = configurationProperties;
@@ -109,7 +111,8 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                     camelContextConfiguration.beforeApplicationStart(camelContext);
                 }
 
-                if (configurationProperties.getMain().isRunController() || configurationProperties.getMain().isMainRunController()) {
+                if (configurationProperties.getMain().isRunController()
+                        || configurationProperties.getMain().isMainRunController()) {
                     CamelMainRunController controller = new CamelMainRunController(applicationContext, camelContext);
 
                     if (configurationProperties.getMain().getDurationMaxMessages() > 0
@@ -124,7 +127,8 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                         }
                         // register lifecycle so we can trigger to shutdown the JVM when maximum number of messages has
                         // been processed
-                        EventNotifier notifier = new MainDurationEventNotifier(camelContext,
+                        EventNotifier notifier = new MainDurationEventNotifier(
+                                camelContext,
                                 configurationProperties.getMain().getDurationMaxMessages(),
                                 configurationProperties.getMain().getDurationMaxIdleSeconds(),
                                 controller.getMainShutdownStrategy(), true,
@@ -184,7 +188,8 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
 
                             // register lifecycle so we can trigger to shutdown the JVM when maximum number of messages
                             // has been processed
-                            EventNotifier notifier = new MainDurationEventNotifier(camelContext,
+                            EventNotifier notifier = new MainDurationEventNotifier(
+                                    camelContext,
                                     configurationProperties.getMain().getDurationMaxMessages(),
                                     configurationProperties.getMain().getDurationMaxIdleSeconds(), strategy, false,
                                     configurationProperties.getMain().isRoutesReloadRestartDuration(),
@@ -252,7 +257,8 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
 
     // Helpers
 
-    private void terminateMainControllerAfter(final CamelContext camelContext, int seconds,
+    private void terminateMainControllerAfter(
+            final CamelContext camelContext, int seconds,
             final MainShutdownStrategy shutdownStrategy, final Runnable mainCompletedTask) {
         ScheduledExecutorService executorService = camelContext.getExecutorServiceManager()
                 .newSingleThreadScheduledExecutor(this, "CamelSpringBootTerminateTask");
@@ -291,7 +297,8 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
         });
     }
 
-    private void terminateApplicationContext(final ConfigurableApplicationContext applicationContext,
+    private void terminateApplicationContext(
+            final ConfigurableApplicationContext applicationContext,
             final CamelContext camelContext, int seconds) {
         ScheduledExecutorService executorService = camelContext.getExecutorServiceManager()
                 .newSingleThreadScheduledExecutor(this, "CamelSpringBootTerminateTask");
@@ -321,7 +328,8 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
         });
     }
 
-    private void terminateApplicationContext(final ConfigurableApplicationContext applicationContext,
+    private void terminateApplicationContext(
+            final ConfigurableApplicationContext applicationContext,
             final CamelContext camelContext, final MainShutdownStrategy shutdownStrategy) {
         ExecutorService executorService = camelContext.getExecutorServiceManager().newSingleThreadExecutor(this,
                 "CamelSpringBootTerminateTask");

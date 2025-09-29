@@ -18,7 +18,6 @@ package org.apache.camel.spring.boot.vault;
 
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.vault.KubernetesConfigMapVaultConfiguration;
-import org.apache.camel.vault.KubernetesVaultConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -32,7 +31,8 @@ import org.springframework.context.annotation.Configuration;
 public class KubernetesConfigMapVaultAutoConfiguration {
 
     @Bean
-    public KubernetesConfigMapVaultConfiguration kubernetesConfigMapVaultConfiguration(KubernetesConfigMapVaultConfigurationProperties config) {
+    public KubernetesConfigMapVaultConfiguration kubernetesConfigMapVaultConfiguration(
+            KubernetesConfigMapVaultConfigurationProperties config) {
         KubernetesConfigMapVaultConfiguration answer = new KubernetesConfigMapVaultConfiguration();
         answer.setRefreshEnabled(config.isRefreshEnabled());
         answer.setConfigmaps(config.getConfigmaps());

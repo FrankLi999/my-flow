@@ -28,7 +28,8 @@ import org.springframework.test.annotation.DirtiesContext;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(classes = { AzureVaultConfigurationTest.class }, properties = { "camel.vault.azure.vaultName=myVault",
+@SpringBootTest(classes = { AzureVaultConfigurationTest.class }, properties = {
+        "camel.vault.azure.vaultName=myVault",
         "camel.vault.azure.clientId=myClientId", "camel.vault.azure.clientSecret=myClientSecret",
         "camel.vault.azure.tenantId=myTenantId", "camel.vault.azure.eventhubConnectionString=connString",
         "camel.vault.azure.azureIdentityEnabled=true", })

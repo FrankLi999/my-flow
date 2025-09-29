@@ -16,6 +16,9 @@
  */
 package org.apache.camel.spring.boot;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
@@ -32,9 +35,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @DirtiesContext
 @CamelSpringBootTest

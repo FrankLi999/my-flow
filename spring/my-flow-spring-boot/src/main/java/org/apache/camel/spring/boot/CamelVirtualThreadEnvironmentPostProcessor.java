@@ -23,12 +23,11 @@ import org.springframework.boot.env.EnvironmentPostProcessor;
 import org.springframework.core.env.ConfigurableEnvironment;
 
 /**
- * Environment post processor that automatically sets the Camel virtual thread 
- * system property when Spring Boot virtual threads are enabled.
- * 
- * This processor runs very early in the Spring Boot startup process, before
- * any Camel classes are loaded, ensuring that Camel's ThreadType static 
- * initialization picks up the correct virtual thread configuration.
+ * Environment post processor that automatically sets the Camel virtual thread system property when Spring Boot virtual
+ * threads are enabled.
+ *
+ * This processor runs very early in the Spring Boot startup process, before any Camel classes are loaded, ensuring that
+ * Camel's ThreadType static initialization picks up the correct virtual thread configuration.
  */
 public class CamelVirtualThreadEnvironmentPostProcessor implements EnvironmentPostProcessor {
 
@@ -38,11 +37,11 @@ public class CamelVirtualThreadEnvironmentPostProcessor implements EnvironmentPo
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
         // Check if Spring Boot virtual threads are enabled
         String springVirtualThreads = environment.getProperty("spring.threads.virtual.enabled");
-        
+
         if ("true".equalsIgnoreCase(springVirtualThreads)) {
             // Set the Camel virtual threads system property early, before Camel classes are loaded
             String existingCamelProperty = System.getProperty("camel.threads.virtual.enabled");
-            
+
             if (existingCamelProperty == null) {
                 System.setProperty("camel.threads.virtual.enabled", "true");
                 LOG.info("Spring virtual threads enabled - automatically setting camel.threads.virtual.enabled=true");

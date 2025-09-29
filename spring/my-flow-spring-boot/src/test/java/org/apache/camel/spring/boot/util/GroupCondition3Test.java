@@ -28,7 +28,8 @@ import org.springframework.test.annotation.DirtiesContext;
 @CamelSpringBootTest
 @DirtiesContext
 @SpringBootApplication
-@SpringBootTest(classes = { GroupCondition3Test.TestConfiguration.class }, properties = { "test.group.enabled=true",
+@SpringBootTest(classes = { GroupCondition3Test.TestConfiguration.class }, properties = {
+        "test.group.enabled=true",
         "test.group.my-class.enabled=false" })
 public class GroupCondition3Test extends GroupConditionTestBase {
     @Autowired

@@ -84,7 +84,9 @@ import org.springframework.core.env.MutablePropertySources;
 
 @ImportRuntimeHints(CamelRuntimeHints.class)
 @Configuration(proxyBeanMethods = false)
-@EnableConfigurationProperties({CamelConfigurationProperties.class, CamelStartupConditionConfigurationProperties.class, PropertiesComponentConfiguration.class})
+@EnableConfigurationProperties({
+        CamelConfigurationProperties.class, CamelStartupConditionConfigurationProperties.class,
+        PropertiesComponentConfiguration.class })
 @Import(TypeConversionConfiguration.class)
 @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
 public class CamelAutoConfiguration {
@@ -103,11 +105,14 @@ public class CamelAutoConfiguration {
     // close would be superfluous.
     @Bean(destroyMethod = "")
     @ConditionalOnMissingBean(CamelContext.class)
-    CamelContext camelContext(ApplicationContext applicationContext, CamelConfigurationProperties config,
-                              CamelBeanPostProcessor beanPostProcessor, StartupConditionStrategy startup) throws Exception {
+    CamelContext camelContext(
+            ApplicationContext applicationContext, CamelConfigurationProperties config,
+            CamelBeanPostProcessor beanPostProcessor, StartupConditionStrategy startup)
+            throws Exception {
         Clock clock = new ResetableClock();
         CamelSpringBootApplicationController controller = new CamelSpringBootApplicationController(applicationContext);
-        CamelContext camelContext = new SpringBootCamelContext(applicationContext,
+        CamelContext camelContext = new SpringBootCamelContext(
+                applicationContext,
                 config.getMain().isWarnOnEarlyShutdown(), controller);
         camelContext.getClock().add(ContextEvents.BOOT, clock);
         controller.setCamelContext(camelContext);
@@ -122,9 +127,11 @@ public class CamelAutoConfiguration {
     /**
      * Not to be used by Camel end users
      */
-    public static CamelContext doConfigureCamelContext(ApplicationContext applicationContext, CamelContext camelContext,
-                                                       CamelConfigurationProperties config,
-                                                       CamelSpringBootApplicationController controller) throws Exception {
+    public static CamelContext doConfigureCamelContext(
+            ApplicationContext applicationContext, CamelContext camelContext,
+            CamelConfigurationProperties config,
+            CamelSpringBootApplicationController controller)
+            throws Exception {
 
         // inject camel context on controller
         CamelContextAware.trySetCamelContext(controller, camelContext);
@@ -170,7 +177,8 @@ public class CamelAutoConfiguration {
             if (env instanceof ConfigurableEnvironment) {
                 MutablePropertySources sources = ((ConfigurableEnvironment) env).getPropertySources();
                 if (!sources.contains("camel-file-configuration")) {
-                    sources.addFirst(new FilePropertySource("camel-file-configuration", applicationContext,
+                    sources.addFirst(new FilePropertySource(
+                            "camel-file-configuration", applicationContext,
                             config.getMain().getFileConfigurations()));
                 }
             }
@@ -210,7 +218,7 @@ public class CamelAutoConfiguration {
                 new FatJarPackageScanResourceResolver());
 
         if (config.getMain().getRouteFilterIncludePattern() != null
-            || config.getMain().getRouteFilterExcludePattern() != null) {
+                || config.getMain().getRouteFilterExcludePattern() != null) {
             LOG.info("Route filtering pattern: include={}, exclude={}", config.getMain().getRouteFilterIncludePattern(),
                     config.getMain().getRouteFilterExcludePattern());
             camelContext.getCamelContextExtension().getContextPlugin(Model.class).setRouteFilterPattern(
@@ -283,7 +291,7 @@ public class CamelAutoConfiguration {
         } else if ("logging".equals(config.getMain().getStartupRecorder())) {
             camelContext.getCamelContextExtension().setStartupStepRecorder(new LoggingStartupStepRecorder());
         } else if ("java-flight-recorder".equals(config.getMain().getStartupRecorder())
-                   || config.getMain().getStartupRecorder() == null) {
+                || config.getMain().getStartupRecorder() == null) {
             // try to auto discover camel-jfr to use
             StartupStepRecorder fr = camelContext.getCamelContextExtension().getBootstrapFactoryFinder()
                     .newInstance(StartupStepRecorder.FACTORY, StartupStepRecorder.class).orElse(null);
@@ -307,11 +315,13 @@ public class CamelAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(CamelSpringBootApplicationListener.class)
-    CamelSpringBootApplicationListener routesCollectorListener(ApplicationContext applicationContext,
-                                                               CamelConfigurationProperties config, RoutesCollector routesCollector) {
+    CamelSpringBootApplicationListener routesCollectorListener(
+            ApplicationContext applicationContext,
+            CamelConfigurationProperties config, RoutesCollector routesCollector) {
         Collection<CamelContextConfiguration> configurations = applicationContext
                 .getBeansOfType(CamelContextConfiguration.class).values();
-        return new CamelSpringBootApplicationListener(applicationContext, new ArrayList(configurations), config,
+        return new CamelSpringBootApplicationListener(
+                applicationContext, new ArrayList(configurations), config,
                 routesCollector);
     }
 
@@ -393,7 +403,8 @@ public class CamelAutoConfiguration {
     // (PropertiesComponent extends ServiceSupport) would be used for bean
     // destruction. And we want Camel to handle the lifecycle.
     @Bean(destroyMethod = "")
-    PropertiesComponent properties(ApplicationContext applicationContext, PropertiesParser parser, PropertiesComponentConfiguration configuration) {
+    PropertiesComponent properties(
+            ApplicationContext applicationContext, PropertiesParser parser, PropertiesComponentConfiguration configuration) {
         PropertiesComponent pc = new PropertiesComponent();
         if (configuration.getAutoDiscoverPropertiesSources() != null) {
             pc.setAutoDiscoverPropertiesSources(configuration.getAutoDiscoverPropertiesSources());

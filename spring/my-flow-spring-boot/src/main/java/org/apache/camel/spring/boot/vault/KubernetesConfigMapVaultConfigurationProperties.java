@@ -31,8 +31,6 @@ public class KubernetesConfigMapVaultConfigurationProperties {
      */
     private String configmaps;
 
-
-
     public boolean isRefreshEnabled() {
         return refreshEnabled;
     }

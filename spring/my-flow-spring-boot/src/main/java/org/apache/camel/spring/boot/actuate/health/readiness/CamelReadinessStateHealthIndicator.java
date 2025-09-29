@@ -17,6 +17,7 @@
 package org.apache.camel.spring.boot.actuate.health.readiness;
 
 import java.util.Collection;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.health.HealthCheck;
 import org.apache.camel.health.HealthCheckHelper;

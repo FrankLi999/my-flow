@@ -17,6 +17,7 @@
 package org.apache.camel.spring.boot;
 
 import java.util.concurrent.atomic.AtomicInteger;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;

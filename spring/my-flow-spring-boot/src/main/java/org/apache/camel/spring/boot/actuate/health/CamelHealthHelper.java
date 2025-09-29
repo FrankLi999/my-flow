@@ -21,7 +21,7 @@ import java.io.StringWriter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
+
 import org.apache.camel.health.HealthCheck;
 import org.springframework.boot.actuate.health.Health;
 
@@ -33,12 +33,9 @@ final class CamelHealthHelper {
     /**
      * Propagates details from the Camel Health {@link HealthCheck.Result} to the Spring Boot {@link Health.Builder}.
      *
-     * @param builder
-     *            The health check response builder
-     * @param result
-     *            The Camel health check result
-     * @param exposureLevel
-     *            The level at which to expose details from the health check result
+     * @param builder       The health check response builder
+     * @param result        The Camel health check result
+     * @param exposureLevel The level at which to expose details from the health check result
      */
     public static void applyHealthDetail(Health.Builder builder, HealthCheck.Result result, String exposureLevel) {
         if (!exposureLevel.equals("oneline")) {

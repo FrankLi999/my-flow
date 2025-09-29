@@ -69,3 +69,6 @@
   atlas-xml-core
   atlas-xml-model
   atlas-xml-module
+
+
+## copied camel/buildtools, camel/parent, camel/catalog/camel-allcomponents, tooling/spi-annotations

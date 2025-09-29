@@ -16,37 +16,35 @@
  */
 package org.apache.camel.spring.boot.actuate.endpoint;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.apache.camel.CamelContext;
-import org.apache.camel.Route;
 import org.apache.camel.ServiceStatus;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.actuate.endpoint.CamelRoutesEndpoint.RouteEndpointInfo;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 /*
  * Test for the {@link CamelRoutesEndpoint} actuator endpoint.
  */
 
 @EnableAutoConfiguration
-@SpringBootTest(classes = { CamelAutoConfiguration.class, CamelRoutesEndpointAutoConfiguration.class,
-        ActuatorTestControlledRoutes.class }, properties = {
-        "management.endpoints.web.exposure.include=*",
-        "camel.routecontroller.enabled=true",
-        "camel.routecontroller.initial-delay=100",
-        "camel.routecontroller.back-off-delay=100",
-        "camel.routecontroller.back-off-max-attempts=3",
-        "camel.main.routes-exclude-pattern=*",
-        "camel.main.routes-collector-enabled=true"}
-)
+@SpringBootTest(classes = {
+        CamelAutoConfiguration.class, CamelRoutesEndpointAutoConfiguration.class,
+        ActuatorTestControlledRoutes.class },
+                properties = {
+                        "management.endpoints.web.exposure.include=*",
+                        "camel.routecontroller.enabled=true",
+                        "camel.routecontroller.initial-delay=100",
+                        "camel.routecontroller.back-off-delay=100",
+                        "camel.routecontroller.back-off-max-attempts=3",
+                        "camel.main.routes-exclude-pattern=*",
+                        "camel.main.routes-collector-enabled=true" })
 public class CamelRoutesEndpointControllerRouteTest {
 
     @Autowired
@@ -55,27 +53,23 @@ public class CamelRoutesEndpointControllerRouteTest {
     @Autowired
     CamelContext camelContext;
 
-
-   @Test
+    @Test
     public void testFailedRouteVisible() throws Exception {
         List<RouteEndpointInfo> routes = endpoint.readRoutes();
-        Assertions.assertTrue(contains(routes,"controlled-bar"));
-        List<RouteEndpointInfo> filtered = filterById( routes,"controlled-bar");
+        Assertions.assertTrue(contains(routes, "controlled-bar"));
+        List<RouteEndpointInfo> filtered = filterById(routes, "controlled-bar");
         Assertions.assertEquals(1, filtered.size());
-       Assertions.assertEquals(ServiceStatus.Stopped.name(),filtered.get(0).getStatus());
-
+        Assertions.assertEquals(ServiceStatus.Stopped.name(), filtered.get(0).getStatus());
 
     }
 
-
-    private boolean contains(List<RouteEndpointInfo> routes, String routeId){
-        List<RouteEndpointInfo> list = filterById( routes,  routeId);
+    private boolean contains(List<RouteEndpointInfo> routes, String routeId) {
+        List<RouteEndpointInfo> list = filterById(routes, routeId);
         return list.size() > 0;
     }
 
-    private  List<RouteEndpointInfo> filterById(List<RouteEndpointInfo> routes, String routeId){
-        return routes.stream().filter(x->(routeId.equals(x.getId()))).collect(Collectors.toUnmodifiableList());
+    private List<RouteEndpointInfo> filterById(List<RouteEndpointInfo> routes, String routeId) {
+        return routes.stream().filter(x -> (routeId.equals(x.getId()))).collect(Collectors.toUnmodifiableList());
     }
-
 
 }

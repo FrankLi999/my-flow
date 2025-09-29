@@ -17,6 +17,7 @@
 package org.apache.camel.spring.boot.util;
 
 import java.util.Arrays;
+
 import org.springframework.boot.autoconfigure.condition.ConditionMessage;
 import org.springframework.boot.autoconfigure.condition.ConditionOutcome;
 import org.springframework.boot.autoconfigure.condition.SpringBootCondition;
@@ -32,7 +33,8 @@ public class HierarchicalCondition extends SpringBootCondition {
     }
 
     @Override
-    public ConditionOutcome getMatchOutcome(ConditionContext conditionContext,
+    public ConditionOutcome getMatchOutcome(
+            ConditionContext conditionContext,
             AnnotatedTypeMetadata annotatedTypeMetadata) {
         if (items.length == 0) {
             return ConditionOutcome.match(ConditionMessage.forCondition("no condition").because("no conditions"));

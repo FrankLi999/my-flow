@@ -21,11 +21,10 @@ import org.apache.camel.component.cxf.jaxws.CxfEndpoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-
 @Component
 public class ActuatorTestControlledRoutes extends RouteBuilder {
 
-    @Bean(name="myCxfEndpointBean")
+    @Bean(name = "myCxfEndpointBean")
     private CxfEndpoint myCxfEndpointBean() {
         return new CxfEndpoint();
     }

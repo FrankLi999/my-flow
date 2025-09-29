@@ -23,7 +23,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
@@ -33,10 +32,12 @@ import org.springframework.test.annotation.DirtiesContext;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(classes = { CamelAutoConfiguration.class, CamelRoutesEndpointAutoConfiguration.class,
-        CamelRouteControllerEndpointAutoConfiguration.class, ActuatorTestRoute.class }, properties = {
-                "management.endpoints.web.exposure.include=*", "management.endpoint.camelroute.enabled=true",
-                "management.endpoint.camelroutecontroller.enabled=false" })
+@SpringBootTest(classes = {
+        CamelAutoConfiguration.class, CamelRoutesEndpointAutoConfiguration.class,
+        CamelRouteControllerEndpointAutoConfiguration.class, ActuatorTestRoute.class },
+                properties = {
+                        "management.endpoints.web.exposure.include=*", "management.endpoint.camelroute.enabled=true",
+                        "management.endpoint.camelroutecontroller.enabled=false" })
 public class CamelRouteControllerEndpointGloballyDisabledAndReenabledTest {
 
     @Autowired(required = false)

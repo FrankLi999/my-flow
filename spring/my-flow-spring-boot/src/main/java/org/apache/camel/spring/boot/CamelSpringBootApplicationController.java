@@ -16,7 +16,10 @@
  */
 package org.apache.camel.spring.boot;
 
+import java.util.Map;
+
 import jakarta.annotation.PreDestroy;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.CamelContextAware;
 import org.apache.camel.ProducerTemplate;
@@ -27,8 +30,6 @@ import org.apache.camel.main.SimpleMainShutdownStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
-
-import java.util.Map;
 
 public class CamelSpringBootApplicationController implements CamelContextAware {
     private static final Logger LOG = LoggerFactory.getLogger(CamelSpringBootApplicationController.class);

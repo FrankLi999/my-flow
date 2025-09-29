@@ -16,7 +16,6 @@
  */
 package org.apache.camel.spring.boot.vault;
 
-import org.apache.camel.spi.Metadata;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.vault.gcp")

@@ -17,6 +17,7 @@
 package org.apache.camel.spring.boot;
 
 import jakarta.annotation.PostConstruct;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
@@ -32,7 +33,8 @@ import org.springframework.test.annotation.DirtiesContext;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(classes = { CamelAutoConfiguration.class,
+@SpringBootTest(classes = {
+        CamelAutoConfiguration.class,
         CamelConfigurationPostConstructAddRouteToRegistryTest.Config.class })
 public class CamelConfigurationPostConstructAddRouteToRegistryTest {
 

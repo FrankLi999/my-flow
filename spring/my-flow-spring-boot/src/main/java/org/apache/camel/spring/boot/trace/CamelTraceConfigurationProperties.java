@@ -16,7 +16,6 @@
  */
 package org.apache.camel.spring.boot.trace;
 
-import org.apache.camel.LoggingLevel;
 import org.apache.camel.spi.Metadata;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

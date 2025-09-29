@@ -16,10 +16,12 @@
  */
 package org.apache.camel.spring.boot.cloud;
 
-import jakarta.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
+import jakarta.annotation.PostConstruct;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.impl.cloud.BlacklistServiceFilter;
 import org.apache.camel.impl.cloud.DefaultServiceDefinition;
@@ -93,7 +95,8 @@ public class CamelCloudServiceFilterAutoConfiguration implements BeanFactoryAwar
     // Helper
     // *******************************
 
-    private void registerBean(ConfigurableBeanFactory factory, String name,
+    private void registerBean(
+            ConfigurableBeanFactory factory, String name,
             CamelCloudConfigurationProperties.ServiceFilterConfiguration configuration) {
         factory.registerSingleton(name, createServiceFilter(configuration));
     }

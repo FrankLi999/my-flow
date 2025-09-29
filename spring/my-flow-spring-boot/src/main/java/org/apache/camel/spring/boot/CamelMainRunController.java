@@ -16,12 +16,12 @@
  */
 package org.apache.camel.spring.boot;
 
+import java.util.Map;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.main.MainListener;
 import org.apache.camel.main.MainShutdownStrategy;
 import org.springframework.context.ApplicationContext;
-
-import java.util.Map;
 
 /**
  * Controller to keep the main running and perform graceful shutdown when the JVM is stopped.

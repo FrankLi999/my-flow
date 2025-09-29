@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
 import org.apache.camel.Exchange;
 import org.apache.camel.TypeConversionException;
 import org.apache.camel.support.TypeConverterSupport;

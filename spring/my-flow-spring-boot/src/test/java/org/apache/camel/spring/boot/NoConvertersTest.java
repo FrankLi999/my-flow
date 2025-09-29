@@ -16,8 +16,6 @@
  */
 package org.apache.camel.spring.boot;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import org.apache.camel.TypeConverter;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.Test;
@@ -27,6 +25,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.annotation.DirtiesContext;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DirtiesContext
 @CamelSpringBootTest

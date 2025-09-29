@@ -16,6 +16,15 @@
  */
 package org.apache.camel.spring.boot.actuate.endpoint;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -33,21 +42,9 @@ import org.springframework.boot.actuate.endpoint.annotation.Selector;
 import org.springframework.boot.actuate.endpoint.annotation.WriteOperation;
 import org.springframework.lang.Nullable;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
-
 
 /*
  * Spring Boot Management Endpoint to expose Camel Route information.
@@ -73,12 +70,12 @@ public class CamelRoutesEndpoint {
     @ReadOperation
     public Object doReadAction(@Selector String id, @Selector ReadAction action) {
         switch (action) {
-        case DETAIL:
-            return getRouteDetailsInfo(id);
-        case INFO:
-            return getRouteInfo(id);
-        default:
-            throw new IllegalArgumentException("Unsupported read action " + action);
+            case DETAIL:
+                return getRouteDetailsInfo(id);
+            case INFO:
+                return getRouteInfo(id);
+            default:
+                throw new IllegalArgumentException("Unsupported read action " + action);
         }
     }
 
@@ -89,26 +86,26 @@ public class CamelRoutesEndpoint {
         }
 
         switch (action) {
-        case STOP:
-            stopRoute(id, Optional.ofNullable(timeInfo).flatMap(ti -> Optional.ofNullable(ti.getTimeout())),
-                    Optional.of(TimeUnit.SECONDS),
-                    Optional.ofNullable(timeInfo).flatMap(ti -> Optional.ofNullable(ti.getAbortAfterTimeout())));
-            break;
-        case START:
-            startRoute(id);
-            break;
-        case RESET:
-            resetRoute(id);
-            break;
-        case SUSPEND:
-            suspendRoute(id, Optional.ofNullable(timeInfo).flatMap(ti -> Optional.ofNullable(ti.getTimeout())),
-                    Optional.of(TimeUnit.SECONDS));
-            break;
-        case RESUME:
-            resumeRoute(id);
-            break;
-        default:
-            throw new IllegalArgumentException("Unsupported write action " + action);
+            case STOP:
+                stopRoute(id, Optional.ofNullable(timeInfo).flatMap(ti -> Optional.ofNullable(ti.getTimeout())),
+                        Optional.of(TimeUnit.SECONDS),
+                        Optional.ofNullable(timeInfo).flatMap(ti -> Optional.ofNullable(ti.getAbortAfterTimeout())));
+                break;
+            case START:
+                startRoute(id);
+                break;
+            case RESET:
+                resetRoute(id);
+                break;
+            case SUSPEND:
+                suspendRoute(id, Optional.ofNullable(timeInfo).flatMap(ti -> Optional.ofNullable(ti.getTimeout())),
+                        Optional.of(TimeUnit.SECONDS));
+                break;
+            case RESUME:
+                resumeRoute(id);
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported write action " + action);
         }
     }
 
@@ -121,15 +118,15 @@ public class CamelRoutesEndpoint {
         return null;
     }
 
-    private Route getRoute(String id){
-        return getRoutes().stream().filter(x->x.getId().equals(id)).findAny().get();
+    private Route getRoute(String id) {
+        return getRoutes().stream().filter(x -> x.getId().equals(id)).findAny().get();
     }
 
-    private Collection<Route> getRoutes(){
+    private Collection<Route> getRoutes() {
         RouteController routeController = camelContext.getRouteController();
-        Map<String,Route> routes = new HashMap<>();
+        Map<String, Route> routes = new HashMap<>();
 
-        if (routeController != null ){
+        if (routeController != null) {
             routes.putAll(routeController.getControlledRoutes().stream().collect(toMap(Route::getId, identity())));
         }
         routes.putAll(camelContext.getRoutes().stream().collect(toMap(Route::getId, identity())));
@@ -169,7 +166,8 @@ public class CamelRoutesEndpoint {
         }
     }
 
-    private void stopRoute(String id, Optional<Long> timeout, Optional<TimeUnit> timeUnit,
+    private void stopRoute(
+            String id, Optional<Long> timeout, Optional<TimeUnit> timeUnit,
             Optional<Boolean> abortAfterTimeout) {
         try {
             if (timeout.isPresent()) {
@@ -212,7 +210,7 @@ public class CamelRoutesEndpoint {
 
         private final String id;
         private final String group;
-        @JsonIgnoreProperties(value = {"route.start.exception"})
+        @JsonIgnoreProperties(value = { "route.start.exception" })
         private final Map<String, Object> properties;
         private final String description;
         private final String uptime;
@@ -464,14 +462,19 @@ public class CamelRoutesEndpoint {
      * List of write actions available for the endpoint
      */
     public enum WriteAction {
-        STOP, START, RESET, SUSPEND, RESUME
+        STOP,
+        START,
+        RESET,
+        SUSPEND,
+        RESUME
     }
 
     /*
      * List of read actions available for the endpoint
      */
     public enum ReadAction {
-        DETAIL, INFO
+        DETAIL,
+        INFO
     }
 
     /*

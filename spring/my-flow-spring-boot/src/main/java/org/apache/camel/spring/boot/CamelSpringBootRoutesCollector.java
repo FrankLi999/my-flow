@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.main.DefaultRoutesCollector;
 import org.apache.camel.support.DefaultRegistry;

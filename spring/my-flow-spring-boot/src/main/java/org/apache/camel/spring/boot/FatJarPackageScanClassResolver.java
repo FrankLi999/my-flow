@@ -78,7 +78,8 @@ public class FatJarPackageScanClassResolver extends DefaultPackageScanClassResol
         return super.parseUrlPath(url);
     }
 
-    protected List<String> doLoadJarClassEntries(InputStream stream, String urlPath, boolean inspectNestedJars,
+    protected List<String> doLoadJarClassEntries(
+            InputStream stream, String urlPath, boolean inspectNestedJars,
             boolean closeStream) {
         List<String> entries = new ArrayList<>();
 
@@ -103,7 +104,8 @@ public class FatJarPackageScanClassResolver extends DefaultPackageScanClassResol
             }
         } catch (IOException ioe) {
             LOG.warn("Cannot search jar file '" + urlPath + " due to an IOException: " + ioe.getMessage()
-                    + ". This exception is ignored.", ioe);
+                     + ". This exception is ignored.",
+                    ioe);
         } finally {
             if (closeStream) {
                 // stream is left open when scanning nested jars, otherwise the fat jar stream gets closed

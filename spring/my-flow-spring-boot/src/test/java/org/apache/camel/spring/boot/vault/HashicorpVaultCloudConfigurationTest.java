@@ -31,7 +31,8 @@ import org.springframework.test.annotation.DirtiesContext;
 @SpringBootTest(classes = { HashicorpVaultCloudConfigurationTest.class }, properties = {
         "camel.vault.hashicorp.token=myToken",
         "camel.vault.hashicorp.host=myHost", "camel.vault.hashicorp.port=myPort",
-        "camel.vault.hashicorp.scheme=myScheme", "camel.vault.hashicorp.cloud=true", "camel.vault.hashicorp.namespace=namespace"})
+        "camel.vault.hashicorp.scheme=myScheme", "camel.vault.hashicorp.cloud=true",
+        "camel.vault.hashicorp.namespace=namespace" })
 public class HashicorpVaultCloudConfigurationTest {
 
     @Autowired

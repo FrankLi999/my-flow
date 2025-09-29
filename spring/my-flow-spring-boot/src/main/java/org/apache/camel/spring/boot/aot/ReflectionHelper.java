@@ -29,6 +29,7 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
@@ -65,20 +66,15 @@ public final class ReflectionHelper {
      * the annotation which can be either {@link ElementType#TYPE}, {@link ElementType#CONSTRUCTOR},
      * {@link ElementType#METHOD}, {@link ElementType#FIELD}, or {@link ElementType#PARAMETER}.
      *
-     * @param c
-     *            the target class
-     * @param a
-     *            the target type of annotation
-     * @param getter
-     *            the method allowing to extract the excepted values from the annotation
-     * @param onMatch
-     *            the action to perform in case of a match
-     * @param <A>
-     *            the type of the target annotation
-     * @param <T>
-     *            the type of the content extracted from the annotation found
+     * @param c       the target class
+     * @param a       the target type of annotation
+     * @param getter  the method allowing to extract the excepted values from the annotation
+     * @param onMatch the action to perform in case of a match
+     * @param <A>     the type of the target annotation
+     * @param <T>     the type of the content extracted from the annotation found
      */
-    public static <A extends Annotation, T> void applyIfMatch(Class<?> c, Class<A> a, Function<A, T> getter,
+    public static <A extends Annotation, T> void applyIfMatch(
+            Class<?> c, Class<A> a, Function<A, T> getter,
             Consumer<T> onMatch) {
         Set<ElementType> targets = null;
         if (a.isAnnotationPresent(Target.class)) {
@@ -128,14 +124,13 @@ public final class ReflectionHelper {
     /**
      * Give all the classes available in the given class loader that are annotated with at least one of the annotations.
      *
-     * @param classLoader
-     *            the class loader from which the classes to find are loaded
-     * @param annotations
-     *            the target annotations
+     * @param  classLoader the class loader from which the classes to find are loaded
+     * @param  annotations the target annotations
      *
-     * @return the list of classes that are annotated with at least one of the annotations.
+     * @return             the list of classes that are annotated with at least one of the annotations.
      */
-    public static List<Class<?>> getClassesByAnnotations(ClassLoader classLoader,
+    public static List<Class<?>> getClassesByAnnotations(
+            ClassLoader classLoader,
             List<Class<? extends Annotation>> annotations) {
         return getClassesByFilters(classLoader,
                 annotations.stream().map(AnnotationTypeFilter::new).collect(Collectors.toList()));
@@ -144,12 +139,10 @@ public final class ReflectionHelper {
     /**
      * Give all the classes available in the given class loader that match with at least one of the filters.
      *
-     * @param classLoader
-     *            the class loader from which the classes to find are loaded
-     * @param includeFilters
-     *            the filters to apply the classes found
+     * @param  classLoader    the class loader from which the classes to find are loaded
+     * @param  includeFilters the filters to apply the classes found
      *
-     * @return a list of classes that match with at least one of the given filters
+     * @return                a list of classes that match with at least one of the given filters
      */
     public static List<Class<?>> getClassesByFilters(ClassLoader classLoader, List<TypeFilter> includeFilters) {
         ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(false) {
@@ -175,12 +168,10 @@ public final class ReflectionHelper {
     /**
      * Convert the given bean definition into a class.
      *
-     * @param bean
-     *            the bean definition to convert.
-     * @param classLoader
-     *            the classloader from which the class of the bean is loaded
+     * @param  bean        the bean definition to convert.
+     * @param  classLoader the classloader from which the class of the bean is loaded
      *
-     * @return the class corresponding to the bean definition if it could be found, {@code null} otherwise.
+     * @return             the class corresponding to the bean definition if it could be found, {@code null} otherwise.
      */
     private static Class<?> asClass(BeanDefinition bean, ClassLoader classLoader) {
         String beanClassName = bean.getBeanClassName();

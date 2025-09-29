@@ -17,6 +17,7 @@
 package org.apache.camel.spring.boot.routetemplate;
 
 import java.util.Map;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.main.PropertiesRouteTemplateParametersSource;
 import org.apache.camel.spi.RouteTemplateParameterSource;
@@ -34,7 +35,8 @@ import org.springframework.context.annotation.Configuration;
 public class CamelRouteTemplateAutoConfiguration {
 
     @Bean
-    public RouteTemplateParameterSource routeTemplate(CamelContext camelContext,
+    public RouteTemplateParameterSource routeTemplate(
+            CamelContext camelContext,
             CamelRouteTemplateConfigurationProperties rt) {
         if (rt.getConfig() == null) {
             return null;

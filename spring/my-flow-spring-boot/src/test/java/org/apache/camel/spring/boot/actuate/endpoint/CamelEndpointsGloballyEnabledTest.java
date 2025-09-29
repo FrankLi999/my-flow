@@ -27,7 +27,8 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(classes = { CamelAutoConfiguration.class, CamelRouteControllerEndpointAutoConfiguration.class,
+@SpringBootTest(classes = {
+        CamelAutoConfiguration.class, CamelRouteControllerEndpointAutoConfiguration.class,
         CamelRoutesEndpointAutoConfiguration.class }, properties = { "management.endpoints.web.exposure.include=*" })
 
 public class CamelEndpointsGloballyEnabledTest {

@@ -17,6 +17,7 @@
 package org.apache.camel.spring.boot.cloud;
 
 import java.util.Properties;
+
 import org.apache.camel.Expression;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
@@ -40,7 +41,8 @@ import org.springframework.test.annotation.DirtiesContext;
 @DirtiesContext
 @CamelSpringBootTest
 @SpringBootApplication
-@SpringBootTest(classes = { CamelAutoConfiguration.class,
+@SpringBootTest(classes = {
+        CamelAutoConfiguration.class,
         CamelCloudServiceCallRefExpressionTest.TestConfiguration.class,
         CamelCloudServiceCallRefExpressionTest.SpringBootPropertySourceConfig.class }
 
@@ -103,7 +105,8 @@ public class CamelCloudServiceCallRefExpressionTest {
         public MutablePropertySources springBootPropertySource() {
 
             MutablePropertySources sources = env.getPropertySources();
-            sources.addFirst(new PropertiesPropertySource("boot-test-property",
+            sources.addFirst(new PropertiesPropertySource(
+                    "boot-test-property",
                     CamelCloudServiceCallRefExpressionTest.getAllProperties()));
             return sources;
 

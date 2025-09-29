@@ -18,6 +18,7 @@ package org.apache.camel.spring.boot.actuate.health;
 
 import java.util.Collection;
 import java.util.Map;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.health.HealthCheck;
 import org.apache.camel.health.HealthCheckHelper;
@@ -38,7 +39,7 @@ public class CamelHealthCheckIndicator extends AbstractHealthIndicator {
     private final String exposureLevel;
 
     public CamelHealthCheckIndicator(ApplicationContext applicationContext, CamelContext camelContext,
-            String exposureLevel) {
+                                     String exposureLevel) {
         this.applicationContext = applicationContext;
         this.camelContext = camelContext;
         this.exposureLevel = exposureLevel;

@@ -20,7 +20,6 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.FluentProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
-import org.apache.camel.spring.SpringRouteBuilder;
 import org.apache.camel.test.spring.junit5.AutoStartupExclude;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.Test;

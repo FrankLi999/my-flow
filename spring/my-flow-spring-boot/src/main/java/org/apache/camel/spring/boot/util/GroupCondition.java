@@ -33,7 +33,8 @@ public class GroupCondition extends SpringBootCondition {
     }
 
     @Override
-    public ConditionOutcome getMatchOutcome(ConditionContext conditionContext,
+    public ConditionOutcome getMatchOutcome(
+            ConditionContext conditionContext,
             AnnotatedTypeMetadata annotatedTypeMetadata) {
         final ConditionMessage.Builder message = ConditionMessage.forCondition(this.single);
         final Environment environment = conditionContext.getEnvironment();

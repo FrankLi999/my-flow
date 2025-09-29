@@ -16,11 +16,6 @@
  */
 package org.apache.camel.spring.boot;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.withSettings;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.ConsumerTemplate;
 import org.apache.camel.EndpointInject;
@@ -43,14 +38,22 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.test.annotation.DirtiesContext;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.withSettings;
+
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(classes = { CamelAutoConfigurationTest.TestConfig.class, CamelAutoConfigurationTest.class,
-        RouteConfigWithCamelContextInjected.class }, properties = { "camel.main.consumerTemplateCacheSize=100",
-                "camel.main.jmxEnabled=true", "camel.main.name=customName",
-                "camel.main.typeConversion=true",
-                "camel.main.threadNamePattern=customThreadName #counter#" })
+@SpringBootTest(classes = {
+        CamelAutoConfigurationTest.TestConfig.class, CamelAutoConfigurationTest.class,
+        RouteConfigWithCamelContextInjected.class },
+                properties = {
+                        "camel.main.consumerTemplateCacheSize=100",
+                        "camel.main.jmxEnabled=true", "camel.main.name=customName",
+                        "camel.main.typeConversion=true",
+                        "camel.main.threadNamePattern=customThreadName #counter#" })
 public class CamelAutoConfigurationTest extends org.junit.jupiter.api.Assertions {
 
     // Collaborators fixtures

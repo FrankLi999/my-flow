@@ -18,6 +18,7 @@ package org.apache.camel.spring.boot.issues;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;

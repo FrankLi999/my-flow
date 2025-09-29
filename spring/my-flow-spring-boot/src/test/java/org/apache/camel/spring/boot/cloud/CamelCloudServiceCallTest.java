@@ -17,6 +17,7 @@
 package org.apache.camel.spring.boot.cloud;
 
 import java.util.Properties;
+
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
@@ -38,7 +39,8 @@ import org.springframework.test.annotation.DirtiesContext;
 @DirtiesContext
 @CamelSpringBootTest
 @SpringBootApplication
-@SpringBootTest(classes = { CamelAutoConfiguration.class, CamelCloudServiceCallTest.TestConfiguration.class,
+@SpringBootTest(classes = {
+        CamelAutoConfiguration.class, CamelCloudServiceCallTest.TestConfiguration.class,
         CamelCloudServiceCallTest.SpringBootPropertySourceConfig.class }
 
 )

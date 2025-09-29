@@ -16,11 +16,8 @@
  */
 package org.apache.camel.spring.boot;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
-import org.apache.camel.ExtendedCamelContext;
 import org.apache.camel.spi.CamelLogger;
 import org.apache.camel.spi.LogListener;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
@@ -29,6 +26,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.stereotype.Component;
 import org.springframework.test.annotation.DirtiesContext;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DirtiesContext
 @CamelSpringBootTest

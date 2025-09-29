@@ -18,15 +18,11 @@ package org.apache.camel.spring.boot.security;
 
 import java.util.Collections;
 import java.util.Map;
+
 import org.apache.camel.CamelContext;
-import org.apache.camel.main.MainHelper;
-import org.apache.camel.spi.ThreadPoolProfile;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.support.jsse.*;
-import org.apache.camel.util.OrderedLocationProperties;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionMessage;
 import org.springframework.boot.autoconfigure.condition.ConditionOutcome;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -48,7 +44,8 @@ public class CamelSSLAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     @Conditional(CamelSSLAutoConfiguration.SSLCondition.class)
-    public SSLContextParameters sslContextParameters(CamelContext camelContext,
+    public SSLContextParameters sslContextParameters(
+            CamelContext camelContext,
             CamelSSLConfigurationProperties properties) {
         // use any camel.ssl.config props
         SSLContextParameters sslContext = camelContext.getSSLContextParameters() != null
@@ -72,7 +69,8 @@ public class CamelSSLAutoConfiguration {
     @ConditionalOnMissingBean
     @Conditional(CamelSSLAutoConfiguration.SSLConfigCondition.class)
     public GlobalSSLContextParametersSupplier sslContextParametersSupplier(CamelSSLConfigurationProperties properties) {
-        final SSLContextParameters config = properties.getConfig() != null ? properties.getConfig()
+        final SSLContextParameters config = properties.getConfig() != null
+                ? properties.getConfig()
                 : new SSLContextParameters();
         return () -> config;
     }

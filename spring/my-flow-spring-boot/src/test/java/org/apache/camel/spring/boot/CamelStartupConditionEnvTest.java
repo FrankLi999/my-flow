@@ -16,6 +16,8 @@
  */
 package org.apache.camel.spring.boot;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
@@ -30,12 +32,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(properties = {"camel.startupcondition.enabled=true", "camel.startupcondition.interval=10", "camel.startupcondition.customClassNames=org.apache.camel.spring.boot.CamelStartupConditionEnvTest$MyEnvCondition"})
+@SpringBootTest(properties = {
+        "camel.startupcondition.enabled=true", "camel.startupcondition.interval=10",
+        "camel.startupcondition.customClassNames=org.apache.camel.spring.boot.CamelStartupConditionEnvTest$MyEnvCondition" })
 public class CamelStartupConditionEnvTest {
 
     private static final AtomicInteger COUNTER = new AtomicInteger();
