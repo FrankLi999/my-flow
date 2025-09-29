@@ -52,7 +52,7 @@
         <maven.compiler.target>${jdk.version}</maven.compiler.target>
         <maven.compiler.release>${jdk.version}</maven.compiler.release>
         <minimalJavaBuildVersion>${jdk.version}</minimalJavaBuildVersion>
-		<java.version>${jdk.version}</java.version>        
+		<!-- <java.version>${jdk.version}</java.version>         -->
 		<spring-boot-version>3.5.6</spring-boot-version>        
 		<camel-version>4.15.0-SNAPSHOT</camel-version>		
 		<flatten-maven-plugin-version>1.7.3</flatten-maven-plugin-version>
@@ -99,12 +99,13 @@
 		</dependency>
 	</dependencies>
     <modules>
+        <module>buildingtools</module>	
 		<module>core</module>		
 		<module>components</module>
 		<module>dsl</module>
 		<module>tooling</module>
-		<module>spring</module>
-		<module>starter</module>
+		<module>camel-dependencies</module>
+        <module>my-flow-spring</module>
 	</modules>
 	<build>
         <defaultGoal>install</defaultGoal>
