@@ -703,31 +703,6 @@
             <!-- NOTE: auto-generated list of components when building camel catalog -->
             <!-- camel components: START -->
             <dependency>
-                <groupId>com.bpwizard.myflow</groupId>
-                <artifactId>camel-bean</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bpwizard.myflow</groupId>
-                <artifactId>camel-direct</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bpwizard.myflow</groupId>
-                <artifactId>camel-spring</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bpwizard.myflow</groupId>
-                <artifactId>camel-spring-main</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bpwizard.myflow</groupId>
-                <artifactId>camel-validator</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-activemq</artifactId>
                 <version>${project.version}</version>
