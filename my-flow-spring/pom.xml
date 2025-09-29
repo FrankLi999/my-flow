@@ -132,7 +132,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
-                    <source>17</source>
+                    <source>${jdk.version}</source>
                     <additionalOptions>${javadoc.opts}</additionalOptions>
                     <!-- disable Javadoc linting for buildung the release with Java 11 -->
                     <doclint>none</doclint>
