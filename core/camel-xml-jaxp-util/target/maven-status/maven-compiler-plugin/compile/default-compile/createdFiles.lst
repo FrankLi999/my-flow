@@ -1,0 +1,4 @@
+org\apache\camel\util\xml\pretty\XmlPrettyPrinter$ColorPrintElement.class
+org\apache\camel\util\xml\pretty\XmlPrettyPrinter.class
+org\apache\camel\util\xml\pretty\XmlPrettyPrinter$1.class
+org\apache\camel\util\xml\pretty\XmlPrettyPrinter$NoopColor.class

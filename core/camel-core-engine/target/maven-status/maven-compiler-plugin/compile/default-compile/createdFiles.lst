@@ -1,0 +1,10 @@
+org\apache\camel\impl\DefaultDumpRoutesStrategy.class
+org\apache\camel\impl\ExtendedCamelContextConfigurer.class
+org\apache\camel\impl\DefaultModel.class
+org\apache\camel\impl\DefaultDumpRoutesStrategyConfigurer.class
+org\apache\camel\impl\DefaultModelReifierFactory.class
+org\apache\camel\impl\RestConfigurationConfigurer.class
+org\apache\camel\impl\CamelContextConfigurer.class
+org\apache\camel\impl\DefaultDumpRoutesStrategy$DummyResource.class
+org\apache\camel\impl\DefaultCamelContext.class
+org\apache\camel\impl\PreconditionHelper.class

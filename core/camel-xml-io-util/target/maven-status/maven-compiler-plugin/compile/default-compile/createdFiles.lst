@@ -1,0 +1,4 @@
+org\apache\camel\xml\io\util\XmlStreamReader.class
+org\apache\camel\xml\io\util\XmlStreamDetector.class
+org\apache\camel\xml\io\util\XmlStreamInfo.class
+org\apache\camel\xml\io\util\XmlStreamReaderException.class
