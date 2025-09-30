@@ -72,8 +72,8 @@ public class JaxbDataFormat extends DataFormatDefinition implements ContentTypeH
     @Metadata(label = "advanced")
     private String partNamespace;
     @XmlAttribute
-    @Metadata(label = "advanced", javaType = "java.util.Map")
-    private String namespacePrefix;
+    @Metadata(label = "advanced")
+    private String namespacePrefixRef;
     @XmlAttribute
     @Metadata(label = "advanced")
     private String xmlStreamWriterWrapper;
@@ -113,7 +113,7 @@ public class JaxbDataFormat extends DataFormatDefinition implements ContentTypeH
         this.fragment = source.fragment;
         this.partClass = source.partClass;
         this.partNamespace = source.partNamespace;
-        this.namespacePrefix = source.namespacePrefix;
+        this.namespacePrefixRef = source.namespacePrefixRef;
         this.xmlStreamWriterWrapper = source.xmlStreamWriterWrapper;
         this.schemaLocation = source.schemaLocation;
         this.noNamespaceSchemaLocation = source.noNamespaceSchemaLocation;
@@ -142,7 +142,7 @@ public class JaxbDataFormat extends DataFormatDefinition implements ContentTypeH
         this.fragment = builder.fragment;
         this.partClass = builder.partClass;
         this.partNamespace = builder.partNamespace;
-        this.namespacePrefix = builder.namespacePrefix;
+        this.namespacePrefixRef = builder.namespacePrefixRef;
         this.xmlStreamWriterWrapper = builder.xmlStreamWriterWrapper;
         this.schemaLocation = builder.schemaLocation;
         this.noNamespaceSchemaLocation = builder.noNamespaceSchemaLocation;
@@ -314,17 +314,17 @@ public class JaxbDataFormat extends DataFormatDefinition implements ContentTypeH
         this.partNamespace = partNamespace;
     }
 
-    public String getNamespacePrefix() {
-        return namespacePrefix;
+    public String getNamespacePrefixRef() {
+        return namespacePrefixRef;
     }
 
     /**
-     * When marshalling using JAXB or SOAP then the JAXB implementation will automatically assign namespace prefixes,
-     * such as ns2, ns3, ns4 etc. To control this mapping, Camel allows you to refer to a map which contains the desired
+     * When marshalling using JAXB or SOAP then the JAXB implementation will automatic assign namespace prefixes, such
+     * as ns2, ns3, ns4 etc. To control this mapping, Camel allows you to refer to a map which contains the desired
      * mapping.
      */
-    public void setNamespacePrefix(String namespacePrefix) {
-        this.namespacePrefix = namespacePrefix;
+    public void setNamespacePrefixRef(String namespacePrefixRef) {
+        this.namespacePrefixRef = namespacePrefixRef;
     }
 
     public String getXmlStreamWriterWrapper() {
@@ -416,7 +416,7 @@ public class JaxbDataFormat extends DataFormatDefinition implements ContentTypeH
         private String fragment;
         private String partClass;
         private String partNamespace;
-        private String namespacePrefix;
+        private String namespacePrefixRef;
         private String xmlStreamWriterWrapper;
         private String schemaLocation;
         private String noNamespaceSchemaLocation;
@@ -624,8 +624,8 @@ public class JaxbDataFormat extends DataFormatDefinition implements ContentTypeH
          * prefixes, such as ns2, ns3, ns4 etc. To control this mapping, Camel allows you to refer to a map which
          * contains the desired mapping.
          */
-        public Builder namespacePrefix(String namespacePrefix) {
-            this.namespacePrefix = namespacePrefix;
+        public Builder namespacePrefixRef(String namespacePrefixRef) {
+            this.namespacePrefixRef = namespacePrefixRef;
             return this;
         }
 

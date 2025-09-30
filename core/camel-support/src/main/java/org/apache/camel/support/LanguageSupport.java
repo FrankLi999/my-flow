@@ -33,6 +33,8 @@ import org.apache.camel.util.TimeUtils;
  */
 public abstract class LanguageSupport implements Language, IsSingleton, CamelContextAware {
 
+    public static final String RESOURCE = "resource:";
+
     private static final String[] SIMPLE_FUNCTION_START = new String[] { "${", "$simple{" };
 
     private CamelContext camelContext;
@@ -66,9 +68,10 @@ public abstract class LanguageSupport implements Language, IsSingleton, CamelCon
     protected String loadResource(String expression) throws ExpressionIllegalSyntaxException {
         // we can only load static resources (if they are dynamic then simple will load them on-demand)
         if (camelContext != null && expression != null && isStaticResource(expression)) {
+            String uri = expression.substring(RESOURCE.length());
             InputStream is = null;
             try {
-                is = ResourceHelper.resolveMandatoryResourceAsInputStream(camelContext, expression);
+                is = ResourceHelper.resolveMandatoryResourceAsInputStream(camelContext, uri);
                 expression = camelContext.getTypeConverter().mandatoryConvertTo(String.class, is);
             } catch (Exception e) {
                 throw new ExpressionIllegalSyntaxException(expression, e);
@@ -83,14 +86,14 @@ public abstract class LanguageSupport implements Language, IsSingleton, CamelCon
      * Does the expression refer to a static resource.
      */
     protected boolean isStaticResource(String expression) {
-        return expression.startsWith(ResourceHelper.RESOURCE) && !hasSimpleFunction(expression);
+        return expression.startsWith(RESOURCE) && !hasSimpleFunction(expression);
     }
 
     /**
      * Does the expression refer to a dynamic resource which uses simple functions.
      */
     protected boolean isDynamicResource(String expression) {
-        return expression.startsWith(ResourceHelper.RESOURCE) && hasSimpleFunction(expression);
+        return expression.startsWith(RESOURCE) && hasSimpleFunction(expression);
     }
 
     /**

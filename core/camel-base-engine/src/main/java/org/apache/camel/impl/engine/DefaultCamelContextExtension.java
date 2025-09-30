@@ -38,7 +38,6 @@ import org.apache.camel.Route;
 import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.Service;
 import org.apache.camel.TypeConverter;
-import org.apache.camel.spi.AutoMockInterceptStrategy;
 import org.apache.camel.spi.BootstrapCloseable;
 import org.apache.camel.spi.CamelContextNameStrategy;
 import org.apache.camel.spi.ClassResolver;
@@ -86,7 +85,6 @@ import org.apache.camel.support.PluginHelper;
 import org.apache.camel.support.service.ServiceHelper;
 import org.apache.camel.support.startup.DefaultStartupStepRecorder;
 import org.apache.camel.util.StringHelper;
-import org.apache.camel.util.URISupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -145,7 +143,6 @@ class DefaultCamelContextExtension implements ExtendedCamelContext {
     @Deprecated(since = "3.17.0")
     private ErrorHandlerFactory errorHandlerFactory;
     private String basePackageScan;
-    private String additionalSensitiveKeywords;
 
     private final Lock lock = new ReentrantLock();
 
@@ -299,16 +296,6 @@ class DefaultCamelContextExtension implements ExtendedCamelContext {
                 }
             }
         }
-    }
-
-    @Override
-    public void registerAutoMockInterceptStrategy(AutoMockInterceptStrategy strategy) {
-        camelContext.getAutoMockInterceptStrategies().add(strategy);
-    }
-
-    @Override
-    public Set<AutoMockInterceptStrategy> getAutoMockInterceptStrategies() {
-        return camelContext.getAutoMockInterceptStrategies();
     }
 
     @Override
@@ -583,18 +570,6 @@ class DefaultCamelContextExtension implements ExtendedCamelContext {
     @Override
     public void setBasePackageScan(String basePackageScan) {
         this.basePackageScan = basePackageScan;
-    }
-
-    @Override
-    public String getAdditionalSensitiveKeywords() {
-        return additionalSensitiveKeywords;
-    }
-
-    @Override
-    public void setAdditionalSensitiveKeywords(String additionalSensitiveKeywords) {
-        this.additionalSensitiveKeywords = additionalSensitiveKeywords;
-        // re-configure sensitive keywords asap so they take effect immediately
-        URISupport.addSanitizeKeywords(additionalSensitiveKeywords);
     }
 
     @Override

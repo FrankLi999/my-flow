@@ -16,11 +16,12 @@
  */
 package org.apache.camel.model.dataformat;
 
-import java.util.StringJoiner;
+import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlTransient;
 
@@ -67,9 +68,8 @@ public class YAMLDataFormat extends DataFormatDefinition {
     @XmlAttribute
     @Metadata(javaType = "java.lang.Boolean")
     private String allowAnyType;
-    @XmlAttribute
-    @Metadata(label = "advanced")
-    private String typeFilter;
+    @XmlElement(name = "typeFilter")
+    private List<YAMLTypeFilterDefinition> typeFilters;
     @XmlAttribute
     @Metadata(label = "advanced", javaType = "java.lang.Integer", defaultValue = "50")
     private String maxAliasesForCollections;
@@ -94,7 +94,7 @@ public class YAMLDataFormat extends DataFormatDefinition {
         this.useApplicationContextClassLoader = source.useApplicationContextClassLoader;
         this.prettyFlow = source.prettyFlow;
         this.allowAnyType = source.allowAnyType;
-        this.typeFilter = source.typeFilter;
+        this.typeFilters = source.typeFilters;
         this.maxAliasesForCollections = source.maxAliasesForCollections;
         this.allowRecursiveKeys = source.allowRecursiveKeys;
     }
@@ -123,7 +123,7 @@ public class YAMLDataFormat extends DataFormatDefinition {
         this.useApplicationContextClassLoader = builder.useApplicationContextClassLoader;
         this.prettyFlow = builder.prettyFlow;
         this.allowAnyType = builder.allowAnyType;
-        this.typeFilter = builder.typeFilter;
+        this.typeFilters = builder.typeFilters;
         this.maxAliasesForCollections = builder.maxAliasesForCollections;
         this.allowRecursiveKeys = builder.allowRecursiveKeys;
     }
@@ -263,15 +263,15 @@ public class YAMLDataFormat extends DataFormatDefinition {
         this.allowAnyType = allowAnyType;
     }
 
-    public String getTypeFilter() {
-        return typeFilter;
+    public List<YAMLTypeFilterDefinition> getTypeFilters() {
+        return typeFilters;
     }
 
     /**
-     * Set the types SnakeYAML is allowed to un-marshall. Multiple types can be separated by comma.
+     * Set the types SnakeYAML is allowed to un-marshall
      */
-    public void setTypeFilter(String typeFilter) {
-        this.typeFilter = typeFilter;
+    public void setTypeFilters(List<YAMLTypeFilterDefinition> typeFilters) {
+        this.typeFilters = typeFilters;
     }
 
     public String getMaxAliasesForCollections() {
@@ -314,7 +314,7 @@ public class YAMLDataFormat extends DataFormatDefinition {
         private String useApplicationContextClassLoader;
         private String prettyFlow;
         private String allowAnyType;
-        private String typeFilter;
+        private List<YAMLTypeFilterDefinition> typeFilters;
         private String maxAliasesForCollections;
         private String allowRecursiveKeys;
 
@@ -434,22 +434,10 @@ public class YAMLDataFormat extends DataFormatDefinition {
         }
 
         /**
-         * Set the types SnakeYAML is allowed to un-marshall. Multiple types can be separated by comma.
+         * Set the types SnakeYAML is allowed to un-marshall
          */
-        public Builder typeFilter(String typeFilter) {
-            this.typeFilter = typeFilter;
-            return this;
-        }
-
-        /**
-         * Set the types SnakeYAML is allowed to un-marshall.
-         */
-        public Builder typeFilter(Class<?>... typeFilter) {
-            StringJoiner sj = new StringJoiner(".");
-            for (Class<?> c : typeFilter) {
-                sj.add(c.getName());
-            }
-            this.typeFilter = sj.toString();
+        public Builder typeFilters(List<YAMLTypeFilterDefinition> typeFilters) {
+            this.typeFilters = typeFilters;
             return this;
         }
 

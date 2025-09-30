@@ -6,6 +6,8 @@
 :since: 2.7
 :supportlevel: Stable
 :tabs-sync-option:
+//Manually maintained attributes
+:camel-spring-boot-name: spring
 
 *Since Camel {since}*
 

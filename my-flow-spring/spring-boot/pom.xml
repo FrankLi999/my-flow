@@ -23,7 +23,7 @@
 	<parent>
         <groupId>com.bpwizard.myflow.springboot</groupId>
         <artifactId>spring-boot-parent</artifactId>
-		<version>4.15.0-SNAPSHOT</version>
+		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../spring-boot-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>spring</artifactId>
@@ -32,14 +32,14 @@
 	<description>My Flow spring</description>
 	<packaging>pom</packaging>
     <modules>
-		<module>my-flow-spring-boot</module>
+		<module>camel-spring-boot</module>
 	</modules>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.camel.springboot</groupId>
                 <artifactId>camel-spring-boot-generator-maven-plugin</artifactId>
-                <version>${project.version}</version>
+                <version>${camel-version}</version>
                 <executions>
                     <execution>
                         <id>readme</id>

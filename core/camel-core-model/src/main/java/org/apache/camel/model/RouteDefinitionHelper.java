@@ -22,14 +22,11 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.ErrorHandlerFactory;
@@ -263,9 +260,11 @@ public final class RouteDefinitionHelper {
      * @return          <tt>null</tt> if no duplicate id's detected, otherwise the first found duplicate id is returned.
      */
     public static String validateUniqueIds(RouteDefinition target, List<RouteDefinition> routes, String prefixId) {
-        List<String> routesIds = new ArrayList<>();
-        // gather all ids for the existing route, but only include custom ids, and no abstract ids
-        // as abstract nodes is cross-cutting functionality such as interceptors etc
+        Set<String> routesIds = new LinkedHashSet<>();
+        // gather all ids for the existing route, but only include custom ids,
+        // and no abstract ids
+        // as abstract nodes is cross-cutting functionality such as interceptors
+        // etc
         for (RouteDefinition route : routes) {
             // skip target route as we gather ids in a separate set
             if (route == target) {
@@ -276,17 +275,8 @@ public final class RouteDefinitionHelper {
 
         // gather all ids for the target route, but only include custom ids, and
         // no abstract ids as abstract nodes is cross-cutting functionality such as interceptors etc
-        List<String> targetIds = new ArrayList<>();
+        Set<String> targetIds = new LinkedHashSet<>();
         ProcessorDefinitionHelper.gatherAllNodeIds(target, targetIds, true, false);
-        // are there any duplicates processor ids in the target route
-        List<String> duplicates = targetIds.stream().collect(Collectors.groupingBy(Function.identity()))
-                .entrySet().stream()
-                .filter(e -> e.getValue().size() > 1)
-                .map(Map.Entry::getKey)
-                .toList();
-        if (!duplicates.isEmpty()) {
-            return duplicates.get(0);
-        }
 
         // now check for clash with the target route
         for (String id : targetIds) {

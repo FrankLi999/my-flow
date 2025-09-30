@@ -23,7 +23,7 @@
     <parent>
         <groupId>com.bpwizard.myflow</groupId>
         <artifactId>core</artifactId>
-        <version>4.15.0-SNAPSHOT</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>camel-core-engine</artifactId>
@@ -93,7 +93,7 @@
                                     <pluginExecutionFilter>
                                         <groupId>org.apache.camel</groupId>
                                         <artifactId>camel-package-maven-plugin</artifactId>
-                                        <versionRange>${project.version}</versionRange>
+                                        <versionRange>${camel.version}</versionRange>
                                         <goals>
                                             <goal>generate-eips-list</goal>
                                         </goals>

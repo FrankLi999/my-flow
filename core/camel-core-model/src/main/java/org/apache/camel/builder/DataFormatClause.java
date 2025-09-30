@@ -18,6 +18,8 @@ package org.apache.camel.builder;
 
 import java.util.Map;
 
+import org.w3c.dom.Node;
+
 import org.apache.camel.model.DataFormatDefinition;
 import org.apache.camel.model.MarshalDefinition;
 import org.apache.camel.model.ProcessorDefinition;
@@ -37,7 +39,6 @@ import org.apache.camel.model.dataformat.FhirJsonDataFormat;
 import org.apache.camel.model.dataformat.FhirXmlDataFormat;
 import org.apache.camel.model.dataformat.ForyDataFormat;
 import org.apache.camel.model.dataformat.GrokDataFormat;
-import org.apache.camel.model.dataformat.GroovyXmlDataFormat;
 import org.apache.camel.model.dataformat.GzipDeflaterDataFormat;
 import org.apache.camel.model.dataformat.HL7DataFormat;
 import org.apache.camel.model.dataformat.IcalDataFormat;
@@ -61,6 +62,7 @@ import org.apache.camel.model.dataformat.SwiftMxDataFormat;
 import org.apache.camel.model.dataformat.SyslogDataFormat;
 import org.apache.camel.model.dataformat.TarFileDataFormat;
 import org.apache.camel.model.dataformat.ThriftDataFormat;
+import org.apache.camel.model.dataformat.TidyMarkupDataFormat;
 import org.apache.camel.model.dataformat.XMLSecurityDataFormat;
 import org.apache.camel.model.dataformat.YAMLDataFormat;
 import org.apache.camel.model.dataformat.YAMLLibrary;
@@ -340,14 +342,6 @@ public class DataFormatClause<T extends ProcessorDefinition<?>> {
     }
 
     /**
-     * Uses the Groovy XML data format
-     */
-    public T groovyXml() {
-        GroovyXmlDataFormat df = new GroovyXmlDataFormat();
-        return dataFormat(df);
-    }
-
-    /**
      * Uses the GZIP deflater data format
      */
     public T gzipDeflater() {
@@ -374,7 +368,7 @@ public class DataFormatClause<T extends ProcessorDefinition<?>> {
     /**
      * Uses the HL7 data format
      */
-    public T hl7(String parser) {
+    public T hl7(Object parser) {
         HL7DataFormat hl7 = new HL7DataFormat();
         hl7.setParser(parser);
         return dataFormat(hl7);
@@ -1028,6 +1022,20 @@ public class DataFormatClause<T extends ProcessorDefinition<?>> {
     }
 
     /**
+     * Return WellFormed HTML (an XML Document) either {@link java.lang.String} or {@link org.w3c.dom.Node}
+     */
+    public T tidyMarkup(Class<?> dataObjectType) {
+        return dataFormat(new TidyMarkupDataFormat(dataObjectType));
+    }
+
+    /**
+     * Return TidyMarkup in the default format as {@link org.w3c.dom.Node}
+     */
+    public T tidyMarkup() {
+        return dataFormat(new TidyMarkupDataFormat(Node.class));
+    }
+
+    /**
      * Uses the YAML data format
      *
      * @param library the yaml library to use
@@ -1168,7 +1176,7 @@ public class DataFormatClause<T extends ProcessorDefinition<?>> {
         xsdf.setRecipientKeyAlias(recipientKeyAlias);
         xsdf.setXmlCipherAlgorithm(xmlCipherAlgorithm);
         xsdf.setKeyCipherAlgorithm(keyCipherAlgorithm);
-        xsdf.setKeyOrTrustStoreParameters(keyOrTrustStoreParametersId);
+        xsdf.setKeyOrTrustStoreParametersRef(keyOrTrustStoreParametersId);
         return dataFormat(xsdf);
     }
 
@@ -1185,7 +1193,7 @@ public class DataFormatClause<T extends ProcessorDefinition<?>> {
         xsdf.setRecipientKeyAlias(recipientKeyAlias);
         xsdf.setXmlCipherAlgorithm(xmlCipherAlgorithm);
         xsdf.setKeyCipherAlgorithm(keyCipherAlgorithm);
-        xsdf.setKeyOrTrustStoreParameters(keyOrTrustStoreParametersId);
+        xsdf.setKeyOrTrustStoreParametersRef(keyOrTrustStoreParametersId);
         xsdf.setKeyPassword(keyPassword);
         return dataFormat(xsdf);
     }
@@ -1203,7 +1211,7 @@ public class DataFormatClause<T extends ProcessorDefinition<?>> {
         xsdf.setRecipientKeyAlias(recipientKeyAlias);
         xsdf.setXmlCipherAlgorithm(xmlCipherAlgorithm);
         xsdf.setKeyCipherAlgorithm(keyCipherAlgorithm);
-        xsdf.setKeyStoreParameters(keyOrTrustStoreParameters);
+        xsdf.setKeyOrTrustStoreParameters(keyOrTrustStoreParameters);
         return dataFormat(xsdf);
     }
 
@@ -1220,7 +1228,7 @@ public class DataFormatClause<T extends ProcessorDefinition<?>> {
         xsdf.setRecipientKeyAlias(recipientKeyAlias);
         xsdf.setXmlCipherAlgorithm(xmlCipherAlgorithm);
         xsdf.setKeyCipherAlgorithm(keyCipherAlgorithm);
-        xsdf.setKeyStoreParameters(keyOrTrustStoreParameters);
+        xsdf.setKeyOrTrustStoreParameters(keyOrTrustStoreParameters);
         xsdf.setKeyPassword(keyPassword);
         return dataFormat(xsdf);
     }
@@ -1238,7 +1246,7 @@ public class DataFormatClause<T extends ProcessorDefinition<?>> {
         xsdf.setRecipientKeyAlias(recipientKeyAlias);
         xsdf.setXmlCipherAlgorithm(xmlCipherAlgorithm);
         xsdf.setKeyCipherAlgorithm(keyCipherAlgorithm);
-        xsdf.setKeyOrTrustStoreParameters(keyOrTrustStoreParametersId);
+        xsdf.setKeyOrTrustStoreParametersRef(keyOrTrustStoreParametersId);
         return dataFormat(xsdf);
     }
 
@@ -1255,7 +1263,7 @@ public class DataFormatClause<T extends ProcessorDefinition<?>> {
         xsdf.setRecipientKeyAlias(recipientKeyAlias);
         xsdf.setXmlCipherAlgorithm(xmlCipherAlgorithm);
         xsdf.setKeyCipherAlgorithm(keyCipherAlgorithm);
-        xsdf.setKeyOrTrustStoreParameters(keyOrTrustStoreParametersId);
+        xsdf.setKeyOrTrustStoreParametersRef(keyOrTrustStoreParametersId);
         xsdf.setKeyPassword(keyPassword);
         return dataFormat(xsdf);
     }
@@ -1274,7 +1282,7 @@ public class DataFormatClause<T extends ProcessorDefinition<?>> {
         xsdf.setRecipientKeyAlias(recipientKeyAlias);
         xsdf.setXmlCipherAlgorithm(xmlCipherAlgorithm);
         xsdf.setKeyCipherAlgorithm(keyCipherAlgorithm);
-        xsdf.setKeyStoreParameters(keyOrTrustStoreParameters);
+        xsdf.setKeyOrTrustStoreParameters(keyOrTrustStoreParameters);
         return dataFormat(xsdf);
     }
 
@@ -1292,7 +1300,7 @@ public class DataFormatClause<T extends ProcessorDefinition<?>> {
         xsdf.setRecipientKeyAlias(recipientKeyAlias);
         xsdf.setXmlCipherAlgorithm(xmlCipherAlgorithm);
         xsdf.setKeyCipherAlgorithm(keyCipherAlgorithm);
-        xsdf.setKeyStoreParameters(keyOrTrustStoreParameters);
+        xsdf.setKeyOrTrustStoreParameters(keyOrTrustStoreParameters);
         xsdf.setKeyPassword(keyPassword);
         return dataFormat(xsdf);
     }
@@ -1311,7 +1319,7 @@ public class DataFormatClause<T extends ProcessorDefinition<?>> {
         xsdf.setRecipientKeyAlias(recipientKeyAlias);
         xsdf.setXmlCipherAlgorithm(xmlCipherAlgorithm);
         xsdf.setKeyCipherAlgorithm(keyCipherAlgorithm);
-        xsdf.setKeyStoreParameters(keyOrTrustStoreParameters);
+        xsdf.setKeyOrTrustStoreParameters(keyOrTrustStoreParameters);
         xsdf.setDigestAlgorithm(digestAlgorithm);
         xsdf.setKeyPassword(keyPassword);
         return dataFormat(xsdf);

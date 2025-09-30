@@ -22,7 +22,6 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 import org.apache.camel.catalog.RuntimeCamelCatalog;
-import org.apache.camel.spi.AutoMockInterceptStrategy;
 import org.apache.camel.spi.BootstrapCloseable;
 import org.apache.camel.spi.EndpointServiceRegistry;
 import org.apache.camel.spi.EndpointStrategy;
@@ -172,14 +171,6 @@ public interface ExtendedCamelContext {
      * @param strategy callback to be invoked
      */
     void registerEndpointCallback(EndpointStrategy strategy);
-
-    /**
-     * Registers an {@link AutoMockInterceptStrategy callback} which is used for intercepting sending messages to
-     * endpoints, and sending a copy to mock endpoints. This is a feature available with camel-test.
-     *
-     * @param strategy callback to be invoked
-     */
-    void registerAutoMockInterceptStrategy(AutoMockInterceptStrategy strategy);
 
     /**
      * Resolves the given name to an {@link Endpoint} of the specified type (scope is prototype). If the name has a
@@ -529,27 +520,6 @@ public interface ExtendedCamelContext {
      * @param basePackageScan the base package name
      */
     void setBasePackageScan(String basePackageScan);
-
-    /**
-     * Camel comes with a default set of sensitive keywords which are automatically masked. This option allows to add
-     * additional custom keywords to be masked as well. Multiple keywords can be separated by comma.
-     *
-     * @see org.apache.camel.util.SensitiveUtils
-     */
-    String getAdditionalSensitiveKeywords();
-
-    /**
-     * Camel comes with a default set of sensitive keywords which are automatically masked. This option allows to add
-     * additional custom keywords to be masked as well. Multiple keywords can be separated by comma.
-     *
-     * @see org.apache.camel.util.SensitiveUtils
-     */
-    void setAdditionalSensitiveKeywords(String additionalSensitiveKeywords);
-
-    /**
-     * Gets the {@link AutoMockInterceptStrategy} strategies.
-     */
-    Set<AutoMockInterceptStrategy> getAutoMockInterceptStrategies();
 
     /**
      * The {@link CamelContext} have additional phases that are not defined in {@link ServiceStatus} and this method

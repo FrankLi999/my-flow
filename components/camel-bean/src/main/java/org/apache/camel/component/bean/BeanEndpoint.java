@@ -30,7 +30,6 @@ import org.apache.camel.spi.UriEndpoint;
 import org.apache.camel.spi.UriParam;
 import org.apache.camel.spi.UriPath;
 import org.apache.camel.support.DefaultEndpoint;
-import org.apache.camel.util.ObjectHelper;
 
 /**
  * Invoke methods of Java beans stored in Camel registry.
@@ -98,7 +97,6 @@ public class BeanEndpoint extends DefaultEndpoint {
         super.doInit();
 
         if (processor == null) {
-            ObjectHelper.notNull(beanName, "beanName", this);
             BeanHolder holder = getBeanHolder();
             if (holder == null) {
                 ParameterMappingStrategy strategy

@@ -60,8 +60,6 @@ import org.apache.camel.health.HealthCheckRegistry;
 import org.apache.camel.health.HealthCheckRepository;
 import org.apache.camel.impl.engine.DefaultCompileStrategy;
 import org.apache.camel.impl.engine.DefaultRoutesLoader;
-import org.apache.camel.model.ModelCamelContext;
-import org.apache.camel.model.Resilience4jConfigurationDefinition;
 import org.apache.camel.saga.CamelSagaService;
 import org.apache.camel.spi.AutowiredLifecycleStrategy;
 import org.apache.camel.spi.BacklogTracer;
@@ -78,7 +76,6 @@ import org.apache.camel.spi.LifecycleStrategy;
 import org.apache.camel.spi.PackageScanClassResolver;
 import org.apache.camel.spi.PropertiesComponent;
 import org.apache.camel.spi.Registry;
-import org.apache.camel.spi.Resilience4jMicrometerFactory;
 import org.apache.camel.spi.RouteTemplateParameterSource;
 import org.apache.camel.spi.RoutesLoader;
 import org.apache.camel.spi.StartupCondition;
@@ -111,6 +108,7 @@ import org.apache.camel.util.FileUtil;
 import org.apache.camel.util.ObjectHelper;
 import org.apache.camel.util.OrderedLocationProperties;
 import org.apache.camel.util.OrderedProperties;
+import org.apache.camel.util.SensitiveUtils;
 import org.apache.camel.util.StringHelper;
 import org.apache.camel.vault.VaultConfiguration;
 import org.slf4j.Logger;
@@ -615,19 +613,19 @@ public abstract class BaseMainSupport extends BaseService {
 
         // log summary of configurations
         if (mainConfigurationProperties.isAutoConfigurationLogSummary() && !autoConfiguredProperties.isEmpty()) {
-            logConfigurationSummary(camelContext, autoConfiguredProperties);
+            logConfigurationSummary(autoConfiguredProperties);
         }
 
         // we are now done with the main helper during bootstrap
         helper.bootstrapDone();
     }
 
-    private static void logConfigurationSummary(CamelContext camelContext, OrderedLocationProperties autoConfiguredProperties) {
+    private static void logConfigurationSummary(OrderedLocationProperties autoConfiguredProperties) {
         // first log variables
-        MainHelper.logConfigurationSummary(camelContext, LOG, autoConfiguredProperties, "Variables summary",
+        MainHelper.logConfigurationSummary(LOG, autoConfiguredProperties, "Variables summary",
                 (k) -> k.startsWith("camel.variable."));
         // then log standard options
-        MainHelper.logConfigurationSummary(camelContext, LOG, autoConfiguredProperties, "Auto-configuration summary", null);
+        MainHelper.logConfigurationSummary(LOG, autoConfiguredProperties, "Auto-configuration summary", null);
     }
 
     protected void configureStartupRecorder(CamelContext camelContext) {
@@ -928,8 +926,6 @@ public abstract class BaseMainSupport extends BaseService {
         if (standalone) {
             // detect if camel-debug JAR is on classpath as we need to know this before configuring routes
             detectCamelDebugJar(camelContext);
-            // detect micrometer for resilience4j circuit breakers
-            detectResilience4jMicrometer(camelContext);
             step = recorder.beginStep(BaseMainSupport.class, "configureRoutes", "Collect Routes");
             configureRoutes(camelContext);
             recorder.endStep(step);
@@ -952,8 +948,7 @@ public abstract class BaseMainSupport extends BaseService {
         // we want to log the property placeholder summary after routes has been started,
         // but before camel context logs that it has been started, so we need to use an event listener
         if (standalone && mainConfigurationProperties.isAutoConfigurationLogSummary()) {
-            camelContext.getManagementStrategy()
-                    .addEventNotifier(new PlaceholderSummaryEventNotifier(camelContext, propertyPlaceholders));
+            camelContext.getManagementStrategy().addEventNotifier(new PlaceholderSummaryEventNotifier(propertyPlaceholders));
         }
     }
 
@@ -963,27 +958,6 @@ public abstract class BaseMainSupport extends BaseService {
         if (df != null) {
             // if camel-debug is on classpath then we need to eager to turn on source location which is needed for Java DSL
             camelContext.setSourceLocationEnabled(true);
-        }
-    }
-
-    protected void detectResilience4jMicrometer(CamelContext camelContext) throws Exception {
-        // optional discover camel-resilience4j-micrometer
-        Resilience4jMicrometerFactory mf = camelContext.getCamelContextExtension().getBootstrapFactoryFinder()
-                .newInstance(Resilience4jMicrometerFactory.FACTORY, Resilience4jMicrometerFactory.class).orElse(null);
-        if (mf == null) {
-            ModelCamelContext model = (ModelCamelContext) camelContext;
-            Resilience4jConfigurationDefinition config = model.getResilience4jConfiguration(null);
-            //enabled flag can be null (in Camel-Quarkus, which does not support resilience)
-            //see https://github.com/apache/camel-quarkus/issues/7682
-            boolean micrometer = config != null && config.getMicrometerEnabled() != null
-                    && CamelContextHelper.parseBoolean(camelContext, config.getMicrometerEnabled());
-            if (micrometer) {
-                throw new IllegalArgumentException(
-                        "Cannot find Resilience4jMicrometerFactory on classpath. Add camel-resilience4j-micrometer to classpath.");
-            }
-        }
-        if (mf != null) {
-            camelContext.addService(mf);
         }
     }
 
@@ -2502,7 +2476,7 @@ public abstract class BaseMainSupport extends BaseService {
 
         // log summary of configurations
         if (mainConfigurationProperties.isAutoConfigurationLogSummary() && !autoConfiguredProperties.isEmpty()) {
-            logConfigurationSummary(camelContext, autoConfiguredProperties);
+            logConfigurationSummary(autoConfiguredProperties);
         }
     }
 
@@ -2663,7 +2637,7 @@ public abstract class BaseMainSupport extends BaseService {
                         header = true;
                     }
 
-                    MainHelper.sensitiveAwareLogging(camelContext, LOG, k, v, loc, debug);
+                    MainHelper.sensitiveAwareLogging(LOG, k, v, loc, debug);
                 }
             }
         } catch (Exception e) {
@@ -2771,11 +2745,9 @@ public abstract class BaseMainSupport extends BaseService {
     }
 
     private static class PlaceholderSummaryEventNotifier extends SimpleEventNotifierSupport implements NonManagedService {
-        private final CamelContext camelContext;
         private final OrderedLocationProperties propertyPlaceholders;
 
-        public PlaceholderSummaryEventNotifier(CamelContext camelContext, OrderedLocationProperties propertyPlaceholders) {
-            this.camelContext = camelContext;
+        public PlaceholderSummaryEventNotifier(OrderedLocationProperties propertyPlaceholders) {
             this.propertyPlaceholders = propertyPlaceholders;
         }
 
@@ -2803,7 +2775,7 @@ public abstract class BaseMainSupport extends BaseService {
                             header = false;
                         }
                         String loc = locationSummary(propertyPlaceholders, k);
-                        if (CamelContextHelper.containsSensitive(camelContext, k)) {
+                        if (SensitiveUtils.containsSensitive(k)) {
                             LOG.info("    {} {} = xxxxxx", loc, k);
                         } else {
                             LOG.info("    {} {} = {}", loc, k, v);

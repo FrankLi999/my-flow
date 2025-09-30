@@ -4,7 +4,7 @@
 :artifactid: camel-main
 :description: Camel Main
 :since: 3.0
-:supportlevel: Stable
+:supportlevel: Preview
 :tabs-sync-option:
 
 *Since Camel {since}*
@@ -19,12 +19,11 @@ The following tables lists all the options:
 
 // main options: START
 === Camel Main configurations
-The camel.main supports 125 options, which are listed below.
+The camel.main supports 124 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| *camel.main.additionalSensitive{zwsp}Keywords* | Camel comes with a default set of sensitive keywords which are automatically masked. This option allows to add additional custom keywords to be masked as well. Multiple keywords can be separated by comma. |  | String
 | *camel.main.allowUseOriginal{zwsp}Message* | Sets whether to allow access to the original message from Camel's error handler, or from org.apache.camel.spi.UnitOfWork.getOriginalInMessage(). Turning this off can optimize performance, as defensive copy of the original message is not needed. Default is false. | false | boolean
 | *camel.main.autoConfiguration{zwsp}Enabled* | Whether auto configuration of components, dataformats, languages is enabled or not. When enabled the configuration parameters are loaded from the properties component. You can prefix the parameters in the properties file with: - camel.component.name.option1=value1 - camel.component.name.option2=value2 - camel.dataformat.name.option1=value1 - camel.dataformat.name.option2=value2 - camel.language.name.option1=value1 - camel.language.name.option2=value2 Where name is the name of the component, dataformat or language such as seda,direct,jaxb. The auto configuration also works for any options on components that is a complex type (not standard Java type) and there has been an explicit single bean instance registered to the Camel registry via the org.apache.camel.spi.Registry#bind(String,Object) method or by using the org.apache.camel.BindToRegistry annotation style. This option is default enabled. | true | boolean
 | *camel.main.autoConfiguration{zwsp}EnvironmentVariablesEnabled* | Whether auto configuration should include OS environment variables as well. When enabled this allows to overrule any configuration using an OS environment variable. For example to set a shutdown timeout of 5 seconds: CAMEL_MAIN_SHUTDOWNTIMEOUT=5. This option is default enabled. | true | boolean
@@ -190,14 +189,13 @@ The camel.routecontroller supports 12 options, which are listed below.
 
 
 === Camel Embedded HTTP Server (only for standalone; not Spring Boot or Quarkus) configurations
-The camel.server supports 18 options, which are listed below.
+The camel.server supports 17 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
 | *camel.server.authentication{zwsp}Enabled* | Whether to enable HTTP authentication for embedded server (for standalone applications; not Spring Boot or Quarkus). | false | boolean
 | *camel.server.authentication{zwsp}Path* | Set HTTP url path of embedded server that is protected by authentication configuration. |  | String
-| *camel.server.authentication{zwsp}Realm* | Sets the authentication realm |  | String
 | *camel.server.basicProperties{zwsp}File* | Name of the file that contains basic authentication info for Vert.x file auth provider. |  | String
 | *camel.server.enabled* | Whether embedded HTTP server is enabled. By default, the server is not enabled. | false | boolean
 | *camel.server.fileUpload{zwsp}Directory* | Directory to temporary store file uploads while Camel routes the incoming request. If no directory has been explicit configured, then a temporary directory is created in the java.io.tmpdir directory. |  | String
@@ -217,14 +215,13 @@ The camel.server supports 18 options, which are listed below.
 
 
 === Camel Embedded HTTP management Server (only for standalone; not Spring Boot or Quarkus) configurations
-The camel.management supports 24 options, which are listed below.
+The camel.management supports 23 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
 | *camel.management.authentication{zwsp}Enabled* | Whether to enable HTTP authentication for embedded server (for standalone applications; not Spring Boot or Quarkus). | false | boolean
 | *camel.management.authentication{zwsp}Path* | Set HTTP url path of embedded server that is protected by authentication configuration. |  | String
-| *camel.management.authentication{zwsp}Realm* | Sets the authentication realm |  | String
 | *camel.management.basic{zwsp}PropertiesFile* | Name of the file that contains basic authentication info for Vert.x file auth provider. |  | String
 | *camel.management.devConsole{zwsp}Enabled* | Whether to enable developer console (not intended for production use). Dev console must also be enabled on CamelContext. For example by setting camel.context.dev-console=true in application.properties, or via code camelContext.setDevConsole(true); If enabled then you can access a basic developer console on context-path: /q/dev. | false | boolean
 | *camel.management.download{zwsp}Enabled* | Whether to enable file download via HTTP. This makes it possible to browse and download resource source files such as Camel XML or YAML routes. Only enable this for development, troubleshooting or special situations for management and monitoring. | false | boolean
@@ -607,7 +604,7 @@ The camel.faulttolerance supports 12 options, which are listed below.
 
 
 === Resilience4j EIP Circuit Breaker configurations
-The camel.resilience4j supports 21 options, which are listed below.
+The camel.resilience4j supports 20 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -619,7 +616,6 @@ The camel.resilience4j supports 21 options, which are listed below.
 | *camel.resilience4j.circuit{zwsp}Breaker* | Refers to an existing io.github.resilience4j.circuitbreaker.CircuitBreaker instance to lookup and use from the registry. When using this, then any other circuit breaker options are not in use. |  | String
 | *camel.resilience4j.config* | Refers to an existing io.github.resilience4j.circuitbreaker.CircuitBreakerConfig instance to lookup and use from the registry. |  | String
 | *camel.resilience4j.failureRate{zwsp}Threshold* | Configures the failure rate threshold in percentage. If the failure rate is equal or greater than the threshold the CircuitBreaker transitions to open and starts short-circuiting calls. The threshold must be greater than 0 and not greater than 100. Default value is 50 percentage. | 50 | Float
-| *camel.resilience4j.micrometer{zwsp}Enabled* | Whether to enable collecting statistics using Micrometer. This requires adding camel-resilience4j-micrometer JAR to the classpath. | false | Boolean
 | *camel.resilience4j.minimum{zwsp}NumberOfCalls* | Configures configures the minimum number of calls which are required (per sliding window period) before the CircuitBreaker can calculate the error rate. For example, if minimumNumberOfCalls is 10, then at least 10 calls must be recorded, before the failure rate can be calculated. If only 9 calls have been recorded the CircuitBreaker will not transition to open even if all 9 calls have failed. Default minimumNumberOfCalls is 100 | 100 | Integer
 | *camel.resilience4j.permitted{zwsp}NumberOfCallsInHalfOpenState* | Configures the number of permitted calls when the CircuitBreaker is half open. The size must be greater than 0. Default size is 10. | 10 | Integer
 | *camel.resilience4j.sliding{zwsp}WindowSize* | Configures the size of the sliding window which is used to record the outcome of calls when the CircuitBreaker is closed. slidingWindowSize configures the size of the sliding window. Sliding window can either be count-based or time-based. If slidingWindowType is COUNT_BASED, the last slidingWindowSize calls are recorded and aggregated. If slidingWindowType is TIME_BASED, the calls of the last slidingWindowSize seconds are recorded and aggregated. The slidingWindowSize must be greater than 0. The minimumNumberOfCalls must be greater than 0. If the slidingWindowType is COUNT_BASED, the minimumNumberOfCalls cannot be greater than slidingWindowSize . If the slidingWindowType is TIME_BASED, you can pick whatever you want. Default slidingWindowSize is 100. | 100 | Integer

@@ -16,9 +16,12 @@
  */
 package org.apache.camel.model.dataformat;
 
+import java.util.List;
+
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlTransient;
 
@@ -36,9 +39,12 @@ public class CsvDataFormat extends DataFormatDefinition {
 
     // Format options
     @XmlAttribute
-    @Metadata(enums = "DEFAULT,EXCEL,INFORMIX_UNLOAD,INFORMIX_UNLOAD_CSV,MONGODB_CSV,MONGODB_TSV,MYSQL,ORACLE,POSTGRESQL_CSV,POSTGRESQL_TEXT,RFC4180",
+    @Metadata(label = "advanced")
+    private String formatRef;
+    @XmlAttribute
+    @Metadata(label = "advanced", enums = "DEFAULT,EXCEL,INFORMIX_UNLOAD,INFORMIX_UNLOAD_CSV,MYSQL,RFC4180",
               defaultValue = "DEFAULT")
-    private String format;
+    private String formatName;
     @XmlAttribute
     @Metadata(label = "advanced", javaType = "java.lang.Boolean")
     private String commentMarkerDisabled;
@@ -56,8 +62,8 @@ public class CsvDataFormat extends DataFormatDefinition {
     @XmlAttribute
     @Metadata(javaType = "java.lang.Boolean")
     private String headerDisabled;
-    @XmlAttribute
-    private String header;
+    @XmlElement
+    private List<String> header;
     @XmlAttribute
     @Metadata(javaType = "java.lang.Boolean")
     private String allowMissingColumnNames;
@@ -124,7 +130,8 @@ public class CsvDataFormat extends DataFormatDefinition {
 
     protected CsvDataFormat(CsvDataFormat source) {
         super(source);
-        this.format = source.format;
+        this.formatRef = source.formatRef;
+        this.formatName = source.formatName;
         this.commentMarkerDisabled = source.commentMarkerDisabled;
         this.commentMarker = source.commentMarker;
         this.delimiter = source.delimiter;
@@ -166,7 +173,8 @@ public class CsvDataFormat extends DataFormatDefinition {
 
     private CsvDataFormat(Builder builder) {
         this();
-        this.format = builder.format;
+        this.formatRef = builder.formatRef;
+        this.formatName = builder.formatName;
         this.commentMarkerDisabled = builder.commentMarkerDisabled;
         this.commentMarker = builder.commentMarker;
         this.delimiter = builder.delimiter;
@@ -220,15 +228,27 @@ public class CsvDataFormat extends DataFormatDefinition {
         return marshallerFactoryRef;
     }
 
-    public String getFormat() {
-        return format;
+    public String getFormatRef() {
+        return formatRef;
     }
 
     /**
-     * The format to use.
+     * The reference format to use, it will be updated with the other format options, the default value is
+     * CSVFormat.DEFAULT
      */
-    public void setFormat(String format) {
-        this.format = format;
+    public void setFormatRef(String formatRef) {
+        this.formatRef = formatRef;
+    }
+
+    public String getFormatName() {
+        return formatName;
+    }
+
+    /**
+     * The name of the format to use, the default value is CSVFormat.DEFAULT
+     */
+    public void setFormatName(String formatName) {
+        this.formatName = formatName;
     }
 
     public String getCommentMarkerDisabled() {
@@ -299,14 +319,14 @@ public class CsvDataFormat extends DataFormatDefinition {
         this.headerDisabled = headerDisabled;
     }
 
-    public String getHeader() {
+    public List<String> getHeader() {
         return header;
     }
 
     /**
-     * To configure the CSV headers. Multiple headers can be separated by comma.
+     * To configure the CSV headers
      */
-    public void setHeader(String header) {
+    public void setHeader(List<String> header) {
         this.header = header;
     }
 
@@ -527,14 +547,15 @@ public class CsvDataFormat extends DataFormatDefinition {
      */
     @XmlTransient
     public static class Builder implements DataFormatBuilder<CsvDataFormat> {
-        private String format;
+        private String formatRef;
+        private String formatName;
         private String commentMarkerDisabled;
         private String commentMarker;
         private String delimiter;
         private String escapeDisabled;
         private String escape;
         private String headerDisabled;
-        private String header;
+        private List<String> header;
         private String allowMissingColumnNames;
         private String ignoreEmptyLines;
         private String ignoreSurroundingSpaces;
@@ -568,10 +589,19 @@ public class CsvDataFormat extends DataFormatDefinition {
         }
 
         /**
-         * The format to use.
+         * The reference format to use, it will be updated with the other format options, the default value is
+         * CSVFormat.DEFAULT
          */
-        public Builder format(String format) {
-            this.format = format;
+        public Builder formatRef(String formatRef) {
+            this.formatRef = formatRef;
+            return this;
+        }
+
+        /**
+         * The name of the format to use, the default value is CSVFormat.DEFAULT
+         */
+        public Builder formatName(String formatName) {
+            this.formatName = formatName;
             return this;
         }
 
@@ -644,9 +674,9 @@ public class CsvDataFormat extends DataFormatDefinition {
         }
 
         /**
-         * To configure the CSV headers. Multiple headers can be separated by comma.
+         * To configure the CSV headers
          */
-        public Builder header(String header) {
+        public Builder header(List<String> header) {
             this.header = header;
             return this;
         }

@@ -269,7 +269,7 @@ public final class TimeUtils {
             answer += 86400000 * days;
         }
 
-        LOG.trace("input: [{}], milliseconds: {}", source, answer);
+        LOG.trace("source: [{}], milliseconds: {}", source, answer);
 
         return answer;
     }

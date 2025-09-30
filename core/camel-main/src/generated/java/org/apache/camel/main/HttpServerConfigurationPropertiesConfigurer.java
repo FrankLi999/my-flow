@@ -24,7 +24,6 @@ public class HttpServerConfigurationPropertiesConfigurer extends org.apache.came
         Map<String, Object> map = new CaseInsensitiveMap();
         map.put("AuthenticationEnabled", boolean.class);
         map.put("AuthenticationPath", java.lang.String.class);
-        map.put("AuthenticationRealm", java.lang.String.class);
         map.put("BasicPropertiesFile", java.lang.String.class);
         map.put("Enabled", boolean.class);
         map.put("FileUploadDirectory", java.lang.String.class);
@@ -51,8 +50,6 @@ public class HttpServerConfigurationPropertiesConfigurer extends org.apache.came
         case "authenticationEnabled": target.setAuthenticationEnabled(property(camelContext, boolean.class, value)); return true;
         case "authenticationpath":
         case "authenticationPath": target.setAuthenticationPath(property(camelContext, java.lang.String.class, value)); return true;
-        case "authenticationrealm":
-        case "authenticationRealm": target.setAuthenticationRealm(property(camelContext, java.lang.String.class, value)); return true;
         case "basicpropertiesfile":
         case "basicPropertiesFile": target.setBasicPropertiesFile(property(camelContext, java.lang.String.class, value)); return true;
         case "enabled": target.setEnabled(property(camelContext, boolean.class, value)); return true;
@@ -95,8 +92,6 @@ public class HttpServerConfigurationPropertiesConfigurer extends org.apache.came
         case "authenticationEnabled": return boolean.class;
         case "authenticationpath":
         case "authenticationPath": return java.lang.String.class;
-        case "authenticationrealm":
-        case "authenticationRealm": return java.lang.String.class;
         case "basicpropertiesfile":
         case "basicPropertiesFile": return java.lang.String.class;
         case "enabled": return boolean.class;
@@ -135,8 +130,6 @@ public class HttpServerConfigurationPropertiesConfigurer extends org.apache.came
         case "authenticationEnabled": return target.isAuthenticationEnabled();
         case "authenticationpath":
         case "authenticationPath": return target.getAuthenticationPath();
-        case "authenticationrealm":
-        case "authenticationRealm": return target.getAuthenticationRealm();
         case "basicpropertiesfile":
         case "basicPropertiesFile": return target.getBasicPropertiesFile();
         case "enabled": return target.isEnabled();

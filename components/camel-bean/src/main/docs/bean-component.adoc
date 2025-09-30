@@ -4,10 +4,12 @@
 :artifactid: camel-bean
 :description: Invoke methods of Java beans stored in Camel registry.
 :since: 1.0
-:supportlevel: Stable
+:supportlevel: Preview
 :tabs-sync-option:
 :component-header: Only producer is supported
 :core:
+//Manually maintained attributes
+:camel-spring-boot-name: bean
 
 *Since Camel {since}*
 

@@ -7,9 +7,9 @@
     "deprecated": false,
     "firstVersion": "3.4.0",
     "label": "core,monitoring",
-    "supportLevel": "Stable",
+    "supportLevel": "Preview",
     "groupId": "com.bpwizard.myflow",
     "artifactId": "camel-health",
-    "version": "4.15.0-SNAPSHOT"
+    "version": "0.0.1-SNAPSHOT"
   }
 }

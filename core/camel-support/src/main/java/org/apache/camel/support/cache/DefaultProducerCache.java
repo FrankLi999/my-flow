@@ -31,7 +31,6 @@ import org.apache.camel.FailedToCreateProducerException;
 import org.apache.camel.Processor;
 import org.apache.camel.Producer;
 import org.apache.camel.spi.EndpointUtilizationStatistics;
-import org.apache.camel.spi.InternalProcessorFactory;
 import org.apache.camel.spi.ProducerCache;
 import org.apache.camel.spi.SharedInternalProcessor;
 import org.apache.camel.support.CamelContextHelper;
@@ -88,8 +87,7 @@ public class DefaultProducerCache extends ServiceSupport implements ProducerCach
     }
 
     protected ProducerServicePool createServicePool(CamelContext camelContext, int cacheSize) {
-        InternalProcessorFactory pf = PluginHelper.getInternalProcessorFactory(getCamelContext());
-        return new ProducerServicePool(pf::createAsyncProducer, Producer::getEndpoint, cacheSize);
+        return new ProducerServicePool(Endpoint::createAsyncProducer, Producer::getEndpoint, cacheSize);
     }
 
     @Override
@@ -365,6 +363,7 @@ public class DefaultProducerCache extends ServiceSupport implements ProducerCach
     @Override
     public int size() {
         int size = producers != null ? producers.size() : 0;
+
         LOG.trace("size = {}", size);
         return size;
     }

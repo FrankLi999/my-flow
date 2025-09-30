@@ -32,7 +32,6 @@ import org.apache.camel.model.dataformat.FhirXmlDataFormat;
 import org.apache.camel.model.dataformat.FlatpackDataFormat;
 import org.apache.camel.model.dataformat.ForyDataFormat;
 import org.apache.camel.model.dataformat.GrokDataFormat;
-import org.apache.camel.model.dataformat.GroovyXmlDataFormat;
 import org.apache.camel.model.dataformat.GzipDeflaterDataFormat;
 import org.apache.camel.model.dataformat.HL7DataFormat;
 import org.apache.camel.model.dataformat.IcalDataFormat;
@@ -54,6 +53,7 @@ import org.apache.camel.model.dataformat.SwiftMxDataFormat;
 import org.apache.camel.model.dataformat.SyslogDataFormat;
 import org.apache.camel.model.dataformat.TarFileDataFormat;
 import org.apache.camel.model.dataformat.ThriftDataFormat;
+import org.apache.camel.model.dataformat.TidyMarkupDataFormat;
 import org.apache.camel.model.dataformat.UniVocityCsvDataFormat;
 import org.apache.camel.model.dataformat.UniVocityFixedDataFormat;
 import org.apache.camel.model.dataformat.UniVocityTsvDataFormat;
@@ -177,13 +177,6 @@ public final class DataFormatBuilderFactory {
      */
     public GrokDataFormat.Builder grok() {
         return new GrokDataFormat.Builder();
-    }
-
-    /**
-     * Uses the Groovy XML format
-     */
-    public GroovyXmlDataFormat.Builder groovyXml() {
-        return new GroovyXmlDataFormat.Builder();
     }
 
     /**
@@ -331,6 +324,13 @@ public final class DataFormatBuilderFactory {
      */
     public ThriftDataFormat.Builder thrift() {
         return new ThriftDataFormat.Builder();
+    }
+
+    /**
+     * Return TidyMarkup in the default format as {@link org.w3c.dom.Node}
+     */
+    public TidyMarkupDataFormat.Builder tidyMarkup() {
+        return new TidyMarkupDataFormat.Builder();
     }
 
     /**

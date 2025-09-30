@@ -129,9 +129,6 @@ public final class DefaultConfigurationConfigurer {
     public static void configure(CamelContext camelContext, DefaultConfigurationProperties<?> config) throws Exception {
         ExtendedCamelContext ecc = camelContext.getCamelContextExtension();
 
-        if (config.getAdditionalSensitiveKeywords() != null) {
-            ecc.setAdditionalSensitiveKeywords(config.getAdditionalSensitiveKeywords());
-        }
         if (config.getStartupRecorder() != null) {
             if ("false".equals(config.getStartupRecorder())) {
                 ecc.getStartupStepRecorder().setEnabled(false);

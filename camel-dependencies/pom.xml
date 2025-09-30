@@ -23,7 +23,7 @@
     <parent>
         <groupId>com.bpwizard.myflow</groupId>
         <artifactId>my-flow-parent</artifactId>
-        <version>4.15.0-SNAPSHOT</version>
+        <version>0.0.1-SNAPSHOT</version>
         <relativePath>../my-flow-parent/pom.xml</relativePath>
     </parent>
 

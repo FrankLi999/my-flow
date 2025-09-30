@@ -28,7 +28,7 @@
 	</parent>
 	<groupId>com.bpwizard.myflow</groupId>
 	<artifactId>my-flow</artifactId>
-	<version>4.15.0-SNAPSHOT</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<name>my-flow</name>
 	<description>Demo project for Spring Boot</description>
 	<packaging>pom</packaging>
@@ -53,8 +53,8 @@
         <maven.compiler.release>${jdk.version}</maven.compiler.release>
         <minimalJavaBuildVersion>${jdk.version}</minimalJavaBuildVersion>
 		<!-- <java.version>${jdk.version}</java.version>         -->
-		<spring-boot-version>3.5.6</spring-boot-version>        
-		<camel-version>4.15.0-SNAPSHOT</camel-version>		
+        <spring-boot-version>3.5.6</spring-boot-version>        
+		<camel-version>4.14.0</camel-version>		
 		<flatten-maven-plugin-version>1.7.3</flatten-maven-plugin-version>
 		<gmavenplus-plugin-version>4.2.1</gmavenplus-plugin-version>
 		
@@ -75,31 +75,10 @@
         <enforcer.phase>none</enforcer.phase><!-- We do not enforce with -Dquickly, the property is overridden in the full profile -->
         <os.detected.classifier>${nisse.os.classifier}</os.detected.classifier>
 	</properties>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.apache.camel</groupId>
-				<artifactId>camel-parent</artifactId>
-				<version>${camel-version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
     <modules>
+     
         <module>buildingtools</module>	
+        <module>my-flow-parent</module>	
 		<module>core</module>		
 		<module>components</module>
 		<module>dsl</module>

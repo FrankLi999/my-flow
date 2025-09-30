@@ -24,7 +24,7 @@
     <parent>
         <groupId>com.bpwizard.myflow.springboot</groupId>
         <artifactId>spring</artifactId>
-        <version>4.15.0-SNAPSHOT</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <name>My Flow SB :: Spring Boot</name>
@@ -183,9 +183,9 @@
                             <includes>org/apache/camel/main/DefaultConfigurationProperties.java</includes>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>org.apache.camel</groupId>
+                                    <groupId>com.bpwizard.myflow</groupId>
                                     <artifactId>camel-main</artifactId>
-                                    <version>${camel-version}</version>
+                                    <version>${project.version}</version>
                                     <type>jar</type>
                                     <classifier>sources</classifier>
                                     <outputDirectory>${project.build.directory}/sources/</outputDirectory>
@@ -198,7 +198,7 @@
             <plugin>
                 <groupId>org.apache.camel.springboot</groupId>
                 <artifactId>camel-spring-boot-config-generator-maven-plugin</artifactId>
-                <version>${project.version}</version>
+                <version>${camel-version}</version>
                 <executions>
                     <execution>
                         <id>generate-config</id>

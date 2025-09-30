@@ -20,8 +20,6 @@ import org.apache.camel.AsyncProducer;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Endpoint;
 import org.apache.camel.FailedToCreateProducerException;
-import org.apache.camel.spi.InternalProcessorFactory;
-import org.apache.camel.support.PluginHelper;
 import org.apache.camel.support.service.ServiceHelper;
 
 public class EmptyProducerCache extends DefaultProducerCache {
@@ -41,8 +39,7 @@ public class EmptyProducerCache extends DefaultProducerCache {
         // always create a new producer
         AsyncProducer answer;
         try {
-            InternalProcessorFactory pf = PluginHelper.getInternalProcessorFactory(getCamelContext());
-            answer = pf.createAsyncProducer(endpoint);
+            answer = endpoint.createAsyncProducer();
             boolean startingRoutes
                     = ecc.getCamelContextExtension().isSetupRoutes() || ecc.getRouteController().isStartingRoutes();
             if (startingRoutes && answer.isSingleton()) {

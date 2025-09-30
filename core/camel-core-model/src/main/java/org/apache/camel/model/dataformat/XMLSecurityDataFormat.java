@@ -40,20 +40,14 @@ import org.apache.camel.support.jsse.KeyStoreParameters;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class XMLSecurityDataFormat extends DataFormatDefinition implements NamespaceAware {
 
-    @XmlTransient
-    private KeyStoreParameters keyStoreParameters;
-    @XmlTransient
-    private Map<String, String> namespaces;
-
     @XmlAttribute
     @Metadata(defaultValue = "AES-256-GCM",
               enums = "TRIPLEDES,AES_128,AES_128_GCM,AES_192,AES_192_GCM,AES_256,AES_256_GCM,SEED_128,CAMELLIA_128,CAMELLIA_192,CAMELLIA_256")
     private String xmlCipherAlgorithm;
     @XmlAttribute
-    @Metadata(secret = true)
     private String passPhrase;
     @XmlAttribute
-    @Metadata(label = "advanced", secret = true)
+    @Metadata(label = "advanced")
     private byte[] passPhraseByte;
     @XmlAttribute
     private String secureTag;
@@ -66,8 +60,7 @@ public class XMLSecurityDataFormat extends DataFormatDefinition implements Names
     @XmlAttribute
     private String recipientKeyAlias;
     @XmlAttribute
-    @Metadata(javaType = "org.apache.camel.support.jsse.KeyStoreParameters")
-    private String keyOrTrustStoreParameters;
+    private String keyOrTrustStoreParametersRef;
     @XmlAttribute
     private String keyPassword;
     @XmlAttribute
@@ -79,9 +72,10 @@ public class XMLSecurityDataFormat extends DataFormatDefinition implements Names
     @XmlAttribute
     @Metadata(javaType = "java.lang.Boolean", defaultValue = "true")
     private String addKeyValueForEncryptedKey;
-    @XmlAttribute(name = "namespace")
-    @Metadata(javaType = "java.util.Map")
-    private String namespaceRef;
+    @XmlTransient
+    private KeyStoreParameters keyOrTrustStoreParameters;
+    @XmlTransient
+    private Map<String, String> namespaces;
 
     public XMLSecurityDataFormat() {
         super("xmlSecurity");
@@ -96,13 +90,12 @@ public class XMLSecurityDataFormat extends DataFormatDefinition implements Names
         this.secureTagContents = source.secureTagContents;
         this.keyCipherAlgorithm = source.keyCipherAlgorithm;
         this.recipientKeyAlias = source.recipientKeyAlias;
-        this.keyOrTrustStoreParameters = source.keyOrTrustStoreParameters;
+        this.keyOrTrustStoreParametersRef = source.keyOrTrustStoreParametersRef;
         this.keyPassword = source.keyPassword;
         this.digestAlgorithm = source.digestAlgorithm;
         this.mgfAlgorithm = source.mgfAlgorithm;
         this.addKeyValueForEncryptedKey = source.addKeyValueForEncryptedKey;
-        this.keyStoreParameters = source.keyStoreParameters;
-        this.namespaceRef = source.namespaceRef;
+        this.keyOrTrustStoreParameters = source.keyOrTrustStoreParameters;
         this.namespaces = source.namespaces != null ? new LinkedHashMap<>(source.namespaces) : null;
     }
 
@@ -115,14 +108,13 @@ public class XMLSecurityDataFormat extends DataFormatDefinition implements Names
         this.secureTagContents = builder.secureTagContents;
         this.keyCipherAlgorithm = builder.keyCipherAlgorithm;
         this.recipientKeyAlias = builder.recipientKeyAlias;
-        this.keyOrTrustStoreParameters = builder.keyOrTrustStoreParameters;
+        this.keyOrTrustStoreParametersRef = builder.keyOrTrustStoreParametersRef;
         this.keyPassword = builder.keyPassword;
         this.digestAlgorithm = builder.digestAlgorithm;
         this.mgfAlgorithm = builder.mgfAlgorithm;
         this.addKeyValueForEncryptedKey = builder.addKeyValueForEncryptedKey;
-        this.keyStoreParameters = builder.keyStoreParameters;
+        this.keyOrTrustStoreParameters = builder.keyOrTrustStoreParameters;
         this.namespaces = builder.namespaces;
-        this.namespaceRef = builder.namespaceRef;
     }
 
     @Override
@@ -238,24 +230,24 @@ public class XMLSecurityDataFormat extends DataFormatDefinition implements Names
      * Refers to a KeyStore instance to lookup in the registry, which is used for configuration options for creating and
      * loading a KeyStore instance that represents the sender's trustStore or recipient's keyStore.
      */
-    public void setKeyOrTrustStoreParameters(String id) {
-        this.keyOrTrustStoreParameters = id;
+    public void setKeyOrTrustStoreParametersRef(String id) {
+        this.keyOrTrustStoreParametersRef = id;
     }
 
-    public String getKeyOrTrustStoreParameters() {
-        return this.keyOrTrustStoreParameters;
+    public String getKeyOrTrustStoreParametersRef() {
+        return this.keyOrTrustStoreParametersRef;
     }
 
-    public KeyStoreParameters getKeyStoreParameters() {
-        return keyStoreParameters;
+    public KeyStoreParameters getKeyOrTrustStoreParameters() {
+        return keyOrTrustStoreParameters;
     }
 
     /**
      * Configuration options for creating and loading a KeyStore instance that represents the sender's trustStore or
      * recipient's keyStore.
      */
-    public void setKeyStoreParameters(KeyStoreParameters keyStoreParameters) {
-        this.keyStoreParameters = keyStoreParameters;
+    public void setKeyOrTrustStoreParameters(KeyStoreParameters keyOrTrustStoreParameters) {
+        this.keyOrTrustStoreParameters = keyOrTrustStoreParameters;
     }
 
     public String getKeyPassword() {
@@ -328,17 +320,6 @@ public class XMLSecurityDataFormat extends DataFormatDefinition implements Names
         return namespaces;
     }
 
-    public String getNamespaceRef() {
-        return namespaceRef;
-    }
-
-    /**
-     * Refers to a Map XML Namespaces of prefix -> uri mappings
-     */
-    public void setNamespaceRef(String namespaceRef) {
-        this.namespaceRef = namespaceRef;
-    }
-
     /**
      * {@code Builder} is a specific builder for {@link XMLSecurityDataFormat}.
      */
@@ -352,14 +333,13 @@ public class XMLSecurityDataFormat extends DataFormatDefinition implements Names
         private String secureTagContents;
         private String keyCipherAlgorithm;
         private String recipientKeyAlias;
-        private String keyOrTrustStoreParameters;
+        private String keyOrTrustStoreParametersRef;
         private String keyPassword;
         private String digestAlgorithm;
         private String mgfAlgorithm;
         private String addKeyValueForEncryptedKey;
-        private KeyStoreParameters keyStoreParameters;
+        private KeyStoreParameters keyOrTrustStoreParameters;
         private Map<String, String> namespaces;
-        private String namespaceRef;
 
         /**
          * The cipher algorithm to be used for encryption/decryption of the XML message content. The available choices
@@ -458,8 +438,8 @@ public class XMLSecurityDataFormat extends DataFormatDefinition implements Names
          * Refers to a KeyStore instance to lookup in the registry, which is used for configuration options for creating
          * and loading a KeyStore instance that represents the sender's trustStore or recipient's keyStore.
          */
-        public Builder keyOrTrustStoreParameters(String keyOrTrustStoreParameters) {
-            this.keyOrTrustStoreParameters = keyOrTrustStoreParameters;
+        public Builder keyOrTrustStoreParametersRef(String keyOrTrustStoreParametersRef) {
+            this.keyOrTrustStoreParametersRef = keyOrTrustStoreParametersRef;
             return this;
         }
 
@@ -467,8 +447,8 @@ public class XMLSecurityDataFormat extends DataFormatDefinition implements Names
          * Configuration options for creating and loading a KeyStore instance that represents the sender's trustStore or
          * recipient's keyStore.
          */
-        public Builder keyStoreParameters(KeyStoreParameters keyStoreParameters) {
-            this.keyStoreParameters = keyStoreParameters;
+        public Builder keyOrTrustStoreParameters(KeyStoreParameters keyOrTrustStoreParameters) {
+            this.keyOrTrustStoreParameters = keyOrTrustStoreParameters;
             return this;
         }
 
@@ -534,14 +514,6 @@ public class XMLSecurityDataFormat extends DataFormatDefinition implements Names
          */
         public Builder namespaces(Map<String, String> namespaces) {
             this.namespaces = namespaces;
-            return this;
-        }
-
-        /**
-         * Refers to a Map XML Namespaces of prefix -> uri mappings
-         */
-        public Builder namespaceRef(String namespaceRef) {
-            this.namespaceRef = namespaceRef;
             return this;
         }
 

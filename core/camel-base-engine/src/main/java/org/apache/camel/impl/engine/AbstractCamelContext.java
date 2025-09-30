@@ -87,7 +87,6 @@ import org.apache.camel.impl.debugger.DefaultBacklogDebugger;
 import org.apache.camel.spi.AnnotationBasedProcessorFactory;
 import org.apache.camel.spi.AnnotationScanTypeConverters;
 import org.apache.camel.spi.AsyncProcessorAwaitManager;
-import org.apache.camel.spi.AutoMockInterceptStrategy;
 import org.apache.camel.spi.BackOffTimerFactory;
 import org.apache.camel.spi.BacklogDebugger;
 import org.apache.camel.spi.BeanIntrospection;
@@ -105,7 +104,6 @@ import org.apache.camel.spi.CliConnectorFactory;
 import org.apache.camel.spi.ComponentNameResolver;
 import org.apache.camel.spi.ComponentResolver;
 import org.apache.camel.spi.ConfigurerResolver;
-import org.apache.camel.spi.ContextServiceLoaderPluginResolver;
 import org.apache.camel.spi.DataFormat;
 import org.apache.camel.spi.DataFormatResolver;
 import org.apache.camel.spi.DataType;
@@ -220,7 +218,6 @@ public abstract class AbstractCamelContext extends BaseService
     private final DefaultCamelContextExtension camelContextExtension = new DefaultCamelContextExtension(this);
     private final AtomicInteger endpointKeyCounter = new AtomicInteger();
     private final Set<EndpointStrategy> endpointStrategies = ConcurrentHashMap.newKeySet();
-    private final Set<AutoMockInterceptStrategy> autoMockInterceptStrategies = ConcurrentHashMap.newKeySet();
     private final GlobalEndpointConfiguration globalEndpointConfiguration = new DefaultGlobalEndpointConfiguration();
     private final Map<String, Component> components = new ConcurrentHashMap<>();
     private final Set<Route> routes = new LinkedHashSet<>();
@@ -350,7 +347,6 @@ public abstract class AbstractCamelContext extends BaseService
      * Called during object construction to initialize context plugins
      */
     protected void initPlugins() {
-        camelContextExtension.addContextPlugin(ContextServiceLoaderPluginResolver.class, createContextServiceLoaderPlugin());
         camelContextExtension.addContextPlugin(StartupConditionStrategy.class, createStartupConditionStrategy());
         camelContextExtension.addContextPlugin(CamelBeanPostProcessor.class, createBeanPostProcessor());
         camelContextExtension.addContextPlugin(CamelDependencyInjectionAnnotationFactory.class,
@@ -854,7 +850,7 @@ public abstract class AbstractCamelContext extends BaseService
                         addPrototypeService(answer);
                         // if there is endpoint strategies, then use the endpoints they return
                         // as this allows to intercept endpoints etc.
-                        for (EndpointStrategy strategy : getEndpointStrategies()) {
+                        for (EndpointStrategy strategy : endpointStrategies) {
                             answer = strategy.registerEndpoint(uri, answer);
                         }
                     }
@@ -905,7 +901,7 @@ public abstract class AbstractCamelContext extends BaseService
 
         // if there is endpoint strategies, then use the endpoints they return
         // as this allows to intercept endpoints etc.
-        for (EndpointStrategy strategy : getEndpointStrategies()) {
+        for (EndpointStrategy strategy : endpointStrategies) {
             endpoint = strategy.registerEndpoint(uri, endpoint);
         }
         endpoints.put(getEndpointKey(uri, endpoint), endpoint);
@@ -973,44 +969,6 @@ public abstract class AbstractCamelContext extends BaseService
     }
 
     @Override
-    public Set<String> getRouteIds() {
-        if (routes.isEmpty()) {
-            return Collections.emptySet();
-        } else {
-            routesLock.lock();
-            try {
-                Set<String> answer = new TreeSet<>();
-                for (Route route : routes) {
-                    answer.add(route.getRouteId());
-                }
-                return answer;
-            } finally {
-                routesLock.unlock();
-            }
-        }
-    }
-
-    @Override
-    public Set<String> getRouteGroupIds() {
-        if (routes.isEmpty()) {
-            return Collections.emptySet();
-        } else {
-            routesLock.lock();
-            try {
-                Set<String> answer = new TreeSet<>();
-                for (Route route : routes) {
-                    if (route.getGroup() != null) {
-                        answer.add(route.getGroup());
-                    }
-                }
-                return answer;
-            } finally {
-                routesLock.unlock();
-            }
-        }
-    }
-
-    @Override
     public List<Route> getRoutes(Predicate<Route> filter) {
         routesLock.lock();
         try {
@@ -1029,7 +987,7 @@ public abstract class AbstractCamelContext extends BaseService
     @Override
     public List<Route> getRoutesByGroup(String groupId) {
         if (groupId == null) {
-            return Collections.emptyList();
+            return Collections.EMPTY_LIST;
         }
         return getRoutes(f -> groupId.equals(f.getGroup()));
     }
@@ -2381,15 +2339,6 @@ public abstract class AbstractCamelContext extends BaseService
                 getCamelContextExtension().addContextPlugin(DevConsoleRegistry.class, dcr);
             }
             startupStepRecorder.endStep(step5);
-        }
-
-        // Start context service loader plugin to discover and load third-party plugins early in build phase
-        ContextServiceLoaderPluginResolver contextServicePlugin
-                = camelContextExtension.getContextPlugin(ContextServiceLoaderPluginResolver.class);
-        if (contextServicePlugin != null) {
-            StartupStep step6 = startupStepRecorder.beginStep(CamelContext.class, null, "Start ContextServiceLoaderPlugin");
-            ServiceHelper.startService(contextServicePlugin);
-            startupStepRecorder.endStep(step6);
         }
 
         // Call all registered trackers with this context
@@ -4482,8 +4431,6 @@ public abstract class AbstractCamelContext extends BaseService
 
     protected abstract StartupConditionStrategy createStartupConditionStrategy();
 
-    protected abstract ContextServiceLoaderPluginResolver createContextServiceLoaderPlugin();
-
     protected abstract BackOffTimerFactory createBackOffTimerFactory();
 
     protected abstract TaskManagerRegistry createTaskManagerRegistry();
@@ -4588,10 +4535,6 @@ public abstract class AbstractCamelContext extends BaseService
 
     Set<EndpointStrategy> getEndpointStrategies() {
         return endpointStrategies;
-    }
-
-    Set<AutoMockInterceptStrategy> getAutoMockInterceptStrategies() {
-        return autoMockInterceptStrategies;
     }
 
     List<RouteStartupOrder> getRouteStartupOrder() {

@@ -17,6 +17,7 @@
 package org.apache.camel.reifier.dataformat;
 
 import java.util.Map;
+import java.util.StringJoiner;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.model.DataFormatDefinition;
@@ -30,14 +31,25 @@ public class CsvDataFormatReifier extends DataFormatReifier<CsvDataFormat> {
 
     @Override
     protected void prepareDataFormatConfig(Map<String, Object> properties) {
-        properties.put("format", definition.getFormat());
+        properties.put("format", asRef(definition.getFormatRef()));
+        properties.put("formatName", definition.getFormatName());
         properties.put("commentMarkerDisabled", definition.getCommentMarkerDisabled());
         properties.put("commentMarker", definition.getCommentMarker());
         properties.put("delimiter", definition.getDelimiter());
         properties.put("escapeDisabled", definition.getEscapeDisabled());
         properties.put("escape", definition.getEscape());
         properties.put("headerDisabled", definition.getHeaderDisabled());
-        properties.put("header", definition.getHeader());
+        // in the model header is a List<String> however it should ideally have
+        // just been a comma separated String so its configurable in uris
+        // so we join the List into a String in the reifier so the configurer can
+        // use the value as-is
+        if (definition.getHeader() != null && !definition.getHeader().isEmpty()) {
+            StringJoiner sj = new StringJoiner(",");
+            for (String s : definition.getHeader()) {
+                sj.add(s);
+            }
+            properties.put("header", sj.toString());
+        }
         properties.put("allowMissingColumnNames", definition.getAllowMissingColumnNames());
         properties.put("ignoreEmptyLines", definition.getIgnoreEmptyLines());
         properties.put("ignoreSurroundingSpaces", definition.getIgnoreSurroundingSpaces());

@@ -23,7 +23,7 @@
 	<parent>
 		<groupId>com.bpwizard.myflow</groupId>
 		<artifactId>components</artifactId>
-		<version>4.15.0-SNAPSHOT</version>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
     <artifactId>camel-bean</artifactId>
@@ -36,8 +36,7 @@
 
         <dependency>
             <groupId>com.bpwizard.myflow</groupId>
-            <artifactId>camel-support</artifactId>
-            <version>${project.version}</version>
+            <artifactId>camel-support</artifactId>            
         </dependency>
 
         <dependency>

@@ -72,7 +72,7 @@ public abstract class ScheduledPollConsumer extends DefaultConsumer
     private Map<String, Object> schedulerProperties;
 
     // state during running
-    private final AtomicInteger pollingCounter = new AtomicInteger();
+    private volatile boolean polling;
     private final AtomicInteger backoffCounter = new AtomicInteger();
     private final AtomicLong idleCounter = new AtomicLong();
     private final AtomicLong errorCounter = new AtomicLong();
@@ -200,7 +200,7 @@ public abstract class ScheduledPollConsumer extends DefaultConsumer
                     }
 
                     // mark we are polling which should also include the begin/poll/commit
-                    pollingCounter.incrementAndGet();
+                    polling = true;
                     try {
                         boolean begin = pollStrategy.begin(this, getEndpoint());
                         if (begin) {
@@ -233,7 +233,7 @@ public abstract class ScheduledPollConsumer extends DefaultConsumer
                             LOG.debug("Cannot begin polling as pollStrategy returned false: {}", pollStrategy);
                         }
                     } finally {
-                        pollingCounter.decrementAndGet();
+                        polling = false;
                     }
                 }
 
@@ -322,7 +322,7 @@ public abstract class ScheduledPollConsumer extends DefaultConsumer
      * Whether polling is currently in progress
      */
     public boolean isPolling() {
-        return pollingCounter.get() > 0;
+        return polling;
     }
 
     public ScheduledPollConsumerScheduler getScheduler() {

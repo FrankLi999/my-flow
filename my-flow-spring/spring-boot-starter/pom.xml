@@ -23,7 +23,7 @@
     <parent>
         <groupId>com.bpwizard.myflow.springboot</groupId>
         <artifactId>spring-boot-parent</artifactId>
-		<version>4.15.0-SNAPSHOT</version>
+		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../spring-boot-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>starter</artifactId>	
@@ -31,6 +31,6 @@
 	<description>My Flow starter</description>
 	<packaging>pom</packaging>
     <modules>
-		<module>my-flow-spring-boot-starter</module>		
+		<module>camel-spring-boot-starter</module>		
 	</modules>
 </project>

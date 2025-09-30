@@ -31,8 +31,6 @@ public class ParquetAvroDataFormatReifier extends DataFormatReifier<ParquetAvroD
     @Override
     protected void prepareDataFormatConfig(Map<String, Object> properties) {
         properties.put("unmarshalType", or(definition.getUnmarshalType(), definition.getUnmarshalTypeName()));
-        properties.put("lazyLoad", definition.getLazyLoad());
-        properties.put("compressionCodecName", definition.getCompressionCodecName());
     }
 
 }

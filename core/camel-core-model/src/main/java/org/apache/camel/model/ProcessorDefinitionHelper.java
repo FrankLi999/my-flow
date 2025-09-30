@@ -18,7 +18,9 @@ package org.apache.camel.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.NamedNode;
@@ -178,15 +180,15 @@ public final class ProcessorDefinitionHelper {
      * Traverses the node, including its children (recursive), and gathers all the node ids.
      *
      * @param  node            the target node
-     * @param  set             list to store ids, if <tt>null</tt> a new list will be created
+     * @param  set             set to store ids, if <tt>null</tt> a new set will be created
      * @param  onlyCustomId    whether to only store custom assigned ids (ie.
      *                         {@link org.apache.camel.model.OptionalIdentifiedDefinition#hasCustomIdAssigned()}
      * @param  includeAbstract whether to include abstract nodes (ie.
      *                         {@link org.apache.camel.model.ProcessorDefinition#isAbstract()}
-     * @return                 the list with the found ids.
+     * @return                 the set with the found ids.
      */
-    public static List<String> gatherAllNodeIds(
-            ProcessorDefinition<?> node, List<String> set, boolean onlyCustomId, boolean includeAbstract) {
+    public static Set<String> gatherAllNodeIds(
+            ProcessorDefinition<?> node, Set<String> set, boolean onlyCustomId, boolean includeAbstract) {
         if (node == null) {
             return set;
         }
@@ -197,7 +199,7 @@ public final class ProcessorDefinitionHelper {
         }
 
         if (set == null) {
-            set = new ArrayList<>();
+            set = new LinkedHashSet<>();
         }
 
         // add ourselves

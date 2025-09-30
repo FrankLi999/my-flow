@@ -28,14 +28,12 @@ import org.apache.camel.model.dataformat.*;
 import org.apache.camel.reifier.AbstractReifier;
 import org.apache.camel.spi.DataFormat;
 import org.apache.camel.spi.DataFormatContentTypeHeader;
-import org.apache.camel.spi.ExtendedPropertyConfigurerGetter;
 import org.apache.camel.spi.PropertyConfigurer;
 import org.apache.camel.spi.PropertyConfigurerAware;
 import org.apache.camel.spi.ReifierStrategy;
 import org.apache.camel.support.CamelContextHelper;
 import org.apache.camel.support.PluginHelper;
 import org.apache.camel.support.PropertyBindingSupport;
-import org.apache.camel.support.PropertyConfigurerHelper;
 import org.apache.camel.util.ObjectHelper;
 import org.apache.camel.util.StringHelper;
 import org.slf4j.Logger;
@@ -170,8 +168,6 @@ public abstract class DataFormatReifier<T extends DataFormatDefinition> extends 
             return new ForyDataFormatReifier(camelContext, definition);
         } else if (definition instanceof GrokDataFormat) {
             return new GrokDataFormatReifier(camelContext, definition);
-        } else if (definition instanceof GroovyXmlDataFormat) {
-            return new GroovyXmlDataFormatReifier(camelContext, definition);
         } else if (definition instanceof GzipDeflaterDataFormat) {
             return new GzipDataFormatReifier(camelContext, definition);
         } else if (definition instanceof HL7DataFormat) {
@@ -214,6 +210,8 @@ public abstract class DataFormatReifier<T extends DataFormatDefinition> extends 
             return new TarFileDataFormatReifier(camelContext, definition);
         } else if (definition instanceof ThriftDataFormat) {
             return new ThriftDataFormatReifier(camelContext, definition);
+        } else if (definition instanceof TidyMarkupDataFormat) {
+            return new TidyMarkupDataFormatReifier(camelContext, definition);
         } else if (definition instanceof UniVocityCsvDataFormat) {
             return new UniVocityCsvDataFormatReifier(camelContext, definition);
         } else if (definition instanceof UniVocityFixedDataFormat) {
@@ -245,7 +243,7 @@ public abstract class DataFormatReifier<T extends DataFormatDefinition> extends 
                     dataFormatContentTypeHeader.setContentTypeHeader(contentTypeHeader);
                 }
                 // configure the rest of the options
-                configureDataFormat(dataFormat, definition.getDataFormatName());
+                configureDataFormat(dataFormat);
             } else {
                 throw new IllegalArgumentException(
                         "Data format '" + (definition.getDataFormatName() != null ? definition.getDataFormatName() : "<null>")
@@ -275,29 +273,8 @@ public abstract class DataFormatReifier<T extends DataFormatDefinition> extends 
     /**
      * Allows derived classes to customize the data format
      */
-    protected void configureDataFormat(DataFormat dataFormat, String dataFormatName) {
+    protected void configureDataFormat(DataFormat dataFormat) {
         Map<String, Object> properties = new LinkedHashMap<>();
-        // is there a generic data format that has been auto-configured, then we need to grab the default configuration first
-        if (dataFormatName != null && camelContext.getDataFormatNames().contains(dataFormatName)) {
-            DataFormat df = camelContext.resolveDataFormat(dataFormatName);
-            if (df != null) {
-                PropertyConfigurer configurer = PluginHelper.getConfigurerResolver(camelContext)
-                        .resolvePropertyConfigurer(dataFormatName + "-dataformat", camelContext);
-                if (configurer == null) {
-                    configurer = PropertyConfigurerHelper.resolvePropertyConfigurer(camelContext, df);
-                }
-                if (configurer instanceof ExtendedPropertyConfigurerGetter eg) {
-                    // grab all the default configured values
-                    var names = eg.getAllOptions(df);
-                    for (String name : names.keySet()) {
-                        Object value = eg.getOptionValue(df, name, true);
-                        if (value != null) {
-                            properties.put(name, value);
-                        }
-                    }
-                }
-            }
-        }
         prepareDataFormatConfig(properties);
         properties.entrySet().removeIf(e -> e.getValue() == null);
 

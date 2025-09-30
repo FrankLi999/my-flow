@@ -23,7 +23,6 @@ import org.apache.camel.AsyncProcessor;
 import org.apache.camel.Endpoint;
 import org.apache.camel.Exchange;
 import org.apache.camel.Producer;
-import org.apache.camel.spi.InternalProcessorFactory;
 import org.apache.camel.support.service.ServiceHelper;
 import org.apache.camel.support.service.ServiceSupport;
 
@@ -84,8 +83,7 @@ public class DeferProducer extends ServiceSupport implements Producer, AsyncProc
         // need to lookup endpoint again as it may be intercepted
         Endpoint lookup = endpoint.getCamelContext().getEndpoint(endpoint.getEndpointUri());
 
-        InternalProcessorFactory pf = PluginHelper.getInternalProcessorFactory(endpoint.getCamelContext());
-        delegate = pf.createProducer(lookup);
+        delegate = lookup.createProducer();
         ServiceHelper.startService(delegate);
     }
 

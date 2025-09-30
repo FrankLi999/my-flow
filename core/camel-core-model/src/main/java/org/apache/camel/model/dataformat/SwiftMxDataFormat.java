@@ -34,23 +34,22 @@ import org.apache.camel.spi.Metadata;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SwiftMxDataFormat extends DataFormatDefinition {
 
-    @XmlTransient
-    private Object writeConfigObject;
-    @XmlTransient
-    private Object readConfigObject;
-
     @XmlAttribute
-    @Metadata(javaType = "java.lang.Boolean")
+    @Metadata(label = "advanced")
+    private String writeConfigRef;
+    @XmlTransient
+    private Object writeConfig;
+    @XmlAttribute
+    @Metadata(label = "advanced", javaType = "java.lang.Boolean")
     private String writeInJson;
     @XmlAttribute
-    @Metadata(label = "advanced", javaType = "com.prowidesoftware.swift.model.MxId")
+    @Metadata(label = "advanced")
     private String readMessageId;
     @XmlAttribute
-    @Metadata(label = "advanced", javaType = "com.prowidesoftware.swift.model.mx.MxReadConfiguration")
-    private String readConfig;
-    @XmlAttribute
-    @Metadata(label = "advanced", javaType = "com.prowidesoftware.swift.model.mx.MxWriteConfiguration")
-    private String writeConfig;
+    @Metadata(label = "advanced")
+    private String readConfigRef;
+    @XmlTransient
+    private Object readConfig;
 
     public SwiftMxDataFormat() {
         super("swiftMx");
@@ -58,12 +57,12 @@ public class SwiftMxDataFormat extends DataFormatDefinition {
 
     protected SwiftMxDataFormat(SwiftMxDataFormat source) {
         super(source);
+        this.writeConfigRef = source.writeConfigRef;
         this.writeConfig = source.writeConfig;
-        this.writeConfigObject = source.writeConfigObject;
         this.writeInJson = source.writeInJson;
         this.readMessageId = source.readMessageId;
+        this.readConfigRef = source.readConfigRef;
         this.readConfig = source.readConfig;
-        this.readConfigObject = source.readConfigObject;
     }
 
     public SwiftMxDataFormat(boolean writeInJson) {
@@ -71,40 +70,40 @@ public class SwiftMxDataFormat extends DataFormatDefinition {
         this.writeInJson = Boolean.toString(writeInJson);
     }
 
-    public SwiftMxDataFormat(boolean writeInJson, String readMessageId, Object readConfigObject) {
-        this(writeInJson);
-        this.readMessageId = readMessageId;
-        this.readConfigObject = readConfigObject;
-    }
-
-    public SwiftMxDataFormat(boolean writeInJson, String readMessageId, String readConfig) {
+    public SwiftMxDataFormat(boolean writeInJson, String readMessageId, Object readConfig) {
         this(writeInJson);
         this.readMessageId = readMessageId;
         this.readConfig = readConfig;
     }
 
-    public SwiftMxDataFormat(Object writeConfigObject, String readMessageId, Object readConfigObject) {
-        this();
-        this.writeConfigObject = writeConfigObject;
+    public SwiftMxDataFormat(boolean writeInJson, String readMessageId, String readConfigRef) {
+        this(writeInJson);
         this.readMessageId = readMessageId;
-        this.readConfigObject = readConfigObject;
+        this.readConfigRef = readConfigRef;
     }
 
-    public SwiftMxDataFormat(String writeConfig, String readMessageId, String readConfig) {
+    public SwiftMxDataFormat(Object writeConfig, String readMessageId, Object readConfig) {
         this();
         this.writeConfig = writeConfig;
         this.readMessageId = readMessageId;
         this.readConfig = readConfig;
     }
 
+    public SwiftMxDataFormat(String writeConfigRef, String readMessageId, String readConfigRef) {
+        this();
+        this.writeConfigRef = writeConfigRef;
+        this.readMessageId = readMessageId;
+        this.readConfigRef = readConfigRef;
+    }
+
     private SwiftMxDataFormat(Builder builder) {
         this();
+        this.writeConfigRef = builder.writeConfigRef;
         this.writeConfig = builder.writeConfig;
-        this.writeConfigObject = builder.writeConfigObject;
         this.writeInJson = builder.writeInJson;
         this.readMessageId = builder.readMessageId;
+        this.readConfigRef = builder.readConfigRef;
         this.readConfig = builder.readConfig;
-        this.readConfigObject = builder.readConfigObject;
     }
 
     @Override
@@ -112,15 +111,15 @@ public class SwiftMxDataFormat extends DataFormatDefinition {
         return new SwiftMxDataFormat(this);
     }
 
-    public Object getWriteConfigObject() {
-        return writeConfigObject;
+    public Object getWriteConfig() {
+        return writeConfig;
     }
 
     /**
      * The specific configuration to use when marshalling a message.
      */
-    public void setWriteConfigObject(Object writeConfigObject) {
-        this.writeConfigObject = writeConfigObject;
+    public void setWriteConfig(Object writeConfig) {
+        this.writeConfig = writeConfig;
     }
 
     public String getWriteInJson() {
@@ -148,37 +147,37 @@ public class SwiftMxDataFormat extends DataFormatDefinition {
         this.readMessageId = readMessageId;
     }
 
-    public Object getReadConfigObject() {
-        return readConfigObject;
+    public Object getReadConfig() {
+        return readConfig;
     }
 
     /**
      * The specific configuration to use when unmarshalling an input stream.
      */
-    public void setReadConfigObject(Object readConfigObject) {
-        this.readConfigObject = readConfigObject;
+    public void setReadConfig(Object readConfig) {
+        this.readConfig = readConfig;
     }
 
-    public String getWriteConfig() {
-        return writeConfig;
+    public String getWriteConfigRef() {
+        return writeConfigRef;
     }
 
     /**
      * Refers to a specific configuration to use when marshalling a message to lookup from the registry.
      */
-    public void setWriteConfig(String writeConfig) {
-        this.writeConfig = writeConfig;
+    public void setWriteConfigRef(String writeConfigRef) {
+        this.writeConfigRef = writeConfigRef;
     }
 
-    public String getReadConfig() {
-        return readConfig;
+    public String getReadConfigRef() {
+        return readConfigRef;
     }
 
     /**
      * Refers to a specific configuration to use when unmarshalling an input stream to lookup from the registry.
      */
-    public void setReadConfig(String readConfig) {
-        this.readConfig = readConfig;
+    public void setReadConfigRef(String readConfigRef) {
+        this.readConfigRef = readConfigRef;
     }
 
     /**
@@ -187,18 +186,18 @@ public class SwiftMxDataFormat extends DataFormatDefinition {
     @XmlTransient
     public static class Builder implements DataFormatBuilder<SwiftMxDataFormat> {
 
-        private String writeConfig;
-        private Object writeConfigObject;
+        private String writeConfigRef;
+        private Object writeConfig;
         private String writeInJson;
         private String readMessageId;
-        private String readConfig;
-        private Object readConfigObject;
+        private String readConfigRef;
+        private Object readConfig;
 
         /**
          * The specific configuration to use when marshalling a message.
          */
-        public Builder writeConfigObject(Object writeConfigObject) {
-            this.writeConfigObject = writeConfigObject;
+        public Builder writeConfig(Object writeConfig) {
+            this.writeConfig = writeConfig;
             return this;
         }
 
@@ -234,24 +233,24 @@ public class SwiftMxDataFormat extends DataFormatDefinition {
         /**
          * The specific configuration to use when unmarshalling an input stream.
          */
-        public Builder readConfigObject(Object readConfigObject) {
-            this.readConfigObject = readConfigObject;
+        public Builder readConfig(Object readConfig) {
+            this.readConfig = readConfig;
             return this;
         }
 
         /**
          * Refers to a specific configuration to use when marshalling a message to lookup from the registry.
          */
-        public Builder writeConfigObject(String writeConfig) {
-            this.writeConfig = writeConfig;
+        public Builder writeConfigRef(String writeConfigRef) {
+            this.writeConfigRef = writeConfigRef;
             return this;
         }
 
         /**
          * Refers to a specific configuration to use when unmarshalling an input stream to lookup from the registry.
          */
-        public Builder readConfig(String readConfig) {
-            this.readConfig = readConfig;
+        public Builder readConfigRef(String readConfigRef) {
+            this.readConfigRef = readConfigRef;
             return this;
         }
 

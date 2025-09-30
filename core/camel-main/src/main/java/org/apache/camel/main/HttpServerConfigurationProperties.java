@@ -55,8 +55,6 @@ public class HttpServerConfigurationProperties implements BootstrapCloseable {
     @Metadata(label = "security")
     private String authenticationPath;
     @Metadata(label = "security")
-    private String authenticationRealm;
-    @Metadata(label = "security")
     private String basicPropertiesFile;
     @Metadata(label = "security")
     private String jwtKeystoreType;
@@ -228,17 +226,6 @@ public class HttpServerConfigurationProperties implements BootstrapCloseable {
         this.authenticationPath = authenticationPath;
     }
 
-    public String getAuthenticationRealm() {
-        return authenticationRealm;
-    }
-
-    /**
-     * Sets the authentication realm
-     */
-    public void setAuthenticationRealm(String authenticationRealm) {
-        this.authenticationRealm = authenticationRealm;
-    }
-
     public String getBasicPropertiesFile() {
         return basicPropertiesFile;
     }
@@ -391,14 +378,6 @@ public class HttpServerConfigurationProperties implements BootstrapCloseable {
      */
     public HttpServerConfigurationProperties withAuthenticationPath(String authenticationPath) {
         this.authenticationPath = authenticationPath;
-        return this;
-    }
-
-    /**
-     * Sets the authentication realm
-     */
-    public HttpServerConfigurationProperties withAuthenticationRealm(String authenticationRealm) {
-        this.authenticationRealm = authenticationRealm;
         return this;
     }
 

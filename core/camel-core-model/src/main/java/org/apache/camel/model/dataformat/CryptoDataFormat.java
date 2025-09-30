@@ -37,17 +37,16 @@ public class CryptoDataFormat extends DataFormatDefinition {
     @XmlAttribute
     private String algorithm;
     @XmlAttribute
-    @Metadata(javaType = "java.security.Key")
-    private String key;
+    private String keyRef;
     @XmlAttribute
     @Metadata(label = "advanced")
     private String cryptoProvider;
     @XmlAttribute
-    @Metadata(label = "advanced", javaType = "byte[]")
-    private String initVector;
+    @Metadata(label = "advanced")
+    private String initVectorRef;
     @XmlAttribute
-    @Metadata(label = "advanced", javaType = "java.security.spec.AlgorithmParameterSpec")
-    private String algorithmParameterSpec;
+    @Metadata(label = "advanced")
+    private String algorithmParameterRef;
     @XmlAttribute
     @Metadata(javaType = "java.lang.Integer", defaultValue = "4096")
     private String bufferSize;
@@ -68,10 +67,10 @@ public class CryptoDataFormat extends DataFormatDefinition {
     protected CryptoDataFormat(CryptoDataFormat source) {
         super(source);
         this.algorithm = source.algorithm;
-        this.key = source.key;
+        this.keyRef = source.keyRef;
         this.cryptoProvider = source.cryptoProvider;
-        this.initVector = source.initVector;
-        this.algorithmParameterSpec = source.algorithmParameterSpec;
+        this.initVectorRef = source.initVectorRef;
+        this.algorithmParameterRef = source.algorithmParameterRef;
         this.bufferSize = source.bufferSize;
         this.macAlgorithm = source.macAlgorithm;
         this.shouldAppendHMAC = source.shouldAppendHMAC;
@@ -81,10 +80,10 @@ public class CryptoDataFormat extends DataFormatDefinition {
     private CryptoDataFormat(Builder builder) {
         this();
         this.algorithm = builder.algorithm;
-        this.key = builder.key;
+        this.keyRef = builder.keyRef;
         this.cryptoProvider = builder.cryptoProvider;
-        this.initVector = builder.initVector;
-        this.algorithmParameterSpec = builder.algorithmParameterSpec;
+        this.initVectorRef = builder.initVectorRef;
+        this.algorithmParameterRef = builder.algorithmParameterRef;
         this.bufferSize = builder.bufferSize;
         this.macAlgorithm = builder.macAlgorithm;
         this.shouldAppendHMAC = builder.shouldAppendHMAC;
@@ -118,30 +117,30 @@ public class CryptoDataFormat extends DataFormatDefinition {
         this.cryptoProvider = cryptoProvider;
     }
 
-    public String getKey() {
-        return key;
+    public String getKeyRef() {
+        return keyRef;
     }
 
     /**
      * Refers to the secret key to lookup from the register to use.
      */
-    public void setKey(String key) {
-        this.key = key;
+    public void setKeyRef(String keyRef) {
+        this.keyRef = keyRef;
     }
 
-    public String getInitVector() {
-        return initVector;
+    public String getInitVectorRef() {
+        return initVectorRef;
     }
 
     /**
      * Refers to a byte array containing the Initialization Vector that will be used to initialize the Cipher.
      */
-    public void setInitVector(String initVector) {
-        this.initVector = initVector;
+    public void setInitVectorRef(String initVectorRef) {
+        this.initVectorRef = initVectorRef;
     }
 
-    public String getAlgorithmParameterSpec() {
-        return algorithmParameterSpec;
+    public String getAlgorithmParameterRef() {
+        return algorithmParameterRef;
     }
 
     /**
@@ -149,8 +148,8 @@ public class CryptoDataFormat extends DataFormatDefinition {
      * <p/>
      * Will lookup the type using the given name as a {@link java.security.spec.AlgorithmParameterSpec} type.
      */
-    public void setAlgorithmParameterSpec(String algorithmParameterSpec) {
-        this.algorithmParameterSpec = algorithmParameterSpec;
+    public void setAlgorithmParameterRef(String algorithmParameterRef) {
+        this.algorithmParameterRef = algorithmParameterRef;
     }
 
     public String getBufferSize() {
@@ -206,10 +205,10 @@ public class CryptoDataFormat extends DataFormatDefinition {
     public static class Builder implements DataFormatBuilder<CryptoDataFormat> {
 
         private String algorithm;
-        private String key;
+        private String keyRef;
         private String cryptoProvider;
-        private String initVector;
-        private String algorithmParameterSpec;
+        private String initVectorRef;
+        private String algorithmParameterRef;
         private String bufferSize;
         private String macAlgorithm = "HmacSHA1";
         private String shouldAppendHMAC;
@@ -234,16 +233,16 @@ public class CryptoDataFormat extends DataFormatDefinition {
         /**
          * Refers to the secret key to lookup from the register to use.
          */
-        public Builder key(String key) {
-            this.key = key;
+        public Builder keyRef(String keyRef) {
+            this.keyRef = keyRef;
             return this;
         }
 
         /**
          * Refers to a byte array containing the Initialization Vector that will be used to initialize the Cipher.
          */
-        public Builder initVector(String initVector) {
-            this.initVector = initVector;
+        public Builder initVectorRef(String initVectorRef) {
+            this.initVectorRef = initVectorRef;
             return this;
         }
 
@@ -252,8 +251,8 @@ public class CryptoDataFormat extends DataFormatDefinition {
          * <p/>
          * Will lookup the type using the given name as a {@link java.security.spec.AlgorithmParameterSpec} type.
          */
-        public Builder algorithmParameterSpec(String algorithmParameterSpec) {
-            this.algorithmParameterSpec = algorithmParameterSpec;
+        public Builder algorithmParameterRef(String algorithmParameterRef) {
+            this.algorithmParameterRef = algorithmParameterRef;
             return this;
         }
 

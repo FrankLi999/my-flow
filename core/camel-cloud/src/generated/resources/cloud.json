@@ -7,9 +7,9 @@
     "deprecated": true,
     "firstVersion": "3.0",
     "label": "core,cloud",
-    "supportLevel": "Stable",
+    "supportLevel": "Preview",
     "groupId": "com.bpwizard.myflow",
     "artifactId": "camel-cloud",
-    "version": "4.15.0-SNAPSHOT"
+    "version": "0.0.1-SNAPSHOT"
   }
 }

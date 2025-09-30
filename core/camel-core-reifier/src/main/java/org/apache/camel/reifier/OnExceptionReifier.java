@@ -31,23 +31,14 @@ import org.apache.camel.spi.ClassResolver;
 
 public class OnExceptionReifier extends ProcessorReifier<OnExceptionDefinition> {
 
-    private boolean validate = true;
-
     public OnExceptionReifier(Route route, ProcessorDefinition<?> definition) {
         super(route, (OnExceptionDefinition) definition);
-    }
-
-    public OnExceptionReifier(Route route, OnExceptionDefinition definition, boolean validate) {
-        super(route, definition);
-        this.validate = validate;
     }
 
     @Override
     public void addRoutes() throws Exception {
         // must validate configuration before creating processor
-        if (validate) {
-            definition.validateConfiguration();
-        }
+        definition.validateConfiguration();
 
         if (parseBoolean(definition.getUseOriginalMessage(), false)) {
             // ensure allow original is turned on

@@ -24,7 +24,7 @@
     <parent>
         <groupId>com.bpwizard.myflow</groupId>
         <artifactId>camel-yaml-dsl-parent</artifactId>
-        <version>4.15.0-SNAPSHOT</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>camel-yaml-dsl</artifactId>
@@ -284,7 +284,7 @@
             <plugin>
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-restdsl-openapi-plugin</artifactId>
-                <version>${project.version}</version>
+                <version>${camel-version}</version>
                 <executions>
                     <execution>
                         <id>generate-dsl</id>

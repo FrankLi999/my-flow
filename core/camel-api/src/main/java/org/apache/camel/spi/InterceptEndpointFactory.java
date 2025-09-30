@@ -37,7 +37,7 @@ public interface InterceptEndpointFactory {
      * @param  after        the processor to execute after intercepted
      * @return              the endpoint with intercepting behaviour
      */
-    InterceptSendToEndpoint createInterceptSendToEndpoint(
+    Endpoint createInterceptSendToEndpoint(
             CamelContext camelContext, Endpoint endpoint, boolean skip,
             Predicate onWhen, Processor before, Processor after);
 

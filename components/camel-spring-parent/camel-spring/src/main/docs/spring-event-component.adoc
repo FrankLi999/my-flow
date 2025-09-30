@@ -4,9 +4,12 @@
 :artifactid: camel-spring
 :description: Listen for Spring Application Events.
 :since: 1.4
-:supportlevel: Stable
+:supportlevel: Preview
 :tabs-sync-option:
 :component-header: Both producer and consumer are supported
+//Manually maintained attributes
+:group: Spring
+:camel-spring-boot-name: spring
 
 *Since Camel {since}*
 

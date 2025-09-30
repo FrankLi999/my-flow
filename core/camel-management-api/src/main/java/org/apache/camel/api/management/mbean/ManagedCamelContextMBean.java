@@ -73,9 +73,6 @@ public interface ManagedCamelContextMBean extends ManagedPerformanceCounterMBean
     @ManagedAttribute(description = "HeadersMapFactory class name")
     String getHeadersMapFactoryClassName();
 
-    @ManagedAttribute(description = "Additional sensitive keywords (such as passwords) that should be masked when logging")
-    String getAdditionalSensitiveKeywords();
-
     /**
      * Gets the value of a CamelContext global option
      *
@@ -296,11 +293,5 @@ public interface ManagedCamelContextMBean extends ManagedPerformanceCounterMBean
      */
     @ManagedOperation(description = "The names of the data formats currently registered")
     Set<String> dataFormatNames() throws Exception;
-
-    @ManagedOperation(description = "Current ids of all the routes")
-    Set<String> routeIds();
-
-    @ManagedOperation(description = "Current route group names of all the routes (is empty if there are no route groups assigned)")
-    Set<String> routeGroups();
 
 }
