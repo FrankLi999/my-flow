@@ -1,5 +1,0 @@
-org\apache\camel\support\ObjectHelperTest.class
-org\apache\camel\support\RestConsumerContextPathMatcherTest.class
-org\apache\camel\support\MessageHelperTest$MyMessageType.class
-org\apache\camel\support\MessageHelperTest.class
-org\apache\camel\support\RestConsumerContextPathMatcherTest$MockConsumerPath.class

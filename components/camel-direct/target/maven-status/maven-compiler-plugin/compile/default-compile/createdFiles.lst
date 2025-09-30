@@ -1,8 +1,0 @@
-org\apache\camel\component\direct\DirectEndpointConfigurer.class
-org\apache\camel\component\direct\DirectConsumer.class
-org\apache\camel\component\direct\DirectEndpoint.class
-org\apache\camel\component\direct\DirectProducer.class
-org\apache\camel\component\direct\DirectComponent.class
-org\apache\camel\component\direct\DirectEndpointUriFactory.class
-org\apache\camel\component\direct\DirectComponentConfigurer.class
-org\apache\camel\component\direct\DirectConsumerNotAvailableException.class
