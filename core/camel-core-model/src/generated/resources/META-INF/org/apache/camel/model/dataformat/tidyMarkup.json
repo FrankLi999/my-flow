@@ -3,7 +3,7 @@
     "kind": "model",
     "name": "tidyMarkup",
     "title": "TidyMarkup",
-    "description": "Parse (potentially invalid) HTML into valid HTML or DOM.",
+    "description": "Parse (potentially invalid) HTML into valid HTML or DOM. --",
     "deprecated": false,
     "firstVersion": "2.0.0",
     "label": "dataformat,transformation",

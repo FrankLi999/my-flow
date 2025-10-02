@@ -27,10 +27,10 @@
 		<version>0.0.1-SNAPSHOT</version>		
 	</parent>
 
-    <artifactId>camel-spring-boot-starter</artifactId>
+    <artifactId>camel-spring-boot-engine-starter</artifactId>
     <packaging>jar</packaging>
-    <name>Camel SB Core Starters :: Spring Boot Starter</name>
-    <description>Spring-Boot Starter for Camel :: Spring Boot</description>
+    <name>Camel SB Core Starters :: Spring Boot Engine Starter</name>
+    <description>Spring-Boot Starter for Camel Engine :: Spring Boot</description>
 
     <dependencies>
         <dependency>
@@ -42,6 +42,6 @@
             <groupId>com.bpwizard.myflow.springboot</groupId>
             <artifactId>camel-spring-boot</artifactId>
             <version>${project.version}</version>
-        </dependency>        
+        </dependency>  git 
     </dependencies>
 </project>

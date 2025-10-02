@@ -31,6 +31,6 @@
 	<description>My Flow starter</description>
 	<packaging>pom</packaging>
     <modules>
-		<module>camel-spring-boot-starter</module>		
+		<module>camel-spring-boot-engine-starter</module>		
 	</modules>
 </project>
