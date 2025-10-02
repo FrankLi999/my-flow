@@ -42,6 +42,6 @@
             <groupId>com.bpwizard.myflow.springboot</groupId>
             <artifactId>camel-spring-boot</artifactId>
             <version>${project.version}</version>
-        </dependency>  git 
+        </dependency>
     </dependencies>
 </project>
