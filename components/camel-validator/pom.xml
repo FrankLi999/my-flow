@@ -21,10 +21,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.apache.camel</groupId>
+        <groupId>myflow</groupId>
         <artifactId>components</artifactId>
-        <version>4.14.0</version>
-    </parent>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent> 
 
     <artifactId>camel-validator</artifactId>
     <packaging>jar</packaging>

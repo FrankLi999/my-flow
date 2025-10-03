@@ -723,6 +723,11 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
+                <groupId>myflow</groupId>
+                <artifactId>camel-validator</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-activemq</artifactId>
                 <version>${camel-version}</version>
