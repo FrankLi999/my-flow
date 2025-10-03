@@ -21,13 +21,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>.myflow</groupId>
+        <groupId>myflow</groupId>
         <artifactId>my-flow-dependencies</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../camel-dependencies/pom.xml</relativePath>
     </parent>
 
-    <groupId>.myflow.springboot</groupId>
+    <groupId>myflow.springboot</groupId>
     <artifactId>spring-boot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>

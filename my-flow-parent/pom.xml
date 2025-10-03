@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>.myflow</groupId>
+        <groupId>myflow</groupId>
         <artifactId>my-flow</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -91,142 +91,142 @@
 				<scope>import</scope>
 			</dependency>
             <dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-util</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-management-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-util-json</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-xml-jaxp-util</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-support</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-base</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-xml-io-util</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-core-model</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-xml-jaxp</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-base-engine</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-core-processor</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-cluster</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-cloud</artifactId>
 				<version>${project.version}</version>
 			</dependency>
             <dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-core-reifier</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-core-engine</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-health</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-core-languages</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-bean</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-direct</artifactId>
 				<version>${project.version}</version>
 			</dependency>	
 			<dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-spring</artifactId>
 				<version>${project.version}</version>
 			</dependency>	
 			<dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-validator</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-main</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-spring-main</artifactId>
 				<version>${project.version}</version>
 			</dependency>	
 			<dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-dsl-support</artifactId>
 				<version>${project.version}</version>
 			</dependency>	
             <dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-yaml-dsl-common</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-yaml-dsl-deserializers</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>.myflow</groupId>
+				<groupId>myflow</groupId>
 				<artifactId>camel-yaml-dsl</artifactId>
 				<version>${project.version}</version>
 			</dependency>            

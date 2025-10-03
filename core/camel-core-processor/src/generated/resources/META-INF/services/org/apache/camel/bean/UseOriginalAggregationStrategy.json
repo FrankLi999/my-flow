@@ -7,7 +7,7 @@
     "title": "Use Original Aggregation Strategy",
     "description": "An AggregationStrategy which just uses the original exchange which can be needed when you want to preserve the original Exchange. For example when splitting an Exchange and then you may want to keep routing using the original Exchange.",
     "deprecated": false,
-    "groupId": ".myflow",
+    "groupId": "myflow",
     "artifactId": "camel-core-processor",
     "version": "0.0.1-SNAPSHOT"
   }

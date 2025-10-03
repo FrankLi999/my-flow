@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>.myflow</groupId>
+        <groupId>myflow</groupId>
         <artifactId>core</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>

@@ -9,7 +9,7 @@
     "label": "messaging",
     "javaType": "org.apache.camel.component.event.EventComponent",
     "supportLevel": "Preview",
-    "groupId": ".myflow",
+    "groupId": "myflow",
     "artifactId": "camel-spring",
     "version": "0.0.1-SNAPSHOT",
     "scheme": "spring-event",

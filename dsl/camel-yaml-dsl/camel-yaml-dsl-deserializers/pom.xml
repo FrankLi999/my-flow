@@ -22,7 +22,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>.myflow</groupId>
+        <groupId>myflow</groupId>
         <artifactId>camel-yaml-dsl-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -44,7 +44,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>.myflow</groupId>
+            <groupId>myflow</groupId>
             <artifactId>camel-yaml-dsl-common</artifactId>
             <version>${project.version}</version>
         </dependency>

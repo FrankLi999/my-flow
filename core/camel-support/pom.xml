@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>.myflow</groupId>
+        <groupId>myflow</groupId>
         <artifactId>core</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -41,23 +41,23 @@
     <dependencies>
 
         <dependency>
-            <groupId>.myflow</groupId>
+            <groupId>myflow</groupId>
             <artifactId>camel-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>.myflow</groupId>
+            <groupId>myflow</groupId>
             <artifactId>camel-management-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>.myflow</groupId>
+            <groupId>myflow</groupId>
             <artifactId>camel-util</artifactId>
         </dependency>
         <dependency>
-            <groupId>.myflow</groupId>
+            <groupId>myflow</groupId>
             <artifactId>camel-util-json</artifactId>
         </dependency>
         <dependency>
-            <groupId>.myflow</groupId>
+            <groupId>myflow</groupId>
             <artifactId>camel-xml-jaxp-util</artifactId>
         </dependency>
 

@@ -22,7 +22,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>.myflow.springboot</groupId>
+        <groupId>myflow.springboot</groupId>
         <artifactId>spring</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -70,27 +70,27 @@
         </dependency>
 
         <dependency>
-            <groupId>.myflow</groupId>
+            <groupId>myflow</groupId>
             <artifactId>camel-spring</artifactId>
         </dependency>
         <dependency>
-            <groupId>.myflow</groupId>
+            <groupId>myflow</groupId>
             <artifactId>camel-spring-main</artifactId>
         </dependency>
         <dependency>
-            <groupId>.myflow</groupId>
+            <groupId>myflow</groupId>
             <artifactId>camel-util-json</artifactId>
         </dependency>
         <dependency>
-            <groupId>.myflow</groupId>
+            <groupId>myflow</groupId>
             <artifactId>camel-cloud</artifactId>
         </dependency>
         <dependency>
-            <groupId>.myflow</groupId>
+            <groupId>myflow</groupId>
             <artifactId>camel-cluster</artifactId>
         </dependency>
         <dependency>
-            <groupId>.myflow</groupId>
+            <groupId>myflow</groupId>
             <artifactId>camel-health</artifactId>
         </dependency>
 
@@ -184,7 +184,7 @@
                             <includes>org/apache/camel/main/DefaultConfigurationProperties.java</includes>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>.myflow</groupId>
+                                    <groupId>myflow</groupId>
                                     <artifactId>camel-main</artifactId>
                                     <version>${project.version}</version>
                                     <type>jar</type>

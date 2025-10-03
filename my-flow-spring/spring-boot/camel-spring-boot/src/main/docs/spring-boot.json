@@ -680,12 +680,6 @@
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main"
     },
     {
-      "name": "management.info.camel.enabled",
-      "type": "java.lang.Boolean",
-      "description": "Whether to enable Camel info.",
-      "defaultValue": true
-    },
-    {
       "name": "camel.main.main-run-controller",
       "type": "java.lang.Boolean",
       "description": "Whether to use the main run controller to ensure the Spring-Boot application keeps running until being stopped or the JVM terminated. You typically only need this if you run Spring-Boot standalone. If you run Spring-Boot with spring-boot-starter-web then the web container keeps the JVM running.",

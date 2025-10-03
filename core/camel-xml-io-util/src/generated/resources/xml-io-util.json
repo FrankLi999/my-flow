@@ -8,7 +8,7 @@
     "firstVersion": "3.10.0",
     "label": "core,xml",
     "supportLevel": "Preview",
-    "groupId": ".myflow",
+    "groupId": "myflow",
     "artifactId": "camel-xml-io-util",
     "version": "0.0.1-SNAPSHOT"
   }

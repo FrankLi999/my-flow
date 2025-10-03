@@ -9,7 +9,7 @@
     "label": "core,script",
     "javaType": "org.apache.camel.component.bean.BeanComponent",
     "supportLevel": "Preview",
-    "groupId": ".myflow",
+    "groupId": "myflow",
     "artifactId": "camel-bean",
     "version": "0.0.1-SNAPSHOT",
     "scheme": "bean",

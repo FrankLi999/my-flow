@@ -7,7 +7,7 @@
     "title": "Grouped Body Aggregation Strategy",
     "description": "Aggregate body of input Message into a single combined Exchange holding all the aggregated bodies in a List of type Object as the message body. This aggregation strategy can be used in combination with Splitter to batch messages.",
     "deprecated": false,
-    "groupId": ".myflow",
+    "groupId": "myflow",
     "artifactId": "camel-core-processor",
     "version": "0.0.1-SNAPSHOT"
   }

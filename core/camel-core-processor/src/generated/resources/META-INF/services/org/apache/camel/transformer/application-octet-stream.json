@@ -5,7 +5,7 @@
     "title": "Application Octet Stream",
     "deprecated": false,
     "javaType": "org.apache.camel.processor.transformer.ByteArrayDataTypeTransformer",
-    "groupId": ".myflow",
+    "groupId": "myflow",
     "artifactId": "camel-core-processor",
     "version": "0.0.1-SNAPSHOT"
   }

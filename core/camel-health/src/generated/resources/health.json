@@ -8,7 +8,7 @@
     "firstVersion": "3.4.0",
     "label": "core,monitoring",
     "supportLevel": "Preview",
-    "groupId": ".myflow",
+    "groupId": "myflow",
     "artifactId": "camel-health",
     "version": "0.0.1-SNAPSHOT"
   }
