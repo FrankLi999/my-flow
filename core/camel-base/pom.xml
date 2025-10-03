@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.bpwizard.myflow</groupId>
+        <groupId>.myflow</groupId>
         <artifactId>core</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -41,19 +41,19 @@
 
         <!-- required dependencies by camel-base -->
         <dependency>
-            <groupId>com.bpwizard.myflow</groupId>
+            <groupId>.myflow</groupId>
             <artifactId>camel-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.bpwizard.myflow</groupId>
+            <groupId>.myflow</groupId>
             <artifactId>camel-management-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.bpwizard.myflow</groupId>
+            <groupId>.myflow</groupId>
             <artifactId>camel-support</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.bpwizard.myflow</groupId>
+            <groupId>.myflow</groupId>
             <artifactId>camel-util</artifactId>
         </dependency>
 

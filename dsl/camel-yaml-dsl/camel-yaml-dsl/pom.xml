@@ -22,7 +22,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.bpwizard.myflow</groupId>
+        <groupId>.myflow</groupId>
         <artifactId>camel-yaml-dsl-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -51,15 +51,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.bpwizard.myflow</groupId>
+            <groupId>.myflow</groupId>
             <artifactId>camel-yaml-dsl-common</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.bpwizard.myflow</groupId>
+            <groupId>.myflow</groupId>
             <artifactId>camel-yaml-dsl-deserializers</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.bpwizard.myflow</groupId>
+            <groupId>.myflow</groupId>
             <artifactId>camel-dsl-support</artifactId>
         </dependency>
 

@@ -7,7 +7,7 @@
     "title": "Accept All Header Filter Strategy",
     "description": "This strategy is used for accepting all headers.The intention is for use with development and troubleshooting where you want Camel to keep all headers\n * when sending and receiving using components that uses HeaderFilterStrategy",
     "deprecated": false,
-    "groupId": "com.bpwizard.myflow",
+    "groupId": ".myflow",
     "artifactId": "camel-support",
     "version": "0.0.1-SNAPSHOT"
   }

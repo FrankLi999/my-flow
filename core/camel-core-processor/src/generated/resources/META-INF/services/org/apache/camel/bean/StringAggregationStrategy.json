@@ -7,7 +7,7 @@
     "title": "String Aggregation Strategy",
     "description": "Aggregate result of pick expression into a single combined Exchange holding all the aggregated bodies in a String as the message body. This aggregation strategy can used in combination with Splitter to batch messages",
     "deprecated": false,
-    "groupId": "com.bpwizard.myflow",
+    "groupId": ".myflow",
     "artifactId": "camel-core-processor",
     "version": "0.0.1-SNAPSHOT",
     "properties": { "delimiter": { "index": 0, "kind": "property", "displayName": "Delimiter", "required": false, "type": "string", "javaType": "java.lang.String", "deprecated": false, "autowired": false, "secret": false, "description": "Delimiter used for joining strings together." } }

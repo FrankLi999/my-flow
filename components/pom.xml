@@ -21,12 +21,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-        <groupId>com.bpwizard.myflow</groupId>
+        <groupId>.myflow</groupId>
         <artifactId>my-flow-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../my-flow-parent/pom.xml</relativePath>
 	</parent>
-	<groupId>com.bpwizard.myflow</groupId>
+	<groupId>.myflow</groupId>
 	<artifactId>components</artifactId>	
 	<name>components</name>
 	<description>My Flow components</description>
@@ -95,7 +95,7 @@
                 </executions>
                 <dependencies>
                     <dependency>
-                        <groupId>com.bpwizard.myflow</groupId>
+                        <groupId>.myflow</groupId>
                         <artifactId>camel-core-model</artifactId>
                         <version>${project.version}</version>
                         <scope>compile</scope>

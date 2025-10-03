@@ -8,7 +8,7 @@
     "firstVersion": "3.0.0",
     "label": "core,management",
     "supportLevel": "Preview",
-    "groupId": "com.bpwizard.myflow",
+    "groupId": ".myflow",
     "artifactId": "camel-management-api",
     "version": "0.0.1-SNAPSHOT"
   }

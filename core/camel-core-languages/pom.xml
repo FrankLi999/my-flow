@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.bpwizard.myflow</groupId>
+        <groupId>.myflow</groupId>
         <artifactId>core</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -41,18 +41,18 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.bpwizard.myflow</groupId>
+            <groupId>.myflow</groupId>
             <artifactId>camel-core-model</artifactId>
             <scope>compile</scope>
         </dependency>
 
         <dependency>
-            <groupId>com.bpwizard.myflow</groupId>
+            <groupId>.myflow</groupId>
             <artifactId>camel-support</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.bpwizard.myflow</groupId>
+            <groupId>.myflow</groupId>
             <artifactId>camel-xml-jaxp-util</artifactId>
         </dependency>
 

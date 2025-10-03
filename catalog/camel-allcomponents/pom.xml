@@ -52,22 +52,22 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.bpwizard.myflow</groupId>
+            <groupId>.myflow</groupId>
             <artifactId>camel-bean</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.bpwizard.myflow</groupId>
+            <groupId>.myflow</groupId>
             <artifactId>camel-direct</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.bpwizard.myflow</groupId>
+            <groupId>.myflow</groupId>
             <artifactId>camel-spring</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.bpwizard.myflow</groupId>
+            <groupId>.myflow</groupId>
             <artifactId>camel-spring-main</artifactId>
             <version>${project.version}</version>
         </dependency>

@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.bpwizard.myflow</groupId>
+        <groupId>.myflow</groupId>
         <artifactId>core</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -42,11 +42,11 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.bpwizard.myflow</groupId>
+            <groupId>.myflow</groupId>
             <artifactId>camel-base-engine</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.bpwizard.myflow</groupId>
+            <groupId>.myflow</groupId>
             <artifactId>camel-core-model</artifactId>
         </dependency>
 

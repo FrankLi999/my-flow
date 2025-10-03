@@ -9,7 +9,7 @@
     "label": "core,messaging",
     "javaType": "org.apache.camel.component.direct.DirectComponent",
     "supportLevel": "Preview",
-    "groupId": "com.bpwizard.myflow",
+    "groupId": ".myflow",
     "artifactId": "camel-direct",
     "version": "0.0.1-SNAPSHOT",
     "scheme": "direct",
