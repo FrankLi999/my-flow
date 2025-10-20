@@ -13,6 +13,10 @@
   @Bean
   CamelContext /SpringBootCamelContext/CamelConfigurationProperty(camel.main/camel's defaultConfigurationProperties,
      camel.component.properties/PropertiesComponentConfiguration)
+
+Spring boot env
+   camel.variables
+     set to variable repo
 ```
 
 ## spring boot 4
