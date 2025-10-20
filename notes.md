@@ -1,3 +1,20 @@
+# spring boot camel
+
+## Notes
+
+### entry
+
+```java
+  CamelAutoConfiguration
+  @Bean
+  CamelBeanPostProcessor
+  @Bean StartupConditionStrategy (CamelStartupConditionConfigurationProperties)
+     camel.startupcondition  
+  @Bean
+  CamelContext /SpringBootCamelContext/CamelConfigurationProperty(camel.main/camel's defaultConfigurationProperties,
+     camel.component.properties/PropertiesComponentConfiguration)
+```
+
 ## spring boot 4
     org.springframework.boot.env
     org.springframework.boot.actuate.health.Health;
